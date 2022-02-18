@@ -55,9 +55,10 @@ const ElButton = styled.button`
   color: #ffffff;
   padding: ${(props) => props.padding};
   box-sizing: border-box;
-  border-radius: 2px;
   border: none;
   ${(props) => (props.margin ? `margin: ${props.margin};` : '')}
+  border-radius: 1px;
+  font-size: 16px;
 `;
 
 // 동그라미 플러스 버튼
