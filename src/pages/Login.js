@@ -121,7 +121,7 @@ const Login = () => {
 const Box = styled.div``;
 
 const Container = styled.div`
-  padding: 0 16px;
+  padding: 10px 16px;
   max-width: 1080px;
   margin: auto;
   flex: 1 1 0px;
