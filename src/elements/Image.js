@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 
 const Image = (props) => {
-  const { shape, src, size, mini } = props;
+  const { shape, src, size } = props;
 
   const styles = {
     src: src,
