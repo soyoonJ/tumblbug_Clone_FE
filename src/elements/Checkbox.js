@@ -11,7 +11,9 @@ const Checkbox = (props) => {
   );
 };
 
-const Label = styled.label``;
+const Label = styled.label`
+  display: block;
+`;
 const Input = styled.input``;
 
 export default Checkbox;

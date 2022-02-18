@@ -1,51 +1,63 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Button = (props) => {
+  const {
+    text,
+    _onClick,
+    is_float,
+    children,
+    margin,
+    width,
+    padding,
+    disabled,
+  } = props;
 
-    const {text, _onClick, is_float, children, margin, width, padding, disabled} = props;
-
-    if(is_float) {
-      return (
-        <React.Fragment>
-          <FloatButton disabled={disabled} onClick={_onClick}>{text? text : children}</FloatButton>
-        </React.Fragment>
-      );
-    }
-    
-    const styles = {
-      margin: margin,
-      width: width,
-      padding: padding,
-    };
-
+  if (is_float) {
     return (
       <React.Fragment>
-        <ElButton {...styles} disabled={disabled} onClick={_onClick}>{text? text : children}</ElButton>
+        <FloatButton disabled={disabled} onClick={_onClick}>
+          {text ? text : children}
+        </FloatButton>
       </React.Fragment>
     );
-}
+  }
+
+  const styles = {
+    margin: margin,
+    width: width,
+    padding: padding,
+  };
+
+  return (
+    <React.Fragment>
+      <ElButton {...styles} disabled={disabled} onClick={_onClick}>
+        {text ? text : children}
+      </ElButton>
+    </React.Fragment>
+  );
+};
 
 Button.defaultProps = {
-    text: false,
-    children: null,
-    _onClick: () => {},
-    is_float: false,
-    margin: false,
-    width: '100%',
-    padding: "12px 0px",
-    disabled: false,
-}
+  text: false,
+  children: null,
+  _onClick: () => {},
+  is_float: false,
+  margin: false,
+  width: '100%',
+  padding: '12px 0px',
+  disabled: false,
+};
 
 const ElButton = styled.button`
-    width: ${(props) => props.width};
-    background-color: #FA6462;
-    color: #ffffff;
-    padding: ${(props) => props.padding};
-    box-sizing: border-box;
-    border-radius: 2px;
-    border: none;
-    ${(props)=> (props.margin? `margin: ${props.margin};` : '')}
+  width: ${(props) => props.width};
+  background-color: #fa6462;
+  color: #ffffff;
+  padding: ${(props) => props.padding};
+  box-sizing: border-box;
+  border-radius: 2px;
+  border: none;
+  ${(props) => (props.margin ? `margin: ${props.margin};` : '')}
 `;
 
 // 동그라미 플러스 버튼
@@ -64,6 +76,6 @@ const FloatButton = styled.button`
   vertical-align: middle;
   border: none;
   border-radius: 50%;
-`
+`;
 
 export default Button;
