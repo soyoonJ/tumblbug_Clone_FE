@@ -5,6 +5,9 @@ import { Grid, Text, Input, Button, Checkbox } from '../elements';
 const Signup = () => {
   return (
     <React.Fragment>
+      <Header>
+        <div></div>
+      </Header>
       <SignupBox>
         <h1>이메일로 가입하기</h1>
         <form>
@@ -19,23 +22,27 @@ const Signup = () => {
           <Checkbox text="전체동의" bold={true} />
           <Line />
           <Grid margin="0px 0px 40px">
-            <Grid is_flex>
+            <Grid is_flex margin="0 0 14px">
               <Checkbox text="텀블벅 이용 약관동의" />
               <Text>
                 <span>내용보기</span>
               </Text>
             </Grid>
-            <Grid is_flex>
+            <Grid is_flex margin="0 0 14px">
               <Checkbox text="개인정보 수집,이용 동의" />
               <Text>
                 <span>내용보기</span>
               </Text>
             </Grid>
-            <Checkbox text="만 14세 이상입니다." />
-            <Checkbox text="전체마케팅 정보 수신 동의(선택)동의" />
+            <Grid margin="0 0 14px">
+              <Checkbox text="만 14세 이상입니다." />
+            </Grid>
+            <Grid margin="0 0 14px">
+              <Checkbox text="전체마케팅 정보 수신 동의(선택)동의" />
+            </Grid>
           </Grid>
 
-          <Button text="가입하기" />
+          <Button text="가입하기" weight="700" />
           <Grid margin="20px 0px 0px">
             <Text size="12px" center>
               이미 텀블벅 계정이 있으신가요?
@@ -60,13 +67,32 @@ const Signup = () => {
               fillOpacity="0.9"
             ></path>
           </svg>
-          카카오로 가입하기
+          <div>카카오로 가입하기</div>
           <div></div>
         </KakaoButton>
       </SignupBox>
+      <Footer>© 2022 Tumblbug Inc.</Footer>
     </React.Fragment>
   );
 };
+
+const Header = styled.div`
+  display: flex;
+  min-height: 58px;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 16px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgb(10 10 10 / 10%) 0px 1px 2px 0px;
+
+  div {
+    background-image: url('/img/logo.png');
+    height: 25px;
+    width: 90px;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+`;
 
 const SignupBox = styled.div`
   padding: 32px;
@@ -106,6 +132,19 @@ const KakaoButton = styled.button`
   padding: 0 20px;
   align-items: center;
   justify-content: space-between;
+
+  div {
+    font-size: 16px;
+  }
+`;
+
+const Footer = styled.div`
+  text-align: center;
+  display: block;
+  width: 100%;
+  color: rgb(158, 158, 158);
+  font-size: 13px;
+  line-height: 20px;
 `;
 
 export default Signup;

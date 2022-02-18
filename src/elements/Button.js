@@ -11,6 +11,7 @@ const Button = (props) => {
     width,
     padding,
     disabled,
+    weight,
   } = props;
 
   if (is_float) {
@@ -27,6 +28,7 @@ const Button = (props) => {
     margin: margin,
     width: width,
     padding: padding,
+    weight,
   };
 
   return (
@@ -47,9 +49,11 @@ Button.defaultProps = {
   width: '100%',
   padding: '12px 0px',
   disabled: false,
+  weight: false,
 };
 
 const ElButton = styled.button`
+  cursor: pointer;
   width: ${(props) => props.width};
   background-color: #fa6462;
   color: #ffffff;
@@ -57,6 +61,8 @@ const ElButton = styled.button`
   box-sizing: border-box;
   border: none;
   ${(props) => (props.margin ? `margin: ${props.margin};` : '')}
+  ${(props) => (props.weight ? `font-weight: ${props.weight};` : '')}
+
   border-radius: 1px;
   font-size: 16px;
 `;

@@ -16,8 +16,10 @@ const Checkbox = (props) => {
 };
 
 const Label = styled.label`
+  font-size: 14px;
   display: block;
   ${(props) => (props.bold ? `font-weight: bold;` : '')}
+  color: rgb(61, 61, 61);
 `;
 
 Label.defaultProps = {
@@ -25,14 +27,16 @@ Label.defaultProps = {
 };
 
 const Input = styled.input`
-  margin: 0 29px 0 0;
+  margin: 0 10px 0 0;
   width: 20px;
   height: 20px;
   border-radius: 2px;
-  border: 1px solid rgb(189, 189, 189);
   color: rgb(61, 61, 61);
   cursor: pointer;
+  vertical-align: middle;
   ${(props) => (props.weight ? `font-weight: ${props.weight};` : '')}
+  border: 1px solid rgb(189, 189, 189);
+  background: rgb(255, 255, 255);
 `;
 
 export default Checkbox;

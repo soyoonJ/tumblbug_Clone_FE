@@ -42,6 +42,7 @@ const P = styled.p`
     color: rgb(39, 163, 255);
     text-decoration: underline;
     margin: 0 0 0 4px;
+    cursor: pointer;
   }
 `;
 
