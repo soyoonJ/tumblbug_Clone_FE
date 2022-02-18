@@ -7,10 +7,12 @@ import {Provider} from "react-redux";
 // 스토어 주입
 import store from "./redux/configureStore"
 
+import store from './redux/configureStore';
+import { Provider } from 'react-redux';
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById('root')
 );
-
