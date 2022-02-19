@@ -4,6 +4,7 @@ import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 
 import User from "./modules/user";
+import Articles from "./modules/articles";
 
 // 히스토리 객체 만들기
 export const history = createBrowserHistory();
@@ -12,12 +13,13 @@ export const history = createBrowserHistory();
 // redux에 있는 모듈들 합하기
 const rootReducer = combineReducers({
   user: User,
+  articles: Articles,
   // 만든 history랑 라우터를 연결시켜 줌
   router: connectRouter(history),
 });
 
 // withExtraArgument - 다른 인수를 더 넘겨줄게~ => 히스토리를 만든 히스토리로 넘겨주기
-const middlewares = [thunk.withExtraArgument({history:history})];
+const middlewares = [thunk.withExtraArgument({ history: history })];
 
 // 지금이 어느 환경인 지 알려줘요. (개발환경, 프로덕션(배포)환경 ...)
 const env = process.env.NODE_ENV;
@@ -42,9 +44,7 @@ const composeEnhancers =
 
 // 미들웨어 묶기
 // 지금까지 있었던 모든 미들웨어 합치기
-const enhancer = composeEnhancers(
-    applyMiddleware(...middlewares)
-    );
+const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
 // rootReducer랑 enhancer 합침
 let store = (initialStore) => createStore(rootReducer, enhancer);
