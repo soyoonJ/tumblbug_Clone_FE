@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import { Grid, Text } from "../elements";
+import React from 'react';
+import styled from 'styled-components';
+import { Grid, Text } from '../elements';
 
 const NaviTop = (props) => {
   return (
     <React.Fragment>
       <NaviTopLayout>
         <Grid is_flex>
-          <LogoImg src="./img/logo.png" />
+          <LogoImg src="/img/logo.png" />
           <Button>
             <Text size="12px" bold padding="12px">
               로그인/회원가입
