@@ -2,11 +2,14 @@ import styled from "styled-components";
 import React from "react";
 
 const Image = (props) => {
-  const { shape, src, size } = props;
+  const { shape, src, size, margin,marginTop ,marginRight, } = props;
 
   const styles = {
     src: src,
     size: size,
+    margin:margin,
+    marginTop:marginTop,
+    marginRight:marginRight,
   };
 
   // 이미지가 동그라미일 때
@@ -43,6 +46,9 @@ const ImageDefault = styled.div`
   background-image: url("${(props) => props.src}");
   background-size: cover;
   background-position: center;
+  margin:'';
+  marginTop:'';
+  marginRight:'';
 `;
 
 const AspectOutter = styled.div`
@@ -70,7 +76,9 @@ const ImageCircle = styled.div`
   background-image: url("${(props) => props.src}");
   background-size: cover;
   background-position: center;
-  margin: 4px;
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+  ${(props) => (props.marginTop ? `margin-top: ${props.marginTop};` : "")}
+  ${(props) => (props.marginRight ? `margin-right: ${props.marginRight};` : "")}
 `;
 
 export default Image;

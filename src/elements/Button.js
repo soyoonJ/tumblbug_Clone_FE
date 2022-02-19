@@ -15,52 +15,70 @@ const Button = (props) => {
     bold,
   } = props;
 
-  const styles = {
-    margin: margin,
-    width: width,
-    padding: padding,
-    fontSize: fontSize,
-    bold: bold,
-    weight,
-  };
 
-  return (
-    <React.Fragment>
-      <ElButton {...styles} disabled={disabled} onClick={_onClick}>
-        {text ? text : children}
-      </ElButton>
-    </React.Fragment>
-  );
-};
+
+    const {text, _onClick, is_float, children, margin, height, width, padding, disabled, fontSize, bold, border, borderRadius, bg, color, flex_center} = props;
+
+    
+    const styles = {
+      margin: margin,
+      width: width,
+      height: height,
+      padding: padding,
+      fontSize: fontSize,
+      bold: bold,
+      borderRadius: borderRadius,
+      bg:bg,
+      color:color,
+      flex_center:flex_center,
+      border,
+      weight,
+    };
+  
+
+    return (
+      <React.Fragment>
+        <ElButton {...styles} disabled={disabled} onClick={_onClick}>{text? text : children}</ElButton>
+      </React.Fragment>
+    );
+}
 
 Button.defaultProps = {
-  text: false,
-  children: null,
-  _onClick: () => {},
-  margin: false,
-  width: '100%',
-  padding: '12px 0px',
-  disabled: false,
-  weight: false,
-  fontSize: '',
-  bold: false,
-};
+    text: false,
+    children: null,
+    _onClick: () => {},
+    margin: false,
+    height:'',
+    width: '100%',
+    padding: "12px 0px",
+    disabled: false,
+    fontSize: '16px',
+    bold: false,
+    border:"none",
+    borderRadius: "2px",
+    bg: "#fa6462",
+    color: "#fff",
+    flex_center: '',
+    weight: false,
+}
 
 const ElButton = styled.button`
-  cursor: pointer;
-  width: ${(props) => props.width};
-  background-color: #fa6462;
-  color: #ffffff;
-  padding: ${(props) => props.padding};
-  box-sizing: border-box;
-  border: none;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : '')}
-  ${(props) => (props.weight ? `font-weight: ${props.weight};` : '')}
-  border-radius: 1px;
-  font-size: 16px;
-  border: none;
-  ${(props) => (props.fontSize ? `font-size: ${props.fontSize};` : '')}
-  font-weight: ${(props) => (props.bold ? 700 : 400)};
+    ${(props)=> (props.height? `height: ${props.height};` : '')}
+    width: ${(props) => props.width};
+    background-color: ${(props) => props.bg};
+    color: ${(props) => props.color};
+    padding: ${(props) => props.padding};
+    box-sizing: border-box;
+    border: ${(props) => props.border};
+    ${(props)=> (props.borderRadius? `border-radius: ${props.borderRadius};` : '')}
+    ${(props)=> (props.margin? `margin: ${props.margin};` : '')}
+    ${(props)=> (props.fontSize? `font-size: ${props.fontSize};` : '')}
+    font-weight: ${(props) => (props.bold ? 700 : 400)};
+    ${(props) => props.flex_center? `display: flex; align-items: center; justify-content:center`: ""}
+    cursor: pointer;
+    ${(props) => (props.weight ? `font-weight: ${props.weight};` : '')}
+
 `;
+
 
 export default Button;
