@@ -1,7 +1,9 @@
 import React from 'react';
-import Image from '../elements/Image'
-import {Grid, Button} from '../elements'
 import styled from 'styled-components';
+
+import {Grid, Button, Image} from '../elements'
+import {CommentWrite, CommentList} from '../components';
+
 
 const PostDetail = () => {
   return (
@@ -12,8 +14,14 @@ const PostDetail = () => {
             <span>카테고리명</span>
           </a>
           <h1 style={{fontSize:"2rem"}}>텀블벅 타이틀</h1>
-          <span>이미지</span>
-          <span>제작사</span>
+          <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
+            <Image
+            src="https://tumblbug-upi.imgix.net/3e34276d-560a-4028-b5da-fe41acbb055e.jpg?auto=format%2Ccompress&ch=Save-Data&facepad=2.0&fit=facearea&h=250&mask=ellipse&w=200&s=92b8d145317f0a5d7bd31d4f0cca9871"
+            >
+            이미지
+            </Image>
+            <span>제작사</span>
+          </div>
         </Title>
 
         {/* 상단 우측 텍스트 요약 */}
@@ -68,25 +76,12 @@ const PostDetail = () => {
         댓글'개수'
         <hr/>
         {/* 댓글 없을 경우 '댓글이 없습니다' 텍스트 추가 필요 */}
-
-        {/* 댓글 작성 조건
-        1: 로그인 '로그인 후 작성할 수 있습니다' (disabled)
-        2: 후원자 아니면 '후원자만 작성할 수 있습니다' (disabled)
-        3: 댓글창 오픈 */}
+        <CommentWrite></CommentWrite>
+        
+        <CommentList></CommentList>
 
 
-        {/* 댓글 개별 박스 -> map 돌려서 데이터 가져오기 */}
-        <Comment>
-          <CommentInfo>
-            <Image></Image>
-            <div>
-              {/* 추가기능으로 할만함: 클릭 시 마이페이지로 넘어가게끔 할지말지 확인해야할듯 -> 약간 아이디 암호화 하는듯*/}
-              <a>사용자명</a><br/>
-              몇일전?{/* 몇일 전 작성할거임? */}
-              <p>댓글작성할거야</p>
-            </div>
-          </CommentInfo>
-        </Comment>
+        
       </div>
       </DetailBottom>
     </React.Fragment>
@@ -192,14 +187,6 @@ const DetailBottom = styled.div`
 width: 1032px;
 margin: auto;
 text-align: left;
-`
-
-const Comment = styled.div`
-padding: 19px 12px 20px 0px;
-`
-
-const CommentInfo = styled.div`
-display: flex;
 `
 
 
