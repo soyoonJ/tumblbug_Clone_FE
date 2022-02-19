@@ -4,7 +4,6 @@ import { history } from "../redux/configureStore";
 
 import React from "react";
 
-import Header from "../components/Header";
 import Main from "../pages/Main";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
@@ -15,7 +14,6 @@ import "./App.css";
 function App() {
   return (
     <React.Fragment>
-      <Header />
       <ConnectedRouter history={history}>
         <Route path="/" exact component={Main}></Route>
         <Route path="/login" exact component={Login}></Route>
