@@ -23,13 +23,18 @@ const Input = (props) => {
   }
 
   return (
-    <Grid margin="0 0 10px">
-      <Text margin="0 0 10px" color="rgb(61, 61, 61)" size="12px">
-        {label}
-      </Text>
+    <Grid>
+      <Text margin="0px">{label}</Text>
       <ElInput type={type} placeholder={placeholder} onChange={_onChange} />
     </Grid>
   );
+
+  // 수민
+  // <Grid margin="0 0 10px">
+  //   <Text margin="0 0 10px" color="rgb(61, 61, 61)" size="12px">
+  //     {label}
+  //   </Text>
+  // </Grid>
 };
 
 Input.defaultProps = {

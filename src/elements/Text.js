@@ -2,8 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Text = (props) => {
-  const { bold, color, size, children, margin, no_wrap, weight, center } =
-    props;
+  const {
+    bold,
+    color,
+    size,
+    children,
+    margin,
+    no_wrap,
+    weight,
+    center,
+    wordBreak,
+  } = props;
 
   const styles = {
     bold: bold,
@@ -13,7 +22,9 @@ const Text = (props) => {
     no_wrap,
     weight,
     center,
+    wordBreak,
   };
+
   return <P {...styles}>{children}</P>;
 };
 
@@ -26,6 +37,7 @@ Text.defaultProps = {
   no_wrap: false,
   weight: 400,
   center: false,
+  wordBreak: false,
 };
 
 const P = styled.p`
@@ -36,6 +48,8 @@ const P = styled.p`
   ${(props) => (props.no_wrap ? ` white-space: nowrap;` : '')}
   ${(props) => (props.weight ? `font-weight: ${props.weight};` : '')}
   ${(props) => (props.center ? 'text-align: center;' : '')}
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : '')}
+
 
 
   span {

@@ -3,23 +3,35 @@ import styled from "styled-components";
 
 const Grid = (props) => {
   // props 넣어주기
-  const { is_flex, width, margin, padding, bg, center, _onClick, children,  } = props;
+  const {
+    is_flex,
+    width,
+    margin,
+    padding,
+    bg,
+    center,
+    _onClick,
+    children,
+    is_row,
+  } = props;
 
   // 위에 props에서 children만 빼고 스타일 속성끼리 묶은 것!
   const styles = {
-      is_flex: is_flex,
-      width: width,
-      margin: margin,
-      padding: padding,
-      bg: bg,
-      center: center,
-      
+    is_flex: is_flex,
+    width: width,
+    margin: margin,
+    padding: padding,
+    bg: bg,
+    center: center,
+    is_row,
   };
   return (
     // 전체 감싸주는거 안에 하나는 꼭 포함되어 있어야되는데, div는 비효율적이니까 React.Fragment 사용
     <React.Fragment>
       {/* 하위에 다른 컴포넌트 같이 쓰려면 children 써야 함 */}
-      <GridBox {...styles} onClick={_onClick}>{children}</GridBox>
+      <GridBox {...styles} onClick={_onClick}>
+        {children}
+      </GridBox>
     </React.Fragment>
   );
 };
@@ -32,7 +44,8 @@ Grid.defaultProps = {
   margin: false,
   bg: null,
   center: false,
-  _onClick: () => {}
+  _onClick: () => {},
+  is_row: false,
 };
 
 // defaultProps를 가지고 스타일 어떻게 줄건지
@@ -50,7 +63,8 @@ const GridBox = styled.div`
       : ""}
   
     //  props가 center면 text-align을 center로 줌!
-  ${(props) => props.center? `text-align: center`:''}
+  ${(props) => (props.center ? `text-align: center` : "")}
+  ${(props) => (props.is_row ? `display: inline-flex;` : "")}
 `;
 
 export default Grid;
