@@ -6,6 +6,23 @@ import Footer from "./Footer";
 import CommentWrite from "./CommentWrite";
 import CommentList from "./CommentList";
 import Creator from "./Creator";
+import Banner from "./Banner";
+import Post from "./Post";
+import MainPost from "./MainPost";
+import RankPost from "./RankPost";
+import SidePost from "./SidePost";
 
-
-export {Header, NaviTop, NaviBottom, Footer, CommentWrite, CommentList, Creator,};
+export {
+  Header,
+  NaviTop,
+  NaviBottom,
+  Footer,
+  CommentWrite,
+  CommentList,
+  Creator,
+  Post,
+  MainPost,
+  RankPost,
+  SidePost,
+  Banner,
+};

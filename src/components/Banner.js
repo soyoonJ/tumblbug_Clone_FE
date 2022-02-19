@@ -5,22 +5,30 @@ import { Grid, Image, Text } from "../elements";
 const Banner = (props) => {
   return (
     <React.Fragment>
-      <Grid is_row>
-        <BannerImage src={props.src} />
-        <BannerComment>
-          <Text bold size="22px" color="white" wordBreak>
-            {props.banner_title}
-          </Text>
-          <Text bold size="14px" color="white">
-            {props.banner_comment}
-          </Text>
-          <Text size="12px" color="white">
-            <Cnt>
-              {props.curcnt}/{props.cnt}
-            </Cnt>
-          </Text>
-        </BannerComment>
-      </Grid>
+      <Container>
+        <Grid is_row>
+          <BannerImage src={props.src} />
+          <BannerComment>
+            <Text
+              bold
+              size="22px"
+              color="white"
+              wordBreak
+              margin=" 0px 0px 10px 0px"
+            >
+              {props.banner_title}
+            </Text>
+            <Text bold size="14px" color="white" margin=" 0px 0px 10px 0px">
+              {props.banner_comment}
+            </Text>
+            <Text size="12px" color="white">
+              <Cnt>
+                {props.curcnt}/{props.cnt}
+              </Cnt>
+            </Text>
+          </BannerComment>
+        </Grid>
+      </Container>
     </React.Fragment>
   );
 };
@@ -33,12 +41,16 @@ Banner.defaultProps = {
   curcnt: 1,
 };
 
+const Container = styled.div`
+  width: 100%;
+`;
+
 const BannerImage = styled.img`
   width: 460px;
 `;
 
 const BannerComment = styled.div`
-  width: 230px;
+  width: 306px;
   background-color: #863d5e;
   padding: 40px;
 `;

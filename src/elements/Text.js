@@ -24,7 +24,6 @@ const Text = (props) => {
     center,
     wordBreak,
   };
-
   return <P {...styles}>{children}</P>;
 };
 
@@ -38,6 +37,7 @@ Text.defaultProps = {
   weight: 400,
   center: false,
   wordBreak: false,
+  padding: false,
 };
 
 const P = styled.p`
@@ -49,8 +49,6 @@ const P = styled.p`
   ${(props) => (props.weight ? `font-weight: ${props.weight};` : '')}
   ${(props) => (props.center ? 'text-align: center;' : '')}
   ${(props) => (props.wordBreak ? `word-break: keep-all;` : '')}
-
-
 
   span {
     color: rgb(39, 163, 255);
