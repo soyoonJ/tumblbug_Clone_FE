@@ -167,14 +167,10 @@ const ProjectCounter = styled.div`
 `;
 
 const ProjectList = styled.div`
-  /* padding: 56px 0px 80px; */
   height: 425px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 
   @media (max-width: 1080px) {
     height: 272px;
@@ -184,6 +180,11 @@ const ProjectList = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 112px 0 117px;
+
+    @media (max-width: 1080px) {
+      padding: 56px 0 80px;
+    }
   }
 `;
 
