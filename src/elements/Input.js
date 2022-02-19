@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import { Text, Grid } from "./index";
+import { Text, Grid } from './index';
 
 const Input = (props) => {
   const { label, placeholder, _onChange, type, multiLine, value } = props;
@@ -11,7 +11,7 @@ const Input = (props) => {
   if (multiLine) {
     return (
       <Grid>
-        <Text margin="0px">{label}</Text>
+        <Text margin="0 0 10px">{label}</Text>
         <ElTextarea
           rows={10}
           value={value}
@@ -28,29 +28,42 @@ const Input = (props) => {
       <ElInput type={type} placeholder={placeholder} onChange={_onChange} />
     </Grid>
   );
+
+  // 수민
+  // <Grid margin="0 0 10px">
+  //   <Text margin="0 0 10px" color="rgb(61, 61, 61)" size="12px">
+  //     {label}
+  //   </Text>
+  // </Grid>
 };
 
 Input.defaultProps = {
   multiLine: false,
   label: false,
-  placeholder: "텍스트를 입력해주세요.",
-  type: "text",
-  value: "",
+  placeholder: '텍스트를 입력해주세요.',
+  type: 'text',
+  value: '',
   _onChange: () => {},
 };
 
 const ElTextarea = styled.textarea`
-  border: 1px solid #212121;
+  border: 1px solid rgb(230, 230, 230);
   width: 100%;
   padding: 12px 4px;
   box-sizing: border-box;
 `;
 
 const ElInput = styled.input`
-  border: 1px solid #212121;
+  border: 1px solid rgb(230, 230, 230);
   width: 100%;
-  padding: 12px 4px;
+  padding: 11px 12px;
   box-sizing: border-box;
+  font-size: 14px;
+  line-height: 24px;
+  max-height: 44px;
+  min-width: 100px;
+  outline: none;
+  color: rgb(13, 13, 13);
 `;
 
 export default Input;
