@@ -11,7 +11,7 @@ const PostDetail = () => {
       <DetailTop>
         <Title>
           <a>
-            <span>카테고리명</span>
+            <span style={{fontWeight:"600", color:"#757575"}}>카테고리명</span>
           </a>
           <h1 style={{fontSize:"2rem"}}>텀블벅 타이틀</h1>
           <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
@@ -20,7 +20,7 @@ const PostDetail = () => {
             >
             이미지
             </Image>
-            <span>제작사</span>
+            <span style={{fontWeight:"600", color:"#757575"}}>제작사</span>
           </div>
         </Title>
 
