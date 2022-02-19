@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Button = (props) => {
 
-    const {text, _onClick, is_float, children, margin, height, width, padding, disabled, fontSize, bold, borderRadius} = props;
+    const {text, _onClick, is_float, children, margin, height, width, padding, disabled, fontSize, bold, border, borderRadius, bg, color, flex_center} = props;
 
     if(is_float) {
       return (
@@ -21,6 +21,10 @@ const Button = (props) => {
       fontSize: fontSize,
       bold: bold,
       borderRadius: borderRadius,
+      bg:bg,
+      color:color,
+      flex_center:flex_center,
+      border,
     };
 
     return (
@@ -42,22 +46,27 @@ Button.defaultProps = {
     disabled: false,
     fontSize: '',
     bold: false,
+    border:"none",
     borderRadius: "2px",
+    bg: "#fa6462",
+    color: "#fff",
+    flex_center: '',
 
 }
 
 const ElButton = styled.button`
     ${(props)=> (props.height? `height: ${props.height};` : '')}
     width: ${(props) => props.width};
-    background-color: #fa6462;
-    color: #ffffff;
+    background-color: ${(props) => props.bg};
+    color: ${(props) => props.color};
     padding: ${(props) => props.padding};
     box-sizing: border-box;
-    border: none;
+    border: ${(props) => props.border};
     ${(props)=> (props.borderRadius? `border-radius: ${props.borderRadius};` : '')}
     ${(props)=> (props.margin? `margin: ${props.margin};` : '')}
     ${(props)=> (props.fontSize? `font-size: ${props.fontSize};` : '')}
     font-weight: ${(props) => (props.bold ? 700 : 400)};
+    ${(props) => props.flex_center? `display: flex; align-items: center; justify-content:center`: ""}
 `;
 
 // 동그라미 플러스 버튼

@@ -2,12 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 import {Grid, Button, Image} from '../elements'
-import {CommentWrite, CommentList, Creator} from '../components';
+import {CommentWrite, CommentList, Creator, Header} from '../components';
 
 
 const PostDetail = () => {
   return (
     <React.Fragment>
+      <Header />
       <DetailTop>
         {/* 타이틀영역 : 카테고리/타이틀/제작사 */}
         <Grid is_flex height="280px">
@@ -82,11 +83,9 @@ const PostDetail = () => {
 
       <DetailBottom>
       <div>
-        댓글'개수'
-        <hr/>
         {/* 댓글 없을 경우 '댓글이 없습니다' 텍스트 추가 필요 */}
-        <Grid is_flex>
-          <Grid>
+        <Grid flex_start>
+          <Grid padding="25px 0px 40px" width="auto">
             <CommentWrite></CommentWrite>
             <CommentList></CommentList>
           </Grid>
