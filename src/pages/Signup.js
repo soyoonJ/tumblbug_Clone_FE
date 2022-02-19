@@ -103,6 +103,7 @@ const SignupBox = styled.div`
 
   @media (max-width: 766px) {
     width: 100%;
+    margin: 0 auto 12px;
   }
 
   h1 {
