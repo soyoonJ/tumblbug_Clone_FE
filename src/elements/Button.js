@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Button = (props) => {
 
-    const {text, _onClick, is_float, children, margin, width, padding, disabled} = props;
+    const {text, _onClick, is_float, children, margin, width, padding, disabled, fontSize, bold} = props;
 
     if(is_float) {
       return (
@@ -17,6 +17,8 @@ const Button = (props) => {
       margin: margin,
       width: width,
       padding: padding,
+      fontSize: fontSize,
+      bold: bold,
     };
 
     return (
@@ -35,17 +37,21 @@ Button.defaultProps = {
     width: '100%',
     padding: "12px 0px",
     disabled: false,
+    fontSize: '',
+    bold: false,
 }
 
 const ElButton = styled.button`
     width: ${(props) => props.width};
-    background-color: #FA6462;
+    background-color: #fa6462;
     color: #ffffff;
     padding: ${(props) => props.padding};
     box-sizing: border-box;
     border-radius: 2px;
     border: none;
     ${(props)=> (props.margin? `margin: ${props.margin};` : '')}
+    ${(props)=> (props.fontSize? `font-size: ${props.fontSize};` : '')}
+    font-weight: ${(props) => (props.bold ? 700 : 400)};
 `;
 
 // 동그라미 플러스 버튼

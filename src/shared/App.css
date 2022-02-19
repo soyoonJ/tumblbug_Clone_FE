@@ -34,3 +34,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/* 상세페이지 숫자, 일반:400 / 달성률:700 */
+@font-face {
+  font-family: 'Segoe UI Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/public/fonts/Segoe\ UI.woff');
+  }
+
+@font-face {
+  font-family: 'Segoe UI Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/public/fonts/Segoe\ UI\ Bold.woff');
+  }
