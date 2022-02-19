@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Button = (props) => {
 
-    const {text, _onClick, is_float, children, margin, width, padding, disabled, fontSize, bold} = props;
+    const {text, _onClick, is_float, children, margin, height, width, padding, disabled, fontSize, bold, borderRadius} = props;
 
     if(is_float) {
       return (
@@ -16,9 +16,11 @@ const Button = (props) => {
     const styles = {
       margin: margin,
       width: width,
+      height: height,
       padding: padding,
       fontSize: fontSize,
       bold: bold,
+      borderRadius: borderRadius,
     };
 
     return (
@@ -34,21 +36,25 @@ Button.defaultProps = {
     _onClick: () => {},
     is_float: false,
     margin: false,
+    height:'',
     width: '100%',
     padding: "12px 0px",
     disabled: false,
     fontSize: '',
     bold: false,
+    borderRadius: "2px",
+
 }
 
 const ElButton = styled.button`
+    ${(props)=> (props.height? `height: ${props.height};` : '')}
     width: ${(props) => props.width};
     background-color: #fa6462;
     color: #ffffff;
     padding: ${(props) => props.padding};
     box-sizing: border-box;
-    border-radius: 2px;
     border: none;
+    ${(props)=> (props.borderRadius? `border-radius: ${props.borderRadius};` : '')}
     ${(props)=> (props.margin? `margin: ${props.margin};` : '')}
     ${(props)=> (props.fontSize? `font-size: ${props.fontSize};` : '')}
     font-weight: ${(props) => (props.bold ? 700 : 400)};
