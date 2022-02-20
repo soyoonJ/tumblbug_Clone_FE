@@ -2,14 +2,51 @@ import React from 'react';
 import {Grid, Button, Image} from '../elements'
 import styled from 'styled-components';
 
+import { history } from "../redux/configureStore";
+import { useDispatch } from 'react-redux';
+
 const CommentList = (props) => {
+
+    const handlePress = ((e)=> {
+      if(e.key==='Enter') {
+          console.log('댓글내용',e.target.value)
+          // dispatch(postActions.searchFB(e.target.value))
+      }
+  })
+
     return (
       <React.Fragment>
         <Container>
           <div>
             {/* 댓글 작성창 */}
             <div>
-              <CommentWrite placeholder="창작자에게 응원의 한마디!" />
+              {/* 로그인+후원까지 했을 때 댓글 창 */}
+              <CommentWrite
+                placeholder="창작자에게 응원의 한마디!"
+                onKeyPress={handlePress}
+              />
+              {/* 후원 안했을 때 댓글 창 */}
+              {/* <CommentDonate>
+                <Image
+                    size="40"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxuZhlpr-G9AJhnM-wk_AHJRVPkSb2uhN4FYIaV8mfOBxwmQlpfehxEXKviMxv_HIc9pw&usqp=CAU"
+                    marginRight="1rem"
+                    marginTop="5px"
+                  />
+                <span>후원자만 글을 쓸 수 있어요.</span>
+              </CommentDonate> */}
+              {/* 로그인 안했을 때 댓글창 */}
+              {/* <CommentLogin onClick={()=>{
+                history.push('/login')
+              }}>
+                <Image
+                    size="40"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxuZhlpr-G9AJhnM-wk_AHJRVPkSb2uhN4FYIaV8mfOBxwmQlpfehxEXKviMxv_HIc9pw&usqp=CAU"
+                    marginRight="1rem"
+                    marginTop="5px"
+                  />
+                <span>로그인 해주세요.</span>
+              </CommentLogin> */}
             </div>
 
             {/* 코멘트 박스 -> map 돌려야 함*/}
@@ -42,6 +79,7 @@ display: block;
 }
 `
 const CommentWrite = styled.input`
+height: 60px;
 width: 100%;
 padding:1rem 1.5rem;
 border:0.8px solid rgb(242, 242, 242);
@@ -49,13 +87,48 @@ border-radius:4px;
 box-shadow:rgb(0 0 0 / 4%) 0px 4px 12px, rgb(0 0 0 / 3%) 0px 0.8px 0px;
 cursor:pointer;
 }
+
+:hover {
+  border: 0.8px solid rgb(208, 208, 208);
+}
+`
+const CommentDonate = styled.div`
+  @media (min-width: 1080px) {
+    padding: 1rem 1.5rem;
+  }
+  display: flex;
+  align-items: center;
+  color: rgb(158, 158, 158);
+  border: 0.8px solid rgb(242, 242, 242);
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 3%) 0px 0.8px 0px;
+  background: rgb(252, 252, 252);
+  font-size: 14px;
+`
+const CommentLogin = styled.div`
+  @media (min-width: 1080px) {
+    padding: 1rem 1.5rem;
+  }
+  display: flex;
+  align-items: center;
+  color: rgb(158, 158, 158);
+  border: 0.8px solid rgb(242, 242, 242);
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 4%) 0px 4px 12px, rgb(0 0 0 / 3%) 0px 0.8px 0px;
+  background: rgb(255, 255, 255);
+  font-size: 14px;
+  cursor: pointer;
+
+  :hover {
+    border: 0.8px solid rgb(208, 208, 208)
+  }
 `
 
 export default CommentList;
 
 
 
-
+// 댓글 한 박스
 const List = (props) => {
 
   const {nickname, content} = props;

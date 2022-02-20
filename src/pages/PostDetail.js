@@ -5,7 +5,14 @@ import {Grid, Button, Image} from '../elements'
 import {CommentList, Creator, Header} from '../components';
 
 
-const PostDetail = () => {
+const PostDetail = (props) => {
+
+  // postId 파라미터 가져오기
+  const postId = props.match.params.id;
+  // 모인금액, 후원자 숫자 콤마작업
+  let total = "1234000".toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  let donater = "10000".toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
   return (
     <React.Fragment>
       <Header />
@@ -56,7 +63,7 @@ const PostDetail = () => {
                   </path></svg></div>
               </div>
               {/* 이미지 오른쪽 화살표 */}
-              <div class="swiper-button-next">
+              <div className="swiper-button-next">
                 <div name="arrow1-right">
                   <svg viewBox="0 0 48 48">
                     <path fillRule="evenodd" clipRule="evenodd" d="M13.9071 46C13.4118 46 12.9164 45.8001 12.6192 45.4003C11.9257 44.7007 11.9257 43.5014 12.6192 42.7019L30.8493 24.0125L12.5201 5.22317C11.8266 4.52357 11.8266 3.32425 12.5201 2.5247C13.2136 1.8251 14.3034 1.8251 15.096 2.5247L36 24.0125L15.195 45.4003C14.7988 45.8001 14.3034 46 13.9071 46Z">
@@ -72,7 +79,7 @@ const PostDetail = () => {
                   <InfoTitle>모인금액</InfoTitle>
                   <InfoNum>
                     {/* 회계처리 필요 */}
-                    <span>1234000</span>
+                    <span>{total}</span>
                     <span>원</span>
                     <span>123%</span>
                   </InfoNum>
@@ -90,7 +97,7 @@ const PostDetail = () => {
                 <Grid marginBottom="1.75rem">
                 <InfoTitle>후원자</InfoTitle>
                 <InfoNum>
-                  <span>10000</span>
+                  <span>{donater}</span>
                   <span>명</span>
                 </InfoNum>
                 </Grid>
