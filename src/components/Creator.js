@@ -68,8 +68,11 @@ const Creator = () => {
                     실전 전 마지막 프로젝트네요
                     화이팅입니다
                   </p>
+                </div>
+                {/* 팔로우, 문의버튼 */}
                   <Grid is_flex>
                     <Button
+                      FollowHover
                       flex_center
                       width="100%"
                       height="36px"
@@ -101,6 +104,7 @@ const Creator = () => {
                       팔로우
                     </Button>
                     <Button
+                      AskHover
                       flex_center
                       width="100%"
                       height="36px"
@@ -121,7 +125,7 @@ const Creator = () => {
                       </div>
                     </Button>
                   </Grid>
-                </div>
+                
               </div>
             </Profile>
         </Aside>

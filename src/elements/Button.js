@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Button = (props) => {
 
 
-    const {text, _onClick, children, margin, height, width, padding, disabled, fontSize, bold, border, borderRadius, bg, color, flex_center, weight, donateHover} = props;
+    const {text, _onClick, children, margin, height, width, padding, disabled, fontSize, bold, border, borderRadius, bg, color, flex_center, weight, donateHover, FollowHover, AskHover} = props;
     
     const styles = {
       margin: margin,
@@ -20,6 +20,8 @@ const Button = (props) => {
       border,
       weight,
       donateHover,
+      FollowHover,
+      AskHover,
     };
   
 
@@ -48,6 +50,8 @@ Button.defaultProps = {
     flex_center: '',
     weight: false,
     donateHover: false,
+    FollowHover: false,
+    AskHover: false,
 }
 
 const ElButton = styled.button`
@@ -66,12 +70,26 @@ const ElButton = styled.button`
     cursor: pointer;
     ${(props) => (props.weight ? `font-weight: ${props.weight};` : '')};
 
-    // 후원하기 버튼 클릭
+    // 상세 후원하기 버튼 hover
     ${(props) => (props.donateHover ?
       `:hover {
           background-color: rgb(255, 69, 67);
           color: rgb(255, 255, 255);
         }` : '')};
+    // 상세 팔로우하기 버튼 hover
+    ${(props) => (props.FollowHover ?
+      `:hover {
+          background-color: rgba(240, 240, 240, 0.7);
+          color: rgb(61, 61, 61);
+        }` : '')};
+    // 상세 문의하기 버튼 hover
+    ${(props) => (props.AskHover ?
+      `:hover {
+          color: rgb(61, 61, 61);
+          border: 1px solid rgb(158, 158, 158);
+          transition: all 0.3s ease-in-out 0s;
+        }` : '')};
+
 `;
 
 

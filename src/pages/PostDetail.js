@@ -349,19 +349,19 @@ const SubInfo = styled.div`
   border: 1px solid rgb(239, 239, 239);
   display: block;
   {/* 텍스트 묶음 */}
-  div {
+  & > div {
     font-size: 1rem;
     color: rgba(0, 0, 0, 0.8);
     display: block;
   }
   {/* 펀딩 진행중 */}
-  div > div {
+  & > div > div {
     font-weight: 700;
     line-height: 1.5;
     margin-bottom: 0.5rem;
   }
   {/* 목표금액~결제 안내 */}
-  div > span {
+  & > div > span {
     line-height: 1.5;
     font-size: 1rem;
   }
