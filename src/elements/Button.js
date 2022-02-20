@@ -2,23 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = (props) => {
-  const {
-    text,
-    _onClick,
-    children,
-    margin,
-    width,
-    padding,
-    disabled,
-    fontSize,
-    weight,
-    bold,
-  } = props;
 
 
-
-    const {text, _onClick, is_float, children, margin, height, width, padding, disabled, fontSize, bold, border, borderRadius, bg, color, flex_center} = props;
-
+    const {text, _onClick, children, margin, height, width, padding, disabled, fontSize, bold, border, borderRadius, bg, color, flex_center, weight} = props;
     
     const styles = {
       margin: margin,
@@ -63,20 +49,20 @@ Button.defaultProps = {
 }
 
 const ElButton = styled.button`
-    ${(props)=> (props.height? `height: ${props.height};` : '')}
+    ${(props)=> (props.height? `height: ${props.height};` : '')};
     width: ${(props) => props.width};
     background-color: ${(props) => props.bg};
     color: ${(props) => props.color};
     padding: ${(props) => props.padding};
     box-sizing: border-box;
     border: ${(props) => props.border};
-    ${(props)=> (props.borderRadius? `border-radius: ${props.borderRadius};` : '')}
-    ${(props)=> (props.margin? `margin: ${props.margin};` : '')}
-    ${(props)=> (props.fontSize? `font-size: ${props.fontSize};` : '')}
+    ${(props)=> (props.borderRadius? `border-radius: ${props.borderRadius};` : '')};
+    ${(props)=> (props.margin? `margin: ${props.margin};` : '')};
+    ${(props)=> (props.fontSize? `font-size: ${props.fontSize};` : '')};
     font-weight: ${(props) => (props.bold ? 700 : 400)};
-    ${(props) => props.flex_center? `display: flex; align-items: center; justify-content:center`: ""}
+    ${(props) => props.flex_center? `display: flex; align-items: center; justify-content:center`: ""};
     cursor: pointer;
-    ${(props) => (props.weight ? `font-weight: ${props.weight};` : '')}
+    ${(props) => (props.weight ? `font-weight: ${props.weight};` : '')};
 
 `;
 

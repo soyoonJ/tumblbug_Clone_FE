@@ -7,7 +7,7 @@ const NaviTop = (props) => {
     <React.Fragment>
       <NaviTopLayout>
         <Grid is_flex>
-          <LogoImg src="./img/logo.png" />
+          <LogoImg src="/img/logo.png" />
           <Button>
             <Text size="12px" bold padding="12px">
               로그인/회원가입

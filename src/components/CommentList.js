@@ -1,12 +1,32 @@
 import React from 'react';
 import {Grid, Button, Image} from '../elements'
-import { CommentWrite } from '.';
 import styled from 'styled-components';
 
 const CommentList = (props) => {
     return (
       <React.Fragment>
-        <Article>
+        <Container>
+          {/* 댓글 작성 조건
+          1: 로그인 '로그인 후 작성할 수 있습니다' (disabled)
+          2: 후원자 아니면 '후원자만 작성할 수 있습니다' (disabled)
+          3: 댓글창 오픈 */}
+
+          {/* 이거 나중에 a 태그로 추가기능 구현해보기 */}
+          
+          <input
+          placeholder="창작자에게 응원의 한마디!"
+          style={{
+            border:"0.8px solid rgb(242, 242, 242)",
+            cursor:"pointer",
+            padding:"1rem 1.5rem",
+            boxShadow:"rgb(0 0 0 / 4%) 0px 4px 12px, rgb(0 0 0 / 3%) 0px 0.8px 0px",
+            borderRadius:"4px",
+            width: "100%",
+          }}>
+            
+          </input>
+
+          <Article>
 
           {/* <CommentWrite></CommentWrite> */}
 
@@ -44,16 +64,24 @@ const CommentList = (props) => {
             </Comment>
             <div style={{color:"#9e9e9e", fontSize:"14px", cursor:"pointer"}}>
               {/* 답글개수 */}
+              <i className="_30LNYFhw6qsigZSbwlGCDz _1QY7TzdLHKX3-BKPDNNYKF">
+              </i>
               0
             </div>
           </Grid>
-        </Article>
+          </Article>
+
+        </Container>
       </React.Fragment>
     );
 };
 
+const Container = styled.div`
+
+
+`
+
 const Article = styled.article`
-max-width:650px;
 
 &input::placeholder {
   color:#9e9e9e;
@@ -67,7 +95,6 @@ const Comment = styled.div`
 padding-top: 16px;
 padding: 1.5rem 0;
 margin: 0px auto;
-font-size: 16px;
 line-height: 28px;
 color: #3d3d3d;
 `

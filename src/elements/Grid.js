@@ -7,6 +7,7 @@ const Grid = (props) => {
     is_flex,
     flex_start,
     width,
+    maxWidth,
     height,
     margin,
     marginBottom,
@@ -26,6 +27,7 @@ const Grid = (props) => {
     is_flex: is_flex,
     flex_start,
     width: width,
+    maxWidth: maxWidth,
     height: height,
     margin: margin,
     marginBottom: marginBottom,
@@ -53,6 +55,7 @@ Grid.defaultProps = {
   is_flex: false,
   flex_start: false,
   width: "100%",
+  maxWidth: "",
   height: "100%",
   padding: false,
   margin: false,
@@ -69,6 +72,7 @@ Grid.defaultProps = {
 // defaultProps를 가지고 스타일 어떻게 줄건지
 const GridBox = styled.div`
   width: ${(props) => props.width};
+  max-width: ${(props) => props.maxWidth};
   height: ${(props) => props.height};
   box-sizing: border-box;
   ${(props) => (props.border ? `border: ${props.border};` : "")}
