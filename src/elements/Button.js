@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Button = (props) => {
 
 
-    const {text, _onClick, children, margin, height, width, padding, disabled, fontSize, bold, border, borderRadius, bg, color, flex_center, weight} = props;
+    const {text, _onClick, children, margin, height, width, padding, disabled, fontSize, bold, border, borderRadius, bg, color, flex_center, weight, donateHover} = props;
     
     const styles = {
       margin: margin,
@@ -19,6 +19,7 @@ const Button = (props) => {
       flex_center:flex_center,
       border,
       weight,
+      donateHover,
     };
   
 
@@ -46,6 +47,7 @@ Button.defaultProps = {
     color: "#fff",
     flex_center: '',
     weight: false,
+    donateHover: false,
 }
 
 const ElButton = styled.button`
@@ -64,6 +66,12 @@ const ElButton = styled.button`
     cursor: pointer;
     ${(props) => (props.weight ? `font-weight: ${props.weight};` : '')};
 
+    // 후원하기 버튼 클릭
+    ${(props) => (props.donateHover ?
+      `:hover {
+          background-color: rgb(255, 69, 67);
+          color: rgb(255, 255, 255);
+        }` : '')};
 `;
 
 

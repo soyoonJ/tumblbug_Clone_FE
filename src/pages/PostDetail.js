@@ -42,7 +42,6 @@ const PostDetail = () => {
                 </div>
               </Title>
             </Grid>
-
             {/* 상품요약 썸네일 : 이미지 */}
             <Img>
               <img src="https://tumblbug-pci.imgix.net/932499bdfd401c73ae81db5270ea5a8a834f7a87/7bbf54d9f81e4491c45cc075b08fe381403801de/f29731dfb323ec5d478d360c1e121d245d294a89/bbb07eaf-c55b-4528-98ba-902ec90396fe.jpeg?ixlib=rb-1.1.0&w=1240&h=930&auto=format%2Ccompress&lossless=true&fit=crop&s=193e308c4f9e9722d61f17e9610e65f0"
@@ -65,7 +64,6 @@ const PostDetail = () => {
               </div>
               
             </Img>
-
             {/* 상품요약 텍스트 : 모인금액~후원하기*/}
             <Info>
               {/* 펀딩 요약 텍스트 */}
@@ -137,7 +135,8 @@ const PostDetail = () => {
                     </MiniBtn>
                   </div>
                   {/* 후원하기 버튼 */}
-                  <Button height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem">이 프로젝트 후원하기</Button>
+                  {/* 후원상태가 true라면 밑에 버튼, false면 회색버튼 추가 */}
+                  <Button donateHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem">이 프로젝트 후원하기</Button>
                 </div>
               </DetailButtons>
             </Info>
@@ -153,13 +152,11 @@ const PostDetail = () => {
         </div>
       </Nav>
 
+      {/* 댓글 없을 경우 '댓글이 없습니다' 텍스트 추가 필요 */}
       <DetailBottom>
         <div>
-          {/* 댓글 없을 경우 '댓글이 없습니다' 텍스트 추가 필요 */}
-          <div>
-            <CommentList></CommentList>
-            <Creator></Creator>
-          </div>
+          <CommentList></CommentList>
+          <Creator></Creator>
         </div>
       </DetailBottom>
     </React.Fragment>
@@ -451,37 +448,25 @@ const Nav = styled.nav`
 
 {/* 하단 댓글/창작자 */}
 const DetailBottom = styled.div`
-  width: 100%;
-  display: block;
+@media only screen and (min-width: 1080px) {
+  width : 1080px;
+}
 
-  div {
-    @media only screen and (min-width: 1200px) {
-      width:1160px;
-    }
-  
-    @media only screen and (min-width: 1080px) {
-    width:1080px;
-    }
-  
-    @media (min-width: 1080px) {
-      width:1032px;
-      margin: 0px auto;
-    }
-  
-    display:block;
-    height: auto;
+@media (min-width: 1080px) {
+  width: 1032px;
+  margin: 0px auto;
+}
 
-    div > div {
-      @media (min-width: 1080px) {
-        width : 1032px;
-        margin: 0px auto;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-      }
-      display: flex;
-    }
-
+& > div {
+  @media (min-width: 1080px) {
+    width: 1032px;
+    margin: 0px auto;
+    flex-wrap: nowrap;
+    justify-content: space-between;
   }
+  display: flex;
+}
+
 
 `
 
