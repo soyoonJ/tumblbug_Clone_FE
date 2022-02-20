@@ -141,9 +141,13 @@ const PostDetail = (props) => {
                         </IconAlign>
                     </MiniBtn>
                   </div>
-                  {/* 후원하기 버튼 */}
                   {/* 후원상태가 true라면 밑에 버튼, false면 회색버튼 추가 */}
-                  <Button donateHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem">이 프로젝트 후원하기</Button>
+                  {/* 후원하기 버튼 */}
+                  <Button donateHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold>이 프로젝트 후원하기</Button>
+                  {/* 후원 취소하기 버튼 */}
+                  {/* <Button CancelHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold
+                    color="rgba(0, 0, 0, 0.6)" bg="rgb(231, 231, 231)"
+                  >후원 취소하기</Button> */}
                 </div>
               </DetailButtons>
             </Info>

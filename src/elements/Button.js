@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Button = (props) => {
 
 
-    const {text, _onClick, children, margin, height, width, padding, disabled, fontSize, bold, border, borderRadius, bg, color, flex_center, weight, donateHover, FollowHover, AskHover} = props;
+    const {text, _onClick, children, margin, height, width, padding, disabled, fontSize, bold, border, borderRadius, bg, color, flex_center, weight, donateHover, CancelHover, FollowHover, AskHover} = props;
     
     const styles = {
       margin: margin,
@@ -20,6 +20,7 @@ const Button = (props) => {
       border,
       weight,
       donateHover,
+      CancelHover,
       FollowHover,
       AskHover,
     };
@@ -50,6 +51,7 @@ Button.defaultProps = {
     flex_center: '',
     weight: false,
     donateHover: false,
+    CancelHover: false,
     FollowHover: false,
     AskHover: false,
 }
@@ -75,6 +77,14 @@ const ElButton = styled.button`
       `:hover {
           background-color: rgb(255, 69, 67);
           color: rgb(255, 255, 255);
+          transition: opacity 0.1s ease 0s, background-color 0.1s ease 0s, color 0.1s ease 0s, box-shadow 0.1s ease 0s, background 0.1s ease 0s;
+        }` : '')};
+    // 상세 후원취소하기 버튼 hover
+    ${(props) => (props.CancelHover ?
+      `:hover {
+          background-color: rgb(217, 217, 217);
+          color: rgb(0, 0, 0);
+          transition: opacity 0.1s ease 0s, background-color 0.1s ease 0s, color 0.1s ease 0s, box-shadow 0.1s ease 0s, background 0.1s ease 0s;
         }` : '')};
     // 상세 팔로우하기 버튼 hover
     ${(props) => (props.FollowHover ?
