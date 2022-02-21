@@ -9,13 +9,15 @@ import { useDispatch, useSelector } from 'react-redux';
 const NaviTop = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
-  console.log(user);
-
-  React.useEffect(() => {
-    dispatch(userActions.loginCheckDB());
-  }, []);
 
   const is_token = localStorage.getItem('login-token') ? true : false;
+
+  React.useEffect(() => {
+    if (is_token) {
+      dispatch(userActions.loginCheckDB());
+      console.log(user);
+    }
+  }, []);
 
   if (is_token) {
     return (
@@ -48,7 +50,7 @@ const NaviTop = (props) => {
                   ></path>
                 </svg>
               </Image>
-              와 로그아웃할랭
+              {user ? user.user.nickname : ''}
             </Button>
           </Grid>
         </NaviTopLayout>
