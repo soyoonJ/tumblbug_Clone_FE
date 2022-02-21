@@ -1,39 +1,64 @@
-import React from "react";
-import styled from "styled-components";
-import { Grid } from "../elements";
+import React from 'react';
+import styled from 'styled-components';
+import { Grid, Text } from '../elements';
+
+import { history } from '../redux/configureStore';
 
 const NaviTop = (props) => {
-  return (
-    <React.Fragment>
-      <NaviTopLayout>
-        <Grid is_flex>
-          <LogoImg src="/img/logo.png" />
-          <Button>
-            <Image>
-              <svg
-                class="style__AvatarIcon-zxsodr-36 ixdnbV"
-                width="48"
-                height="48"
-                viewBox="0 0 48 48"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M41.8081 40.2C40.6938 32.1539 34.8597 26 27.852 26H20.1498C13.1405 26 7.30625 32.1539 6.19186 40.2C6.06567 41.1111 6 42.0465 6 43H42C42 42.0465 41.9343 41.1111 41.8081 40.2Z"
-                  fill="#ffffff"
-                ></path>
-                <path
-                  d="M24 23C28.9639 23 33 18.9626 33 14C33 9.0374 28.9639 5 24 5C19.0379 5 15 9.0374 15 14C15 18.9626 19.0379 23 24 23Z"
-                  fill="#ffffff"
-                ></path>
-              </svg>
-            </Image>
-            로그인/회원가입
-          </Button>
-        </Grid>
-      </NaviTopLayout>
-    </React.Fragment>
-  );
+  const is_token = localStorage.getItem('login-token') ? true : false;
+
+  if (is_token) {
+    return (
+      <React.Fragment>
+        <NaviTopLayout>
+          <Grid is_flex>
+            <LogoImg src="/img/logo.png" />
+            <Button>
+              <Image>
+                <svg
+                  class="style__AvatarIcon-zxsodr-36 ixdnbV"
+                  width="48"
+                  height="48"
+                  viewBox="0 0 48 48"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M41.8081 40.2C40.6938 32.1539 34.8597 26 27.852 26H20.1498C13.1405 26 7.30625 32.1539 6.19186 40.2C6.06567 41.1111 6 42.0465 6 43H42C42 42.0465 41.9343 41.1111 41.8081 40.2Z"
+                    fill="#ffffff"
+                  ></path>
+                  <path
+                    d="M24 23C28.9639 23 33 18.9626 33 14C33 9.0374 28.9639 5 24 5C19.0379 5 15 9.0374 15 14C15 18.9626 19.0379 23 24 23Z"
+                    fill="#ffffff"
+                  ></path>
+                </svg>
+              </Image>
+              로그인/회원가입
+            </Button>
+          </Grid>
+        </NaviTopLayout>
+      </React.Fragment>
+    );
+  } else {
+    return (
+      <React.Fragment>
+        <NaviTopLayout>
+          <Grid is_flex>
+            <LogoImg src="/img/logo.png" />
+            <Button
+              onClick={() => {
+                history.push('/login');
+              }}
+            >
+              <Text size="12px" bold padding="12px">
+                와 로그아웃
+              </Text>
+            </Button>
+          </Grid>
+        </NaviTopLayout>
+      </React.Fragment>
+    );
+  }
 };
 
 const NaviTopLayout = styled.div`
