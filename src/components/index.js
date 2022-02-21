@@ -3,7 +3,6 @@ import Header from "./Header";
 import NaviTop from "./NaviTop";
 import NaviBottom from "./NaviBottom";
 import Footer from "./Footer";
-import CommentWrite from "./CommentWrite";
 import CommentList from "./CommentList";
 import Creator from "./Creator";
 import Banner from "./Banner";
@@ -18,7 +17,6 @@ export {
   NaviTop,
   NaviBottom,
   Footer,
-  CommentWrite,
   CommentList,
   Creator,
   Post,
