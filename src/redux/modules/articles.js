@@ -8,8 +8,9 @@ import axios from 'axios';
 // actions
 const GET_MAIN_ARTICLES = 'GET_MAIN_ARTICLES';
 const GET_POULAR_ARTICLES = 'GET_POULAR_ARTICLES';
-const DONATE = 'DONATE';
 const SET_ONE = 'SET_ONE';
+const WANT_DONATE = 'WANT_DONATE';
+const CANCEL_DONATE = 'CANCEL_DONATE';
 
 // action creators
 // const logIn = createAction(LOG_IN, (user)=> ({user}));
@@ -19,9 +20,9 @@ const getMainArticles = createAction(GET_MAIN_ARTICLES, (articles) => ({
 const getPoularArticles = createAction(GET_POULAR_ARTICLES, (articles) => ({
   articles,
 }));
-
 const setOne = createAction(SET_ONE, (one_list) => ({ one_list }));
-const donate = createAction(DONATE, (articleId, is_donate) => ({ articleId }));
+const wantDonate = createAction(WANT_DONATE, (articleId) => ({ articleId }))
+const cancelDonate = createAction(CANCEL_DONATE, (articleId) => ({ articleId }))
 
 // initialState
 // defaultProps 같은 역할
@@ -74,10 +75,15 @@ const getPoularArticlesDB = () => {
 const donateDB = (articleId) => {
   return function (dispatch, getState, { history }) {
     axios
-      .get(`http://아이피주소/api/article/${articleId}/donation`)
+      .patch(`http://3.35.176.155:8080/api/article/${articleId}/donation`,
+      {
+        headers: {
+        Authorization: `Bearer ${localStorage.getItem('login-token')}`,
+        },
+    })
       .then(function (res) {
-        console.log(res);
-        // dispatch(donate(articleId));
+        console.log('도네이트',res);
+        // dispatch(getOneDB(articleId));
       })
       .catch(function (error) {
         console.log(error);
@@ -88,9 +94,14 @@ const donateDB = (articleId) => {
 const notDonateDB = (articleId) => {
   return function (dispatch, getState, { history }) {
     axios
-      .get(`http://아이피주소/api/article/${articleId}/donationCancel`)
+      .patch(`http://3.35.176.155:8080/api/article/${articleId}/donationCancel`,{
+        headers: {
+        Authorization: `Bearer ${localStorage.getItem("login-token")}`,
+        },
+    })
       .then(function (res) {
         console.log(res);
+        dispatch(getOneDB(articleId));
       })
       .catch(function (error) {
         console.log(error);
@@ -98,13 +109,14 @@ const notDonateDB = (articleId) => {
   };
 };
 
+// articleId 샘플 - 21
 const getOneDB = (articleId) => {
   return function (dispatch, getState, { history }) {
     axios
-      .get(`http://아이피주소/api/article/${articleId}`)
+      .get(`http://3.35.176.155:8080/api/article/${articleId}`)
       .then(function (res) {
         console.log(res);
-        // dispatch(setOne(아티클정보));
+        dispatch(setOne(res.data));
       })
       .catch(function (error) {
         console.log(error);
@@ -127,15 +139,20 @@ export default handleActions(
         console.log(draft.list);
       }),
 
-    [DONATE]: (state, action) =>
-      produce(state, (draft) => {
-        draft.is_donate[action.payload.articleId] = action.payload.is_donate;
-      }),
-
     [SET_ONE]: (state, action) =>
       produce(state, (draft) => {
         draft.one_list = action.payload.one_list;
       }),
+
+    [WANT_DONATE]: (state, action) =>
+    produce(state, (draft) => {
+      draft.one_list = action.payload.one_list;
+    }),
+
+    [CANCEL_DONATE]: (state, action) =>
+    produce(state, (draft) => {
+      draft.one_list = action.payload.one_list;
+    }),
   },
   initialState
 );
@@ -149,8 +166,9 @@ const actionCreators = {
 
   setOne,
   getOneDB,
-  donate,
+  wantDonate,
   donateDB,
+  cancelDonate,
   notDonateDB,
 };
 
