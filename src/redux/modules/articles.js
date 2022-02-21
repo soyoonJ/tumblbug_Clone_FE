@@ -20,6 +20,10 @@ const getPoularArticles = createAction(GET_POULAR_ARTICLES, (articles) => ({
 }));
 
 
+const setOne = createAction(SET_ONE, (one_list) => ({ one_list }));
+const donate = createAction(DONATE, (articleId, is_donate) => ({ articleId }));
+
+
 // initialState
 // defaultProps 같은 역할
 const initialState = {
@@ -72,13 +76,27 @@ const donateDB = (articleId) => {
       .get(`http://아이피주소/api/article/${articleId}/donation`)
       .then(function (res) {
         console.log(res)
-        dispatch(donate(articleId));
+        // dispatch(donate(articleId));
       })
       .catch(function (error) {
         console.log(error);
       });
   };
 };
+
+const notDonateDB = (articleId) => {
+  return function (dispatch, getState, { history }) {
+    axios
+      .get(`http://아이피주소/api/article/${articleId}/donationCancel`)
+      .then(function (res) {
+        console.log(res)
+        
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+}
 
 const getOneDB = (articleId) => {
   return function (dispatch, getState, { history }) {
@@ -131,6 +149,8 @@ const actionCreators = {
   getOneDB,
   donate,
   donateDB,
+  notDonateDB,
+
 };
 
 export { actionCreators };
