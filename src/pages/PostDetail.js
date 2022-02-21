@@ -14,8 +14,10 @@ const PostDetail = (props) => {
   // getPostFB가 완성되고 나서 살려야 함
   const article = useSelector((state)=> state.articles.one_list)
   const donators = useSelector((state) => state.articles.one_list.detailedProjects.donator)
-  // const userEmail = useSelector((state)=>state.user.user.email)
-  // const isDonated = (donators.filter(e=> e === userEmail).length !== 0)?true:false;
+  // const isDonate = useSelector((state) => state.articles.is_donate)
+  const userEmail = useSelector((state)=>state.user.user.email)
+  // const donateCheck = (donators.filter(e=>e === userEmail).length !== 0)?true:false;
+  
 
   // articleId 파라미터 가져오기
   const articleId = props.match.params.id;
@@ -176,7 +178,7 @@ const PostDetail = (props) => {
                   </div>
                   {/* 후원상태가 true라면 밑에 버튼, false면 회색버튼 추가 */}
                   {/* 후원하기 버튼 */}
-                  {/* {!isDonated ? */}
+                  {/* {!donateCheck ? */}
                   <Button
                   _onClick={wantDonate}
                   donateHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold>
