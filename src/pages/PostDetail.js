@@ -5,6 +5,7 @@ import {Grid, Button, Image} from '../elements'
 import {CommentList, Creator, Header} from '../components';
 
 
+
 const PostDetail = (props) => {
 
   // postId 파라미터 가져오기
@@ -48,6 +49,7 @@ const PostDetail = (props) => {
                   </div>
                 </div>
               </Title>
+
             </Grid>
             {/* 상품요약 썸네일 : 이미지 */}
             <Img>
@@ -161,6 +163,7 @@ const PostDetail = (props) => {
             <a>커뮤니티<span>0</span></a>
           </div>
         </div>
+
       </Nav>
 
       {/* 댓글 없을 경우 '댓글이 없습니다' 텍스트 추가 필요 */}
@@ -175,7 +178,7 @@ const PostDetail = (props) => {
 };
 
 const DetailTop = styled.div`
-  @medida(min-width: 1080px) {
+  @media(min-width: 1080px) {
     padding-bottom: 3rem;
   }
   width: 100%;
@@ -358,6 +361,7 @@ const SubInfo = styled.div`
   order: 5;
   background-color: rgb(250, 250, 250);
   border: 1px solid rgb(239, 239, 239);
+<<<<<<< HEAD
   display: block;
   {/* 텍스트 묶음 */}
   & > div {
@@ -480,5 +484,6 @@ const DetailBottom = styled.div`
 
 
 `
+
 
 export default PostDetail;

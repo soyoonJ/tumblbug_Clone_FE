@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const Button = (props) => {
 
-
     const {text, _onClick, children, margin, height, width, padding, disabled, fontSize, bold, border, borderRadius, bg, color, flex_center, weight, donateHover, CancelHover, FollowHover, AskHover} = props;
     
     const styles = {
@@ -99,8 +98,6 @@ const ElButton = styled.button`
           border: 1px solid rgb(158, 158, 158);
           transition: all 0.3s ease-in-out 0s;
         }` : '')};
-
-`;
-
+`
 
 export default Button;

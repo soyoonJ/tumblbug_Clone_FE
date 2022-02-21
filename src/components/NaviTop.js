@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { Grid, Text } from "../elements";
+import React from 'react';
+import styled from 'styled-components';
+import { Grid, Text } from '../elements';
 
 const NaviTop = (props) => {
   return (
