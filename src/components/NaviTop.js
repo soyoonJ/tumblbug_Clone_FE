@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid, Text } from "../elements";
+import { Grid } from "../elements";
 
 const NaviTop = (props) => {
   return (
@@ -9,9 +9,26 @@ const NaviTop = (props) => {
         <Grid is_flex>
           <LogoImg src="/img/logo.png" />
           <Button>
-            <Text size="12px" bold padding="12px">
-              로그인/회원가입
-            </Text>
+            <Image>
+              <svg
+                class="style__AvatarIcon-zxsodr-36 ixdnbV"
+                width="48"
+                height="48"
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M41.8081 40.2C40.6938 32.1539 34.8597 26 27.852 26H20.1498C13.1405 26 7.30625 32.1539 6.19186 40.2C6.06567 41.1111 6 42.0465 6 43H42C42 42.0465 41.9343 41.1111 41.8081 40.2Z"
+                  fill="#ffffff"
+                ></path>
+                <path
+                  d="M24 23C28.9639 23 33 18.9626 33 14C33 9.0374 28.9639 5 24 5C19.0379 5 15 9.0374 15 14C15 18.9626 19.0379 23 24 23Z"
+                  fill="#ffffff"
+                ></path>
+              </svg>
+            </Image>
+            로그인/회원가입
           </Button>
         </Grid>
       </NaviTopLayout>
@@ -26,7 +43,7 @@ const NaviTopLayout = styled.div`
   width: 100%;
   min-height: 48px;
   max-width: 1160px;
-  margin: 13px 0px;
+  margin: 15px 0px;
 `;
 
 const LogoImg = styled.img`
@@ -42,10 +59,29 @@ const Button = styled.div`
   border: 1px solid rgb(223, 223, 223);
   width: auto;
   min-width: 30px;
+  max-height: 44px;
   font-size: 12px;
   font-weight: 600;
-  padding: 12px;
+  padding: 16px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Image = styled.div`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  padding-top: 5px;
+  box-sizing: border-box;
+  border-radius: 24px;
+  border: 1px solid rgb(223, 223, 223);
+  background-color: rgb(217 217 217);
 `;
 
 export default NaviTop;

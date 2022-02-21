@@ -27,7 +27,7 @@ const Container = styled.div`
   width: 100%;
   max-width: 1160px;
   margin: 0px auto;
-  padding: 56px 20px 0px 0px;
+  padding: 56px 0px;
 `;
 
 export default Main;
