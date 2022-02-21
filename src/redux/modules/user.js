@@ -3,62 +3,88 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { RESP } from '../../shared/response';
 
+// mock API
+const respLogin = RESP.LOGIN;
+const respSignup = RESP.SIGNUP;
+const respLoginCheck = RESP.LOGIN_CHECK;
+
 // actions
-// const LOG_IN = "LOG_IN";
-const LOG_OUT = 'LOG_OUT';
-const GET_USER = 'GET_USER';
 const SET_USER = 'SET_USER';
+const LOG_OUT = 'LOG_OUT';
 
 // action creators
-// const logIn = createAction(LOG_IN, (user)=> ({user}));
-const logOut = createAction(LOG_OUT, (user) => ({ user }));
-const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
+const logOut = createAction(LOG_OUT, () => ({}));
 
 // initialState
 // defaultProps 같은 역할
 const initialState = {
-  // user: null,
-  // is_login: false,
+  user: { email: null, nickname: null },
+  is_login: false,
 };
 
-const loginFB = () => {
-  return function (dispatch, getState, { history }) {};
+// 로그인
+const loginDB = (email, password) => {
+  return function (dispatch, getState, { history }) {
+    if (!respLogin.result) {
+      return;
+    }
+    localStorage.setItem('login-token', respLogin.token);
+    dispatch(setUser({ email, password }));
+    history.replace('/');
+  };
 };
 
-const signupFB = () => {
-  return function (dispatch, getState, { history }) {};
+// 회원가입
+const signupDB = (nickname, email, password) => {
+  return function (dispatch, getState, { history }) {
+    if (!respSignup.result) {
+      return;
+    }
+    history.replace('/');
+  };
 };
 
-const loginCheckFB = () => {
-  return function (dispatch, getState, { history }) {};
-};
+// 로그인 체크
+const loginCheckDB = () => {
+  return function (dispatch, getState, { history }) {
+    if (!respLoginCheck.result) {
+      alert('회원정보가 올바르지 않습니다.');
+      history.replace('/');
+    }
 
-const logoutFB = () => {
-  return function (dispatch, getState, { history }) {};
+    // dispatch(setUser({ email , nickname }));
+  };
 };
 
 // 리듀서
 export default handleActions(
   {
-    [SET_USER]: (state, action) => produce(state, (draft) => {}),
+    [SET_USER]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload.user);
+        draft.user.email = action.payload.user.email;
+        draft.user.nickname = action.payload.user.nickname;
+        draft.is_login = true;
+      }),
 
-    [LOG_OUT]: (state, action) => produce(state, (draft) => {}),
-
-    [GET_USER]: (state, action) => produce(state, (draft) => {}),
+    [LOG_OUT]: (state, action) =>
+      produce(state, (draft) => {
+        localStorage.removeItem('login-token');
+        draft.user = null;
+        draft.is_login = false;
+        window.location.replace('/');
+      }),
   },
   initialState
 );
 
 // action creator export
 const actionCreators = {
-  loginFB,
+  loginDB,
+  signupDB,
+  loginCheckDB,
   logOut,
-  getUser,
-
-  signupFB,
-  loginCheckFB,
-  logoutFB,
 };
 
 export { actionCreators };

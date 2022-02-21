@@ -25,7 +25,7 @@ const NaviTopLayout = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: 56px;
+  min-height: 36px;
   max-width: 1160px;
 `;
 
@@ -48,8 +48,8 @@ const Search = styled.div`
   border: none;
   background-color: rgb(243 243 243);
   min-width: 30px;
+  /* height: 36px; */
   padding: 5px 16px;
-  margin-bottom: 10px;
   position: absolute;
   top: 0px;
   right: 0px;

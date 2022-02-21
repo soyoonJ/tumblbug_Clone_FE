@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Text = (props) => {
   const {
@@ -30,8 +30,8 @@ const Text = (props) => {
 Text.defaultProps = {
   children: null,
   bold: false,
-  color: '#222831',
-  size: '14px',
+  color: "#222831",
+  size: "14px",
   margin: false,
   no_wrap: false,
   weight: 400,
@@ -43,12 +43,12 @@ Text.defaultProps = {
 const P = styled.p`
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
-  font-weight: ${(props) => (props.bold ? '600' : '400')};
-  ${(props) => (props.margin ? `margin: ${props.margin};` : '')}
-  ${(props) => (props.no_wrap ? ` white-space: nowrap;` : '')}
-  ${(props) => (props.weight ? `font-weight: ${props.weight};` : '')}
-  ${(props) => (props.center ? 'text-align: center;' : '')}
-  ${(props) => (props.wordBreak ? `word-break: keep-all;` : '')}
+  font-weight: ${(props) => (props.bold ? "600" : "400")};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+  ${(props) => (props.no_wrap ? ` white-space: nowrap;` : "")}
+  ${(props) => (props.weight ? `font-weight: ${props.weight};` : "")}
+  ${(props) => (props.center ? "text-align: center;" : "")}
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")}
 
   span {
     color: rgb(39, 163, 255);
