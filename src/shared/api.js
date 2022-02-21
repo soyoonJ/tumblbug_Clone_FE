@@ -3,7 +3,7 @@ import axios from 'axios';
 const token = localStorage.getItem('login-token');
 
 const api = axios.create({
-  baseURL: 'http://52.79.160.167',
+  baseURL: 'http://3.35.176.155:8080/',
   headers: {
     'content-type': 'application/json;charset=UTF-8',
     accept: 'application/json,',
@@ -21,7 +21,7 @@ export const apis = {
       password,
     }),
 
-  loginCheck: (token) => api.post('/api/checklogin', token),
+  loginCheck: () => api.post('/api/users/me'),
 
   // articles
   mainAriticles: () => api.get('/api/articles/mainProjects'), // 주목할 만한 프로젝트

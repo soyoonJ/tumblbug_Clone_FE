@@ -1,9 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import styled from "styled-components";
-import Post from "./Post";
-import { RESP } from "../shared/response";
-import { useSelector } from "react-redux";
+import styled from 'styled-components';
+import Post from './Post';
+
+import { RESP } from '../shared/response';
+import { useSelector } from 'react-redux';
 
 const MainPost = (props) => {
   const mainArticles = RESP.ARTICLES_MAIN1.mainProjects;

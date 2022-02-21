@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import NaviTop from "./NaviTop";
-import NaviBottom from "./NaviBottom";
-import styled from "styled-components";
+import NaviTop from './NaviTop';
+import NaviBottom from './NaviBottom';
+import styled from 'styled-components';
 
 const Header = (props) => {
   return (
