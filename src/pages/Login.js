@@ -1,8 +1,115 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Input, Button } from '../elements';
+import { emailCheckReg } from '../shared/emailCheck';
+
+// redux import
+import { useDispatch } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/user';
 
 const Login = () => {
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  // 경고창 없애는 함수
+  const noneWarningSigns = () => {
+    const warningEmail = document.getElementById('WarningEmail');
+    warningEmail.style.display = 'none';
+
+    const warningPw = document.getElementById('WarningPw');
+    warningPw.style.display = 'none';
+
+    const pleaseEmail = document.getElementById('pleaseEmail');
+    pleaseEmail.style.display = 'none';
+
+    const pleasePW = document.getElementById('pleasePW');
+    pleasePW.style.display = 'none';
+
+    const emailInput = document.getElementById('emailInput');
+    emailInput.style.border = '1px solid rgb(230, 230, 230)';
+
+    const pwInput = document.getElementById('pwInput');
+    pwInput.style.border = '1px solid rgb(230, 230, 230)';
+  };
+
+  // 이메일 입력창
+  const onChangeEmail = (e) => {
+    noneWarningSigns();
+    setEmail(e.target.value);
+  };
+
+  // 비밀번호 입력창
+  const onChangePw = (e) => {
+    noneWarningSigns();
+    setPassword(e.target.value);
+  };
+
+  const onClick = () => {
+    // 이메일과 비밀번호를 입력하지 않을 경우
+    if (email === '' && password === '') {
+      const emailInput = document.getElementById('emailInput');
+      emailInput.style.border = '1px solid rgb(236, 99, 94)';
+
+      const pleaseEmail = document.getElementById('pleaseEmail');
+      pleaseEmail.style.display = 'block';
+
+      const pwInput = document.getElementById('pwInput');
+      pwInput.style.border = '1px solid rgb(236, 99, 94)';
+
+      const pleasePW = document.getElementById('pleasePW');
+      pleasePW.style.display = 'block';
+
+      return;
+    }
+    // 이메일을 입력하지 않을 경우
+    if (email === '') {
+      const pleaseEmail = document.getElementById('pleaseEmail');
+      pleaseEmail.style.display = 'block';
+
+      const emailInput = document.getElementById('emailInput');
+      emailInput.style.border = '1px solid rgb(236, 99, 94)';
+
+      return;
+    }
+    // 비밀번호를 입력하지 않을 경우
+    if (password === '') {
+      const pleasePW = document.getElementById('pleasePW');
+      pleasePW.style.display = 'block';
+
+      const pwInput = document.getElementById('pwInput');
+      pwInput.style.border = '1px solid rgb(236, 99, 94)';
+
+      return;
+    }
+
+    // 비밀번호가 6자 이상이 아닐 경우
+    if (password.length < 6) {
+      const warningPw = document.getElementById('WarningPw');
+      warningPw.style.display = 'block';
+
+      const pwInput = document.getElementById('pwInput');
+      pwInput.style.border = '1px solid rgb(236, 99, 94)';
+
+      return;
+    }
+
+    // 이메일 주소 형식이 맞지 않을 경우
+    if (!emailCheckReg(email)) {
+      const warningEmail = document.getElementById('WarningEmail');
+      warningEmail.style.display = 'block';
+
+      const emailInput = document.getElementById('emailInput');
+      emailInput.style.border = '1px solid rgb(236, 99, 94)';
+
+      return;
+    }
+
+    // 이메일 형식이 맞고 비밀번호가 6자 이상일 경우
+    dispatch(userActions.loginDB(email, password));
+  };
+
   return (
     <React.Fragment>
       <Box>
@@ -14,16 +121,31 @@ const Login = () => {
             <h1>이메일로 로그인</h1>
             <Grid>
               <Input
+                _id="emailInput"
                 label="이메일 주소"
                 placeholder="이메일 주소를 입력해주세요"
-                is_login
+                is_user
+                value={email}
+                _onChange={(e) => {
+                  onChangeEmail(e);
+                }}
               />
+              <Waring id="pleaseEmail">이메일 주소를 입력해주세요.</Waring>
+              <Waring id="WarningEmail">이메일 형식에 맞게 입력하세요.</Waring>
               <Input
+                _id="pwInput"
                 label="비밀번호"
                 placeholder="비밀번호를 입력해주세요"
-                is_login
+                is_user
+                value={password}
+                type="password"
+                _onChange={(e) => {
+                  onChangePw(e);
+                }}
               />
-              <Button margin="40px 0 0" text="로그인" />
+              <Waring id="pleasePW">비밀번호를 입력해주세요.</Waring>
+              <Waring id="WarningPw">비밀번호는 6자 이상이어야 합니다.</Waring>
+              <Button margin="40px 0 0" text="로그인" _onClick={onClick} />
             </Grid>
             <div className="socialBox">
               <Grid is_flex padding="10px 0px">
@@ -194,6 +316,14 @@ const CircleBox = styled.div`
   @media (max-width: 1080px) {
     width: 100%;
   }
+`;
+
+const Waring = styled.p`
+  display: none;
+  font-size: 13px;
+  line-height: 20px;
+  color: #ff5757;
+  margin: 0 0 12px;
 `;
 
 export default Login;

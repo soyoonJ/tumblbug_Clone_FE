@@ -5,6 +5,7 @@ import { RESP } from '../../shared/response';
 
 // mock API
 const respLogin = RESP.LOGIN;
+const respSignup = RESP.SIGNUP;
 
 // actions
 const GET_USER = 'GET_USER';
@@ -21,14 +22,23 @@ const initialState = {
   // is_login: false,
 };
 
-const loginDB = () => {
-  // return function (dispatch, getState, { history }) {};
-  if (respLogin.result) {
-  }
+const loginDB = (email, password) => {
+  return function (dispatch, getState, { history }) {
+    if (!respLogin.result) {
+      return;
+    }
+    localStorage.setItem('login-token', respLogin.token);
+    history.replace('/');
+  };
 };
 
-const signupDB = () => {
-  return function (dispatch, getState, { history }) {};
+const signupDB = (nickname, email, password) => {
+  return function (dispatch, getState, { history }) {
+    if (!respSignup.result) {
+      return;
+    }
+    history.replace('/');
+  };
 };
 
 const loginCheckDB = () => {

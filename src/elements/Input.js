@@ -4,16 +4,34 @@ import styled from 'styled-components';
 import { Text, Grid } from './index';
 
 const Input = (props) => {
-  const { label, placeholder, _onChange, type, multiLine, value, is_login } =
-    props;
+  const {
+    label,
+    placeholder,
+    _onChange,
+    type,
+    multiLine,
+    value,
+    is_user,
+    _id,
+  } = props;
 
-  if (is_login) {
+  if (is_user) {
     return (
       <Grid margin="0 0 10px">
-        <Text margin="0 0 10px" color="rgb(61, 61, 61)" size="12px">
+        <Text
+          margin="0 0 10px"
+          color="rgb(61, 61, 61)"
+          size="12px"
+          weight="500"
+        >
           {label}
         </Text>
-        <ElInput type={type} placeholder={placeholder} onChange={_onChange} />
+        <ElInput
+          id={_id}
+          type={type}
+          placeholder={placeholder}
+          onChange={_onChange}
+        />
       </Grid>
     );
   }
