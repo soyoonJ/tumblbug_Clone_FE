@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { history } from "../redux/configureStore";
 import { useDispatch } from 'react-redux';
 
-const CommentList = (props) => {
+const CommentList = ({detail}) => {
 
     const handlePress = ((e)=> {
       if(e.key==='Enter') {
@@ -21,18 +21,25 @@ const CommentList = (props) => {
             {/* 댓글 작성창 */}
             <div>
               {/* 로그인+후원까지 했을 때 댓글 창 */}
-              <CommentWrite
-                placeholder="창작자에게 응원의 한마디!"
-                onKeyPress={handlePress}
-              />
+              <CommentWrite onKeyPress={handlePress}>
+                <Profileimg>
+                  <span>정</span>
+                </Profileimg>
+                <input
+                  placeholder="창작자에게 응원의 한마디!"
+                  style={{
+                    outline: "none",
+                    border: "none",
+                    fontSize: "14px",
+                    color: "rgb(158, 158, 158)",
+                  }}
+                />
+              </CommentWrite>
               {/* 후원 안했을 때 댓글 창 */}
               {/* <CommentDonate>
-                <Image
-                    size="40"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxuZhlpr-G9AJhnM-wk_AHJRVPkSb2uhN4FYIaV8mfOBxwmQlpfehxEXKviMxv_HIc9pw&usqp=CAU"
-                    marginRight="1rem"
-                    marginTop="5px"
-                  />
+                <Profileimg>
+                  <span>정</span>
+                </Profileimg>
                 <span>후원자만 글을 쓸 수 있어요.</span>
               </CommentDonate> */}
               {/* 로그인 안했을 때 댓글창 */}
@@ -48,12 +55,73 @@ const CommentList = (props) => {
                 <span>로그인 해주세요.</span>
               </CommentLogin> */}
             </div>
-
+            {/* contents 부분 */}
+            <Contents>
+              <div>
+                {/* 업데이트 버튼 */}
+                <Update>
+                  <div name="pin">
+                    <svg width="12px" height="12px" viewBox="0 0 48 48">
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M35.8228 23.0891C34.7042 22.0081 33.2915 21.2741 31.7598 20.9751V11.4481C32.4853 10.8831 33.0667 10.4621 33.5001 10.0381C34.9602 8.62809 35.7956 6.70009 35.8228 4.67909V3.12809C35.9236 2.61409 35.586 2.11709 35.068 2.01709C34.9834 2.00109 34.8957 1.99609 34.8101 2.00309H13.193C12.9028 2.00309 12.7566 2.14409 12.4674 2.28509C12.1782 2.42609 12.1782 2.85009 12.1782 2.98009V4.55009C12.2195 7.29009 13.7815 9.78409 16.2402 11.0341V20.5531C14.6975 20.8201 13.2766 21.5591 12.1782 22.6671C10.7624 24.0371 9.97539 25.9221 10.0006 27.8841V30.2811C9.99353 30.8201 10.4278 31.2611 10.971 31.2681C10.9861 31.2681 11.0002 31.2681 11.0153 31.2671H20.3033L22.9132 45.1621C23.012 45.6421 23.4342 45.9911 23.929 46.0001C24.197 45.9951 24.455 45.8941 24.6545 45.7171C24.8067 45.5621 24.9074 45.3651 24.9437 45.1521L27.6998 31.6891H36.9847C37.2527 31.6841 37.5107 31.5841 37.7102 31.4071C37.8886 31.2171 37.9914 30.9701 37.9994 30.7121V28.3061C38.0246 26.3441 37.2376 24.4591 35.8228 23.0891Z"
+                      ></path>
+                    </svg>
+                    업데이트
+                  </div>
+                </Update>
+                {/* 창작자 프로필 */}
+                <CreatorInfo>
+                  {/* 프로필 이미지 */}
+                  <Image
+                    size="40"
+                    src="https://tumblbug-upi.imgix.net/3e34276d-560a-4028-b5da-fe41acbb055e.jpg?auto=format%2Ccompress&ch=Save-Data&facepad=2.0&fit=facearea&h=250&mask=ellipse&w=200&s=92b8d145317f0a5d7bd31d4f0cca9871"
+                    marginRight="1rem"
+                    marginTop="5px"
+                  />
+                  {/* 창작자 정보 텍스트 */}
+                  <div>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <span
+                        style={{
+                          fontSize: "1.1rem",
+                          fontWeight: "700",
+                        }}
+                      >
+                        {detail.nickname}
+                      </span>
+                      <span>창작자</span>
+                      <Icon>
+                        <svg width="9px" height="9px" viewBox="0 0 48 48">
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M14.4941 46.0019C13.1317 46.0019 12.0613 44.9019 12.0613 43.6019C12.0613 43.0019 12.2559 42.4019 12.7425 41.9019L29.4791 24.0019L12.6452 6.20187C11.7694 5.20187 11.7694 3.70187 12.7425 2.70187C13.7156 1.70187 15.1753 1.80187 16.1484 2.80187L36 24.0019L16.1484 45.3019C15.6618 45.7019 15.078 46.0019 14.4941 46.0019Z"
+                          ></path>
+                        </svg>
+                      </Icon>
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "13px",
+                        color: "#757575",
+                        lineHeight: "22px",
+                      }}
+                    >
+                      2022.02.21
+                    </div>
+                  </div>
+                </CreatorInfo>
+              </div>
+              <div>
+                <p>{detail.contents}</p>
+              </div>
+            </Contents>
             {/* 코멘트 박스 -> map 돌려야 함*/}
             <List />
             <List />
             <List />
-
           </div>
         </Container>
       </React.Fragment>
@@ -78,8 +146,9 @@ display: block;
   width : 100%;
 }
 `
-const CommentWrite = styled.input`
-height: 60px;
+const CommentWrite = styled.div`
+display: flex;
+align-items: center;
 width: 100%;
 padding:1rem 1.5rem;
 border:0.8px solid rgb(242, 242, 242);
@@ -91,7 +160,29 @@ cursor:pointer;
 :hover {
   border: 0.8px solid rgb(208, 208, 208);
 }
+
 `
+
+const Profileimg = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgb(208, 208, 208);
+  color: rgb(255, 255, 255);
+  margin: 5px 1rem 0px 0px;
+
+  & > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+`
+
 const CommentDonate = styled.div`
   @media (min-width: 1080px) {
     padding: 1rem 1.5rem;
@@ -122,6 +213,76 @@ const CommentLogin = styled.div`
   :hover {
     border: 0.8px solid rgb(208, 208, 208)
   }
+`
+
+const Contents = styled.div`
+@media (min-width: 1080px) {
+  padding: 24px 10px;
+  margin: 0px;
+  border-top: 0px;
+}
+
+& > div:nth-child(2) {
+  @media (min-width: 1080px) {
+    padding: 1.5rem 0;
+  }
+  padding-top: 16px;
+  max-width: 620px;
+  margin: 0px auto;
+  overflow-x: hidden;
+  word-break: break-all;
+  color: rgb(61, 61, 61);
+  line-height: 28px;
+}
+
+& > div:nth-child(2) > p {
+  @media (min-width: 1080px) {
+    font-size: 16px;
+    margin: 0em 0em 1em;
+  }
+}
+
+`
+const Update = styled.div`
+background: rgb(253, 244, 243);
+color: rgb(248, 100, 83);
+border-radius: 4px;
+padding: 0px 10px;
+height: 26px;
+display: inline-flex;
+align-items: center;
+margin-bottom: 18px;
+font-weight: 500;
+font-size: 12px;
+line-height: 20px;
+
+& > div {
+  display: inline-flex;
+  align-self: center;
+}
+
+svg {
+  fill: rgb(235, 75, 56);
+  margin: auto 6px auto 0px;
+}
+`
+// 창작자 정보
+const CreatorInfo = styled.div`
+ display: flex;
+ align-items: start;
+
+ & > div > div > span:nth-child(2) {
+   background: rgb(248, 100, 83);
+   color: rgb(255, 255, 255);
+   padding: 0px 4px;
+   border-radius: 2px;
+   display: inline-flex;
+   align-items: center;
+   height: 16px;
+   font-size: 10px;
+   font-weight: 500;
+   margin-left: 4px;
+ }
 `
 
 export default CommentList;

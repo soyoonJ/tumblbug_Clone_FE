@@ -3,14 +3,46 @@ import styled from "styled-components";
 
 import {Grid, Button, Image} from '../elements'
 import {CommentList, Creator, Header} from '../components';
+import { useDispatch, useSelector } from 'react-redux';
+import {actionCreators as articleActions} from '../redux/modules/articles'
 
 const PostDetail = (props) => {
 
+  const dispatch = useDispatch();
+  // console.log(isDonate)
+  // const article = useSelector((state) => state.articles.one_list)
+
+  // console.log('아티클',article)
   // postId 파라미터 가져오기
-  const postId = props.match.params.id;
+  const articleId = props.match.params.id;
   // 모인금액, 후원자 숫자 콤마작업
-  let total = "1234000".toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-  let donater = "10000".toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  const detail = props.detailedProjects
+  // console.log('디테일', detail)
+
+  // let today = new Date();
+  // let year = today.getFullYear().toString().slice(-2);
+  // let month = ("0" + (today.getMonth() + 1)).slice(-2);
+  // let day = parseInt(("0" + today.getDate()).slice(-2));
+  // let deadline = parseInt(detail.deadline);
+  // let endDate = `${year}년 ${month}월 ${day+deadline}일`
+  // console.log(endDate);
+
+  let total = detail.totalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  let target = detail.targetAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  let achieve = detail.totalAmount/detail.targetAmount*100
+  let donator = props.donatorNum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
+  React.useEffect(()=> {
+
+    dispatch(articleActions.setOne(articleId))
+
+    // 후원하기 버튼 클릭 발생할 때마다 또 해줘야 함 (포스트 정보 바뀔때마다!)
+  },[])
+
+  const wantDonate = () => {
+    // user에서 로그인 여부 받아와서 나눠주기
+    dispatch(articleActions.donateDB(articleId))
+  }
 
   return (
     <React.Fragment>
@@ -31,9 +63,9 @@ const PostDetail = (props) => {
                       background:"rgb(250, 250, 250)",
                       border:"1px solid rgb(239, 239, 239)",
                       borderRadius:"2px",
-                      }}>카테고리명</span>
+                      }}>{detail.category}</span>
                   </a>
-                  <h1>과일의 싱그러움을 담는 프프프의 첫 굿즈 Fresh RED</h1>
+                  <h1>{detail.title}</h1>
                   <div>
                     <Image
                     size="25"
@@ -43,7 +75,7 @@ const PostDetail = (props) => {
                     >
                     이미지
                     </Image>
-                    <span style={{fontWeight:"600", fontSize:"1rem"}}>제작사</span>
+                    <span style={{fontWeight:"600", fontSize:"1rem"}}>{detail.nickname}</span>
                   </div>
                 </div>
               </Title>
@@ -51,7 +83,7 @@ const PostDetail = (props) => {
             </Grid>
             {/* 상품요약 썸네일 : 이미지 */}
             <Img>
-              <img src="https://tumblbug-pci.imgix.net/932499bdfd401c73ae81db5270ea5a8a834f7a87/7bbf54d9f81e4491c45cc075b08fe381403801de/f29731dfb323ec5d478d360c1e121d245d294a89/bbb07eaf-c55b-4528-98ba-902ec90396fe.jpeg?ixlib=rb-1.1.0&w=1240&h=930&auto=format%2Ccompress&lossless=true&fit=crop&s=193e308c4f9e9722d61f17e9610e65f0"
+              <img src={detail.image}
               style={{width:"100%", maxWidth:"100%"}}
               alt="썸네일"
               / >
@@ -75,29 +107,30 @@ const PostDetail = (props) => {
             <Info>
               {/* 펀딩 요약 텍스트 */}
               <div>
+                {/* 모인금액 */}
                 <Grid marginBottom="1.75rem">
                   <InfoTitle>모인금액</InfoTitle>
                   <InfoNum>
                     {/* 회계처리 필요 */}
                     <span>{total}</span>
                     <span>원</span>
-                    <span>123%</span>
+                    <span>{achieve}%</span>
                   </InfoNum>
                 </Grid>
-
+                {/* 남은시간 */}
                 <Grid fontSize="2.75rem" marginBottom="1.75rem">
                 <InfoTitle>남은시간</InfoTitle>
                 <InfoNum>
                   {/* 회계처리 필요 */}
-                  <span>6</span>
+                  <span>{detail.deadline}</span>
                   <span>일</span>
                 </InfoNum>
                 </Grid>
-
+                {/* 후원자 */}
                 <Grid marginBottom="1.75rem">
                 <InfoTitle>후원자</InfoTitle>
                 <InfoNum>
-                  <span>{donater}</span>
+                  <span>{donator}</span>
                   <span>명</span>
                 </InfoNum>
                 </Grid>
@@ -106,7 +139,7 @@ const PostDetail = (props) => {
               <SubInfo>
                 <div>
                   <div>펀딩 진행중</div>
-                  <span>목표 금액인 '목표금액'이 모여야만 결제됩니다.<br/>
+                  <span>목표 금액인 {target}원이 모여야만 결제됩니다.<br/>
                   결제는 '마감일자'에 다함께 진행됩니다.</span>
                 </div>
               </SubInfo>
@@ -143,11 +176,16 @@ const PostDetail = (props) => {
                   </div>
                   {/* 후원상태가 true라면 밑에 버튼, false면 회색버튼 추가 */}
                   {/* 후원하기 버튼 */}
-                  <Button donateHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold>이 프로젝트 후원하기</Button>
-                  {/* 후원 취소하기 버튼 */}
+                  <Button
+                  _onClick={wantDonate}
+                  donateHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold>
+                    이 프로젝트 후원하기</Button>
                   {/* <Button CancelHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold
                     color="rgba(0, 0, 0, 0.6)" bg="rgb(231, 231, 231)"
                   >후원 취소하기</Button> */}
+                  
+                  {/* 후원 취소하기 버튼 */}
+                  
                 </div>
               </DetailButtons>
             </Info>
@@ -167,13 +205,31 @@ const PostDetail = (props) => {
       {/* 댓글 없을 경우 '댓글이 없습니다' 텍스트 추가 필요 */}
       <DetailBottom>
         <div>
-          <CommentList></CommentList>
-          <Creator></Creator>
+          {/* 코멘트 db props로 넘겨주기 */}
+          <CommentList detail={detail}></CommentList>
+          {detail && <Creator {...detail}></Creator>}
         </div>
       </DetailBottom>
     </React.Fragment>
   );
 };
+
+
+PostDetail.defaultProps = {
+  donatorNum: 1,
+  detailedProjects: {
+    category: "카테고리",
+    nickname: "창작자",
+    title: "타이틀",
+    image:"https://tumblbug-pci.imgix.net/932499bdfd401c73ae81db5270ea5a8a834f7a87/00e0280cfcd37839d70cce63ea3c89360ef59af5/f2f822b0d93b98c4f50801a243776ffcc18e55cd/224c8b53-8589-4d04-be03-a8b2e4c0b83b.jpeg?ixlib=rb-1.1.0&w=1240&h=930&auto=format%2Ccompress&lossless=true&fit=crop&s=e0ed2c1f02c2bdff4ecf7f21d8f366e6",
+    targetAmount: 100000,
+    totalAmount: 50000,
+    deadline: "1",
+    contents: "default contents",
+  },
+};
+
+
 
 const DetailTop = styled.div`
   @media(min-width: 1080px) {

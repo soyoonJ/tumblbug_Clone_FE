@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configureStore';
+// import { useDispatch, useSelector } from 'react-redux';
 
 import React from 'react';
 
@@ -13,6 +14,9 @@ import MyPage from '../pages/MyPage';
 import './App.css';
 
 function App() {
+  // const article = useSelector((state) => state.articles.one_list)
+  // console.log('아티클',article)
+
   return (
     <React.Fragment>
       <ConnectedRouter history={history}>
