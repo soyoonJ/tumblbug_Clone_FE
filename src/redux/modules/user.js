@@ -3,15 +3,14 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { RESP } from '../../shared/response';
 
+// mock API
+const respLogin = RESP.LOGIN;
+
 // actions
-// const LOG_IN = "LOG_IN";
-const LOG_OUT = 'LOG_OUT';
 const GET_USER = 'GET_USER';
 const SET_USER = 'SET_USER';
 
 // action creators
-// const logIn = createAction(LOG_IN, (user)=> ({user}));
-const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
 
@@ -22,19 +21,21 @@ const initialState = {
   // is_login: false,
 };
 
-const loginFB = () => {
+const loginDB = () => {
+  // return function (dispatch, getState, { history }) {};
+  if (respLogin.result) {
+  }
+};
+
+const signupDB = () => {
   return function (dispatch, getState, { history }) {};
 };
 
-const signupFB = () => {
+const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {};
 };
 
-const loginCheckFB = () => {
-  return function (dispatch, getState, { history }) {};
-};
-
-const logoutFB = () => {
+const logout = () => {
   return function (dispatch, getState, { history }) {};
 };
 
@@ -43,8 +44,6 @@ export default handleActions(
   {
     [SET_USER]: (state, action) => produce(state, (draft) => {}),
 
-    [LOG_OUT]: (state, action) => produce(state, (draft) => {}),
-
     [GET_USER]: (state, action) => produce(state, (draft) => {}),
   },
   initialState
@@ -52,13 +51,11 @@ export default handleActions(
 
 // action creator export
 const actionCreators = {
-  loginFB,
-  logOut,
+  loginDB,
+  signupDB,
+  loginCheckDB,
+  logout,
   getUser,
-
-  signupFB,
-  loginCheckFB,
-  logoutFB,
 };
 
 export { actionCreators };

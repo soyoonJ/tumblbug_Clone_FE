@@ -16,8 +16,13 @@ const Login = () => {
               <Input
                 label="이메일 주소"
                 placeholder="이메일 주소를 입력해주세요"
+                is_login
               />
-              <Input label="비밀번호" placeholder="비밀번호를 입력해주세요" />
+              <Input
+                label="비밀번호"
+                placeholder="비밀번호를 입력해주세요"
+                is_login
+              />
               <Button margin="40px 0 0" text="로그인" />
             </Grid>
             <div className="socialBox">

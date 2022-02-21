@@ -11,14 +11,23 @@ const Signup = () => {
       <SignupBox>
         <h1>이메일로 가입하기</h1>
         <form>
-          <Input label="이름" placeholder="사용하실 이름을 입력해주세요." />
+          <Input
+            label="이름"
+            placeholder="사용하실 이름을 입력해주세요."
+            is_login
+          />
           <Input
             label="이메일 주소"
             placeholder="이메일 주소를 입력해주세요."
+            is_login
           />
-          <Input placeholder="이메일 주소를 확인합니다." />
-          <Input label="비밀번호" placeholder="비밀번호를 입력해주세요." />
-          <Input placeholder="비밀번호를 확인합니다." />
+          <Input placeholder="이메일 주소를 확인합니다." is_login />
+          <Input
+            label="비밀번호"
+            placeholder="비밀번호를 입력해주세요."
+            is_login
+          />
+          <Input placeholder="비밀번호를 확인합니다." is_login />
           <Checkbox text="전체동의" bold={true} />
           <Line />
           <Grid margin="0px 0px 40px">
