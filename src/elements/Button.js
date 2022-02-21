@@ -79,7 +79,7 @@ const ElButton = styled.button`
     font-weight: ${(props) => (props.bold ? 700 : 400)};
   ${(props) =>
     props.flex_center
-      ? `display: flex; align-items: center; justify-content:center`
+      ? `display: flex; align-items: center; justify-content:center;`
       : ""}
   cursor: pointer;
   ${(props) => (props.weight ? `font-weight: ${props.weight};` : "")}
