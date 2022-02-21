@@ -10,22 +10,18 @@ const PostDetail = (props) => {
 
   const dispatch = useDispatch();
   // console.log(isDonate)
-  // const article = useSelector((state) => state.articles.one_list)
 
-  // console.log('아티클',article)
-  // postId 파라미터 가져오기
+  // getPostFB가 완성되고 나서 살려야 함
+  const article = useSelector((state)=> state.articles.one_list)
+  const donators = useSelector((state) => state.articles.one_list.detailedProjects.donator)
+  // const userEmail = useSelector((state)=>state.user.user.email)
+  // const isDonated = (donators.filter(e=> e === userEmail).length !== 0)?true:false;
+
+  // articleId 파라미터 가져오기
   const articleId = props.match.params.id;
   // 모인금액, 후원자 숫자 콤마작업
-  const detail = props.detailedProjects
+  const detail = article.detailedProjects
   // console.log('디테일', detail)
-
-  // let today = new Date();
-  // let year = today.getFullYear().toString().slice(-2);
-  // let month = ("0" + (today.getMonth() + 1)).slice(-2);
-  // let day = parseInt(("0" + today.getDate()).slice(-2));
-  // let deadline = parseInt(detail.deadline);
-  // let endDate = `${year}년 ${month}월 ${day+deadline}일`
-  // console.log(endDate);
 
   let total = detail.totalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
   let target = detail.targetAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -34,9 +30,12 @@ const PostDetail = (props) => {
 
   React.useEffect(()=> {
 
-    dispatch(articleActions.setOne(articleId))
-
-    // 후원하기 버튼 클릭 발생할 때마다 또 해줘야 함 (포스트 정보 바뀔때마다!)
+    // 아티클 정보 불러오기
+    dispatch(articleActions.getOneDB(articleId))
+    // 코멘트 정보 불러오기
+    // dispatch(commentActions.getCommentDB(articleId))
+    // 후원자 정보 바뀔 때마다 변경해주기
+  // },[article])
   },[])
 
   const wantDonate = () => {
@@ -75,10 +74,8 @@ const PostDetail = (props) => {
                     size="25"
                     marginRight="0.5rem"
                     marginTop="5px"
-                    src="https://tumblbug-upi.imgix.net/3e34276d-560a-4028-b5da-fe41acbb055e.jpg?auto=format%2Ccompress&ch=Save-Data&facepad=2.0&fit=facearea&h=250&mask=ellipse&w=200&s=92b8d145317f0a5d7bd31d4f0cca9871"
-                    >
-                    이미지
-                    </Image>
+                    src={detail.creatorImg}
+                    />
                     <span style={{fontWeight:"600", fontSize:"1rem"}}>{detail.nickname}</span>
                   </div>
                 </div>
@@ -125,7 +122,6 @@ const PostDetail = (props) => {
                 <Grid fontSize="2.75rem" marginBottom="1.75rem">
                 <InfoTitle>남은시간</InfoTitle>
                 <InfoNum>
-                  {/* 회계처리 필요 */}
                   <span>{detail.deadline}</span>
                   <span>일</span>
                 </InfoNum>
@@ -134,7 +130,7 @@ const PostDetail = (props) => {
                 <Grid marginBottom="1.75rem">
                 <InfoTitle>후원자</InfoTitle>
                 <InfoNum>
-                  <span>{donator}</span>
+                  <span>{article.donatorNum}</span>
                   <span>명</span>
                 </InfoNum>
                 </Grid>
@@ -144,7 +140,7 @@ const PostDetail = (props) => {
                 <div>
                   <div>펀딩 진행중</div>
                   <span>목표 금액인 {target}원이 모여야만 결제됩니다.<br/>
-                  결제는 '마감일자'에 다함께 진행됩니다.</span>
+                  결제는 {detail.deadline}에 다함께 진행됩니다.</span>
                 </div>
               </SubInfo>
               {/* 하트/공유하기/후원하기 */}
@@ -180,15 +176,18 @@ const PostDetail = (props) => {
                   </div>
                   {/* 후원상태가 true라면 밑에 버튼, false면 회색버튼 추가 */}
                   {/* 후원하기 버튼 */}
+                  {/* {!isDonated ? */}
                   <Button
                   _onClick={wantDonate}
                   donateHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold>
                     이 프로젝트 후원하기</Button>
+                    {/* :
                   <Button
                   _onClick={cancelDonate}
                   CancelHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold
                     color="rgba(0, 0, 0, 0.6)" bg="rgb(231, 231, 231)"
                   >후원 취소하기</Button>
+                } */}
                   
                   {/* 후원 취소하기 버튼 */}
                   
@@ -212,7 +211,7 @@ const PostDetail = (props) => {
       <DetailBottom>
         <div>
           {/* 코멘트 db props로 넘겨주기 */}
-          <CommentList detail={detail}></CommentList>
+          <CommentList articleId={articleId} detail={detail}></CommentList>
           {detail && <Creator {...detail}></Creator>}
         </div>
       </DetailBottom>
@@ -232,10 +231,11 @@ PostDetail.defaultProps = {
     totalAmount: 50000,
     deadline: "1",
     contents: "default contents",
+    donator: [
+      "test@email.com",
+      ]
   },
 };
-
-
 
 const DetailTop = styled.div`
   @media(min-width: 1080px) {
