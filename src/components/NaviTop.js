@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Grid, Text } from '../elements';
+import React from "react";
+import styled from "styled-components";
+import { Grid, Text } from "../elements";
 
 const NaviTop = (props) => {
   return (
@@ -42,6 +42,9 @@ const Button = styled.div`
   border: 1px solid rgb(223, 223, 223);
   width: auto;
   min-width: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 12px;
   cursor: pointer;
 `;
 

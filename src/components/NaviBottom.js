@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { Grid, Input, Text } from "../elements";
+import Category from "./Category";
 
 const NaviBottom = () => {
   return (
     <React.Fragment>
       <NaviTopLayout>
         <Grid is_flex>
-          <Grid is_row width="150px">
-            <Category>카테고리</Category>
-            <Home>홈</Home>
+          <Grid>
+            <CategoryBar></CategoryBar>
           </Grid>
           <Search>
             <input type="text" placeholder="검색어를 입력해주세요." />
@@ -22,7 +22,6 @@ const NaviBottom = () => {
 
 const NaviTopLayout = styled.div`
   position: relative;
-
   display: flex;
   align-items: center;
   width: 100%;
@@ -30,15 +29,17 @@ const NaviTopLayout = styled.div`
   max-width: 1160px;
 `;
 
-const Category = styled.div`
-  margin: 0px 18px 0px 0px;
-  padding: 0px 6px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-`;
+// const Category = styled.div`
+//   margin: 0px 18px 0px 0px;
+//   padding: 0px 6px;
+//   font-size: 15px;
+//   font-weight: 700;
+//   cursor: pointer;
+// `;
 
-const Home = styled(Category)``;
+const CategoryBar = styled(Category)`
+  font-weight: 600;
+`;
 
 const Search = styled.div`
   display: inline-flex;
@@ -49,7 +50,9 @@ const Search = styled.div`
   min-width: 30px;
   padding: 5px 16px;
   margin-bottom: 10px;
-  align-items: center;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 
   input {
     background-color: rgb(243 243 243);

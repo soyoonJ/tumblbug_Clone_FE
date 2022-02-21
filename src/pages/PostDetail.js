@@ -1,10 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 import {Grid, Button, Image} from '../elements'
 import {CommentList, Creator, Header} from '../components';
-
-
 
 const PostDetail = (props) => {
 
@@ -361,7 +359,6 @@ const SubInfo = styled.div`
   order: 5;
   background-color: rgb(250, 250, 250);
   border: 1px solid rgb(239, 239, 239);
-<<<<<<< HEAD
   display: block;
   {/* 텍스트 묶음 */}
   & > div {
@@ -481,8 +478,6 @@ const DetailBottom = styled.div`
   }
   display: flex;
 }
-
-
 `
 
 

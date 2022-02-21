@@ -26,10 +26,10 @@ const RankPost = (props) => {
           >
             {category} ㅣ {nickname}
           </Text>
-          <Text bold size="14px">
+          <Text weight="600" size="14px">
             {title}
           </Text>
-          <Text bold size="13px" color="rgb(255, 87, 87)" padding="2px">
+          <Text weight="600" size="13px" color="rgb(255, 87, 87)" padding="2px">
             {(totalAmount / targetAmount) * 100}%
           </Text>
         </PostContent>
@@ -54,6 +54,7 @@ const SidePostCard = styled.div`
   align-items: flex-start;
   width: 100%;
   height: 100%;
+  margin-bottom: 8px;
 `;
 
 const PostImg = styled.img`
