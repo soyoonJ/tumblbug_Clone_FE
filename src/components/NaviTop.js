@@ -16,7 +16,7 @@ const NaviTop = (props) => {
             <Button>
               <Image>
                 <svg
-                  class="style__AvatarIcon-zxsodr-36 ixdnbV"
+                  className="style__AvatarIcon-zxsodr-36 ixdnbV"
                   width="48"
                   height="48"
                   viewBox="0 0 48 48"
