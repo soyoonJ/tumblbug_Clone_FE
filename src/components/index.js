@@ -11,6 +11,7 @@ import Post from "./Post";
 import MainPost from "./MainPost";
 import RankPost from "./RankPost";
 import SidePost from "./SidePost";
+import Category from "./Category";
 
 export {
   Header,
@@ -25,4 +26,5 @@ export {
   RankPost,
   SidePost,
   Banner,
+  Category,
 };

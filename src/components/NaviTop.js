@@ -1,18 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid, Text } from "../elements";
+import { Grid } from "../elements";
 
 const NaviTop = (props) => {
   return (
     <React.Fragment>
       <NaviTopLayout>
         <Grid is_flex>
-          <LogoImg src="./img/logo.png" />
-          <Button>
-            <Text size="12px" bold padding="12px">
-              로그인/회원가입
-            </Text>
-          </Button>
+          <LogoImg src="/img/logo.png" />
+          <Button>로그인/회원가입</Button>
         </Grid>
       </NaviTopLayout>
     </React.Fragment>
@@ -42,6 +38,9 @@ const Button = styled.div`
   border: 1px solid rgb(223, 223, 223);
   width: auto;
   min-width: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 12px;
   cursor: pointer;
 `;
 
