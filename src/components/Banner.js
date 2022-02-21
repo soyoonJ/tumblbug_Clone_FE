@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid, Image, Text } from "../elements";
+import { Grid, Text } from "../elements";
 
 const Banner = (props) => {
   return (
@@ -10,7 +10,7 @@ const Banner = (props) => {
           <BannerImage src={props.src} />
           <BannerComment>
             <Text
-              bold
+              weight="600"
               size="22px"
               color="white"
               wordBreak
@@ -18,14 +18,17 @@ const Banner = (props) => {
             >
               {props.banner_title}
             </Text>
-            <Text bold size="14px" color="white" margin=" 0px 0px 10px 0px">
+            <Text
+              weight="600"
+              size="14px"
+              color="white"
+              margin=" 0px 0px 10px 0px"
+            >
               {props.banner_comment}
             </Text>
-            <Text size="12px" color="white">
-              <Cnt>
-                {props.curcnt}/{props.cnt}
-              </Cnt>
-            </Text>
+            <Cnt>
+              {props.curcnt}/{props.cnt}
+            </Cnt>
           </BannerComment>
         </Grid>
       </Container>
@@ -55,11 +58,15 @@ const BannerComment = styled.div`
   padding: 40px;
 `;
 
-const Cnt = styled.span`
+const Cnt = styled.div`
   box-sizing: border-box;
+  width: 40px;
   padding: 2px 10px;
   border-radius: 10px;
   background-color: rgba(13, 13, 13, 0.2);
+  color: white;
+  font-size: 12px;
+  text-align: center;
 `;
 
 export default Banner;

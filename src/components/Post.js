@@ -25,11 +25,11 @@ const Post = (props) => {
           >
             {category} ㅣ {nickname}
           </Text>
-          <Text bold size="14px">
+          <Text weight="600" size="14px">
             {title}
           </Text>
         </PostContent>
-        <Text bold size="13px" color="rgb(255, 87, 87)">
+        <Text weight="600" size="13px" color="rgb(255, 87, 87)">
           {(totalAmount / targetAmount) * 100}%
         </Text>
       </PostCard>
