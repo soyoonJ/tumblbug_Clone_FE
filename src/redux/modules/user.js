@@ -1,12 +1,7 @@
 // 액션 만들어주는 것들
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
-import { RESP } from '../../shared/response';
-
-// mock API
-const respLogin = RESP.LOGIN;
-const respSignup = RESP.SIGNUP;
-const respLoginCheck = RESP.LOGIN_CHECK;
+import { apis } from '../../shared/api';
 
 // actions
 const SET_USER = 'SET_USER';
@@ -26,34 +21,43 @@ const initialState = {
 // 로그인
 const loginDB = (email, password) => {
   return function (dispatch, getState, { history }) {
-    if (!respLogin.result) {
-      return;
-    }
-    localStorage.setItem('login-token', respLogin.token);
-    dispatch(setUser({ email, password }));
-    history.replace('/');
+    apis.login(email, password).then((res) => {
+      if (!res.data.result) {
+        alert('회원정보가 올바르지 않습니다.');
+        history.replace('/');
+        return;
+      }
+      localStorage.setItem('login-token', res.data.token);
+      dispatch(setUser({ email }));
+      history.replace('/');
+    });
   };
 };
 
 // 회원가입
 const signupDB = (nickname, email, password) => {
   return function (dispatch, getState, { history }) {
-    if (!respSignup.result) {
-      return;
-    }
-    history.replace('/');
+    apis.signup(nickname, email, password).then((res) => {
+      if (!res.data.result) {
+        return;
+      }
+      history.replace('/');
+    });
   };
 };
 
 // 로그인 체크
 const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
-    if (!respLoginCheck.result) {
-      alert('회원정보가 올바르지 않습니다.');
-      history.replace('/');
-    }
-
-    // dispatch(setUser({ email , nickname }));
+    apis.loginCheck().then((res) => {
+      console.log(res);
+      // if (!res.data.result) {
+      //   alert('회원정보가 올바르지 않습니다.');
+      //   history.replace('/');
+      //   return;
+      // }
+      // dispatch(setUser({ email: res.data.email, nickname: res.data.nickname }));
+    });
   };
 };
 
@@ -66,6 +70,7 @@ export default handleActions(
         draft.user.email = action.payload.user.email;
         draft.user.nickname = action.payload.user.nickname;
         draft.is_login = true;
+        console.log(draft.user);
       }),
 
     [LOG_OUT]: (state, action) =>
@@ -73,7 +78,6 @@ export default handleActions(
         localStorage.removeItem('login-token');
         draft.user = null;
         draft.is_login = false;
-        window.location.replace('/');
       }),
   },
   initialState

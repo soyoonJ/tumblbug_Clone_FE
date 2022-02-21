@@ -21,7 +21,7 @@ export const apis = {
       password,
     }),
 
-  loginCheck: (token) => api.post('/api/checklogin', token),
+  loginCheck: () => api.post('/api/users/me'),
 
   // articles
   mainAriticles: () => api.get('/api/articles/mainProjects'), // 주목할 만한 프로젝트
