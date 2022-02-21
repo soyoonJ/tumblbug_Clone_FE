@@ -3,7 +3,10 @@ import styled from 'styled-components';
 
 import {Grid, Button, Image} from '../elements'
 
-const Creator = () => {
+const Creator = (props) => {
+
+    // console.log('창작자',props)
+
     return (
       <React.Fragment>
         {/* 창작자 소개 */}
@@ -31,7 +34,7 @@ const Creator = () => {
                         fontWeight: "700",
                       }}
                     >
-                      사용자명
+                      {props.nickname}
                     </span>
                     <div
                       style={{
