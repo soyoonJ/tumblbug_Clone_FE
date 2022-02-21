@@ -2,8 +2,11 @@ import React from "react";
 import RankPost from "./RankPost";
 import styled from "styled-components";
 import { Text } from "../elements";
+import { RESP } from "../shared/response";
 
 const SidePost = (props) => {
+  const populArticles = RESP.ARTICLES_MAIN2.mainProjects;
+
   let today = new Date();
   let year = today.getFullYear().toString().slice(-2);
   let month = ("0" + (today.getMonth() + 1)).slice(-2);
@@ -19,14 +22,9 @@ const SidePost = (props) => {
         {date} 기준
       </Text>
       <PostBox>
-        <RankPost />
-        <RankPost />
-        <RankPost />
-        <RankPost />
-        <RankPost />
-        <RankPost />
-        <RankPost />
-        <RankPost />
+        {populArticles.map((a, i) => {
+          return <RankPost key={i} {...a} />;
+        })}
       </PostBox>
     </React.Fragment>
   );
