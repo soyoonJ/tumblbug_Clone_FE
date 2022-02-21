@@ -7,6 +7,8 @@ import { emailCheckReg } from '../shared/emailCheck';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 
+import { history } from '../redux/configureStore';
+
 const Login = () => {
   const dispatch = useDispatch();
 
@@ -115,7 +117,11 @@ const Login = () => {
       <Box>
         <Container>
           <Header>
-            <div></div>
+            <div
+              onClick={() => {
+                history.push('/');
+              }}
+            ></div>
           </Header>
           <div className="loginBox">
             <h1>이메일로 로그인</h1>
@@ -222,7 +228,13 @@ const Login = () => {
             <Grid margin="50px 0px 0px">
               <Text size="12px" weight="500" color="rgb(158, 158, 158)">
                 아직 텀블벅 계정이 없으신가요?
-                <span>회원가입</span>
+                <span
+                  onClick={() => {
+                    history.push('/signup');
+                  }}
+                >
+                  회원가입
+                </span>
               </Text>
             </Grid>
             <Grid margin="5px 0px 0px">

@@ -7,6 +7,8 @@ import { emailCheckReg } from '../shared/emailCheck';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 
+import { history } from '../redux/configureStore';
+
 const Signup = () => {
   const dispatch = useDispatch();
 
@@ -260,7 +262,11 @@ const Signup = () => {
   return (
     <React.Fragment>
       <Header>
-        <div></div>
+        <div
+          onClick={() => {
+            history.push('/');
+          }}
+        ></div>
       </Header>
       <SignupBox>
         <h1>이메일로 가입하기</h1>
@@ -373,7 +379,13 @@ const Signup = () => {
         <Grid margin="20px 0px 0px">
           <Text size="12px" center>
             이미 텀블벅 계정이 있으신가요?
-            <span>기존 계정으로 로그인하기</span>
+            <span
+              onClick={() => {
+                history.push('/login');
+              }}
+            >
+              기존 계정으로 로그인하기
+            </span>
           </Text>
         </Grid>
         <Grid is_flex padding="10px 0px">
@@ -417,6 +429,7 @@ const Header = styled.div`
     width: 90px;
     background-repeat: no-repeat;
     background-size: cover;
+    cursor: pointer;
   }
 `;
 
@@ -459,6 +472,7 @@ const KakaoButton = styled.button`
   padding: 0 20px;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 
   div {
     font-size: 16px;

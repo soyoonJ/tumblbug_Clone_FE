@@ -1,22 +1,51 @@
-import React from "react";
-import styled from "styled-components";
-import { Grid, Text } from "../elements";
+import React from 'react';
+import styled from 'styled-components';
+import { Grid, Text } from '../elements';
+
+import { history } from '../redux/configureStore';
 
 const NaviTop = (props) => {
-  return (
-    <React.Fragment>
-      <NaviTopLayout>
-        <Grid is_flex>
-          <LogoImg src="/img/logo.png" />
-          <Button>
-            <Text size="12px" bold padding="12px">
-              로그인/회원가입
-            </Text>
-          </Button>
-        </Grid>
-      </NaviTopLayout>
-    </React.Fragment>
-  );
+  const is_token = localStorage.getItem('login-token') ? true : false;
+
+  if (is_token) {
+    return (
+      <React.Fragment>
+        <NaviTopLayout>
+          <Grid is_flex>
+            <LogoImg src="/img/logo.png" />
+            <Button
+              onClick={() => {
+                history.push('/login');
+              }}
+            >
+              <Text size="12px" bold padding="12px">
+                로그인/회원가입
+              </Text>
+            </Button>
+          </Grid>
+        </NaviTopLayout>
+      </React.Fragment>
+    );
+  } else {
+    return (
+      <React.Fragment>
+        <NaviTopLayout>
+          <Grid is_flex>
+            <LogoImg src="/img/logo.png" />
+            <Button
+              onClick={() => {
+                history.push('/login');
+              }}
+            >
+              <Text size="12px" bold padding="12px">
+                와 로그아웃
+              </Text>
+            </Button>
+          </Grid>
+        </NaviTopLayout>
+      </React.Fragment>
+    );
+  }
 };
 
 const NaviTopLayout = styled.div`
