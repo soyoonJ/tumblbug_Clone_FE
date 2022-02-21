@@ -13,33 +13,31 @@ const api = axios.create({
 
 export const apis = {
   // user
-  login: (id, pw) => api.post('/api/login', { loginId: id, password: pw }),
-  signup: (id, pw, nickname) =>
-    api.post('/api/signup', {
-      loginId: id,
-      password: pw,
-      nickname: nickname,
+  login: (email, password) => api.post('/api/users/login', { email, password }),
+  signup: (nickname, email, password) =>
+    api.post('/api/users/signup', {
+      nickname,
+      email,
+      password,
     }),
-  checkId: (id) =>
-    api.post('/api/checkid', {
-      loginId: id,
-    }),
-  checkLogin: (token) => api.get('/api/checklogin', token),
 
-  // post
-  posts: () => api.get('/api/posts'),
-  post: (postId) => api.get(`/api/posts/${postId}`),
-  add: (title, price, imgurl, content) =>
-    api.post('/api/posts', title, price, imgurl, content),
-  image: (file) => api.post('/api/image', file),
-  edit: (postId, title, price, imgurl, content) =>
-    api.put(`/api/posts`, postId, title, price, imgurl, content),
-  del: (postId) => api.delete(`/api/posts`, postId),
-  changeStatus: (postId) => api.patch(`/api/status`, postId),
+  loginCheck: (token) => api.post('/api/checklogin', token),
+
+  // articles
+  mainAriticles: () => api.get('/api/articles/mainProjects'), // 주목할 만한 프로젝트
+  popularAriticles: () => api.get('/api/articles/popularProjects'), //  인기 프로젝트
+  myAriticles: () => api.get('/api/articles/myDonatedProjects'),
+  cateAriticles: () => api.get('/api/articles/category?category=name'),
+  searchAriticles: () => api.get('/api/articles?search=keyword'),
+
+  ariticles: () => api.get('/api/articles?search=keyword'), // 상세 조회
+  donation: () => api.fetch('/api/article/:articleId/donation'), // 후원하기
+  donationCancel: () => api.fetch('/api/article/:articleId/donationCancel'), // 후원취소
 
   // comment
-  addComment: (postId, comment) => api.post(`/api/comments`, postId, comment),
-  delComment: (commentId) => api.delete(`/api/comments`, commentId),
-  editComment: (commentId, comment) =>
-    api.patch(`/api/comments`, commentId, comment),
+  comments: () => api.get(`/api/comments/:articleId`),
+  addComment: (content) => api.post(`/api/comments/:articleId`, content),
+  updateComment: (content) =>
+    api.patch(`/api/comments/modify/:commentId`, content),
+  delComment: () => api.delete(`/api/comments/delete/:commentId`),
 };
