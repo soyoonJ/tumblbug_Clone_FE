@@ -44,6 +44,10 @@ const PostDetail = (props) => {
     dispatch(articleActions.donateDB(articleId))
   }
 
+  const cancelDonate = () => {
+    dispatch(articleActions.notDonateDB(articleId))
+  }
+
   return (
     <React.Fragment>
       <Header />
@@ -180,9 +184,11 @@ const PostDetail = (props) => {
                   _onClick={wantDonate}
                   donateHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold>
                     이 프로젝트 후원하기</Button>
-                  {/* <Button CancelHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold
+                  <Button
+                  _onClick={cancelDonate}
+                  CancelHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold
                     color="rgba(0, 0, 0, 0.6)" bg="rgb(231, 231, 231)"
-                  >후원 취소하기</Button> */}
+                  >후원 취소하기</Button>
                   
                   {/* 후원 취소하기 버튼 */}
                   
