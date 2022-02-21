@@ -18,35 +18,19 @@ const Signup = () => {
 
   const [isOk, setIsOk] = React.useState(true);
 
-  // 주의 text, input id 선언
-  // 이름
-  const nicknameInput = document.getElementById('nicknameInput');
-  const pleaseNickname = document.getElementById('pleaseNickname');
-  const warningNickname = document.getElementById('warningNickname');
-
-  // 이메일
-  const emailInput = document.getElementById('emailInput');
-  const pleaseEmail = document.getElementById('pleaseEmail');
-  const warningEmail = document.getElementById('warningEmail');
-
-  // 이메일 확인
-  const emailCheckInput = document.getElementById('emailCheckInput');
-  const pleaseEmailCheck = document.getElementById('pleaseEmailCheck');
-  const warningEmailCheck = document.getElementById('warningEmailCheck');
-
-  // 비밀번호
-  const passwordInput = document.getElementById('passwordInput');
-  const pleasePassword = document.getElementById('pleasePassword');
-  const warningPassword = document.getElementById('warningPassword');
-
-  // 비밀번호 확인
-  const passwordCheckInput = document.getElementById('passwordCheckInput');
-  const pleasePasswordCheck = document.getElementById('pleasePasswordCheck');
-  const warningPasswordCheck = document.getElementById('warningPasswordCheck');
+  // 이메일 일치 확인 문구
+  const emailMatch = document.getElementById('emailMatch');
+  const emailCheckMatch = document.getElementById('emailCheckMatch');
+  const passwordMatch = document.getElementById('passwordMatch');
+  const passworCheckdMatch = document.getElementById('passworCheckdMatch');
 
   // 이름
   const onChangeNickname = (e) => {
     setNickname(e.target.value);
+
+    const nicknameInput = document.getElementById('nicknameInput');
+    const pleaseNickname = document.getElementById('pleaseNickname');
+    const warningNickname = document.getElementById('warningNickname');
 
     nicknameInput.style.border = '1px solid rgb(230, 230, 230)';
     pleaseNickname.style.display = 'none';
@@ -68,6 +52,10 @@ const Signup = () => {
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
 
+    const emailInput = document.getElementById('emailInput');
+    const pleaseEmail = document.getElementById('pleaseEmail');
+    const warningEmail = document.getElementById('warningEmail');
+
     emailInput.style.border = '1px solid rgb(230, 230, 230)';
     pleaseEmail.style.display = 'none';
 
@@ -76,21 +64,33 @@ const Signup = () => {
       emailInput.style.border = '1px solid rgb(236, 99, 94)';
       warningEmail.style.display = 'block';
       setIsOk(false);
-    } else {
-      // 이메일 형식이 맞을 경우
-      emailInput.style.border = '1px solid rgb(230, 230, 230)';
-      warningEmail.style.display = 'none';
-      setIsOk(true);
     }
-
-    // 이메일과 이메일 확인이 같지 않을 경우
-    if (email !== emailCheck) {
+    // 이메일 형식이 맞을 경우
+    else {
+      // 이메일과 이메일 확인이 같지 않을 경우
+      if (e.target.value !== emailCheck) {
+        emailInput.style.border = '1px solid rgb(236, 99, 94)';
+        pleaseEmail.style.display = 'none';
+        warningEmail.style.display = 'none';
+        emailMatch.style.display = 'block';
+        setIsOk(false);
+      } else {
+        emailInput.style.border = '1px solid rgb(230, 230, 230)';
+        pleaseEmail.style.display = 'none';
+        warningEmail.style.display = 'none';
+        emailMatch.style.display = 'none';
+        setIsOk(true);
+      }
     }
   };
 
   // 이메일 확인
   const onChangeEmailCheck = (e) => {
     setEmailCheck(e.target.value);
+
+    const emailCheckInput = document.getElementById('emailCheckInput');
+    const pleaseEmailCheck = document.getElementById('pleaseEmailCheck');
+    const warningEmailCheck = document.getElementById('warningEmailCheck');
 
     emailCheckInput.style.border = '1px solid rgb(230, 230, 230)';
     pleaseEmailCheck.style.display = 'none';
@@ -100,21 +100,35 @@ const Signup = () => {
       emailCheckInput.style.border = '1px solid rgb(236, 99, 94)';
       warningEmailCheck.style.display = 'block';
       setIsOk(false);
-    } else {
-      // 이메일 형식이 맞을 경우
-      emailCheckInput.style.border = '1px solid rgb(230, 230, 230)';
-      warningEmailCheck.style.display = 'none';
-      setIsOk(true);
     }
-
-    // 이메일과 이메일 확인이 같지 않을 경우
-    if (email !== emailCheck) {
+    // 이메일 형식이 맞을 경우
+    else {
+      // 이메일과 이메일 확인이 같지 않을 경우
+      if (email !== e.target.value) {
+        emailCheckInput.style.border = '1px solid rgb(236, 99, 94)';
+        pleaseEmailCheck.style.display = 'none';
+        warningEmailCheck.style.display = 'none';
+        emailCheckMatch.style.display = 'block';
+        setIsOk(false);
+      }
+      // 이메일과 이메일 확인이 같을 경우
+      else {
+        emailCheckInput.style.border = '1px solid rgb(230, 230, 230)';
+        pleaseEmailCheck.style.display = 'none';
+        warningEmailCheck.style.display = 'none';
+        emailCheckMatch.style.display = 'none';
+        setIsOk(true);
+      }
     }
   };
 
   // 비밀번호
   const onChangePassword = (e) => {
     setPassword(e.target.value);
+
+    const passwordInput = document.getElementById('passwordInput');
+    const pleasePassword = document.getElementById('pleasePassword');
+    const warningPassword = document.getElementById('warningPassword');
 
     passwordInput.style.border = '1px solid rgb(230, 230, 230)';
     pleasePassword.style.display = 'none';
@@ -128,15 +142,34 @@ const Signup = () => {
       warningPassword.style.display = 'block';
       setIsOk(false);
     } else {
-      passwordInput.style.border = '1px solid rgb(230, 230, 230)';
-      warningPassword.style.display = 'none';
-      setIsOk(false);
+      // 비밀번호와 비밀번호 확인이 같지 않을 경우
+      if (e.target.value !== passwordCheck) {
+        passwordInput.style.border = '1px solid rgb(236, 99, 94)';
+        pleasePassword.style.display = 'none';
+        warningPassword.style.display = 'none';
+        passwordMatch.style.display = 'block';
+        setIsOk(false);
+      }
+      // 비밀번호와 비밀번호 확인이 같을 경우
+      else {
+        passwordInput.style.border = '1px solid rgb(230, 230, 230)';
+        pleasePassword.style.display = 'none';
+        warningPassword.style.display = 'none';
+        passwordMatch.style.display = 'none';
+        setIsOk(true);
+      }
     }
   };
 
   // 비밀번호 확인
   const onChangePasswordCheck = (e) => {
     setPasswordCheck(e.target.value);
+
+    const passwordCheckInput = document.getElementById('passwordCheckInput');
+    const pleasePasswordCheck = document.getElementById('pleasePasswordCheck');
+    const warningPasswordCheck = document.getElementById(
+      'warningPasswordCheck'
+    );
 
     passwordCheckInput.style.border = '1px solid rgb(230, 230, 230)';
     pleasePasswordCheck.style.display = 'none';
@@ -150,9 +183,22 @@ const Signup = () => {
       warningPasswordCheck.style.display = 'block';
       setIsOk(false);
     } else {
-      passwordCheckInput.style.border = '1px solid rgb(230, 230, 230)';
-      warningPasswordCheck.style.display = 'none';
-      setIsOk(false);
+      // 비밀번호와 비밀번호 확인이 같지 않을 경우
+      if (password !== e.target.value) {
+        passwordCheckInput.style.border = '1px solid rgb(236, 99, 94)';
+        pleasePasswordCheck.style.display = 'none';
+        warningPasswordCheck.style.display = 'none';
+        passworCheckdMatch.style.display = 'block';
+        setIsOk(false);
+      }
+      // 비밀번호와 비밀번호 확인이 같을 경우
+      else {
+        passwordCheckInput.style.border = '1px solid rgb(230, 230, 230)';
+        pleasePasswordCheck.style.display = 'none';
+        warningPasswordCheck.style.display = 'none';
+        passworCheckdMatch.style.display = 'none';
+        setIsOk(true);
+      }
     }
   };
 
@@ -231,6 +277,7 @@ const Signup = () => {
         <Waring id="warningNickname">
           이름은 2자 이상, 20자 이하로 입력하세요.
         </Waring>
+
         <Input
           label="이메일 주소"
           placeholder="이메일 주소를 입력해주세요."
@@ -243,6 +290,8 @@ const Signup = () => {
         />
         <Waring id="pleaseEmail">이메일 주소를 입력해주세요.</Waring>
         <Waring id="warningEmail">유효하지 않은 이메일 형식입니다.</Waring>
+        <Waring id="emailMatch">이메일 주소가 일치하지 않습니다.</Waring>
+
         <Input
           placeholder="이메일 주소를 확인합니다."
           is_user
@@ -256,6 +305,8 @@ const Signup = () => {
           이메일 주소를 한번 더 입력해주세요.
         </Waring>
         <Waring id="warningEmailCheck">유효하지 않은 이메일 형식입니다.</Waring>
+        <Waring id="emailCheckMatch">이메일 주소가 일치하지 않습니다.</Waring>
+
         <Input
           label="비밀번호"
           placeholder="비밀번호를 입력해주세요."
@@ -270,6 +321,8 @@ const Signup = () => {
         <Waring id="warningPassword">
           비밀번호는 6자 이상, 20자 이하로 입력하세요.
         </Waring>
+        <Waring id="passwordMatch">비밀번호가 일치하지 않습니다.</Waring>
+
         <Input
           placeholder="비밀번호를 확인합니다."
           is_user
@@ -285,6 +338,8 @@ const Signup = () => {
         <Waring id="warningPasswordCheck">
           비밀번호는 6자 이상, 20자 이하로 입력하세요.
         </Waring>
+        <Waring id="passworCheckdMatch">비밀번호가 일치하지 않습니다.</Waring>
+
         <Checkbox text="전체동의" bold={true} />
         <Line />
         <Grid margin="0px 0px 40px">
