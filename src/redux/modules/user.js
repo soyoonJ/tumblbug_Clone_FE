@@ -29,7 +29,7 @@ const loginDB = (email, password) => {
       }
       localStorage.setItem('login-token', res.data.token);
       dispatch(setUser({ email }));
-      history.replace('/');
+      window.location.replace('/');
     });
   };
 };
@@ -51,12 +51,12 @@ const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
     apis.loginCheck().then((res) => {
       console.log(res);
-      // if (!res.data.result) {
-      //   alert('회원정보가 올바르지 않습니다.');
-      //   history.replace('/');
-      //   return;
-      // }
-      // dispatch(setUser({ email: res.data.email, nickname: res.data.nickname }));
+      if (!res.data.result) {
+        alert('회원정보가 올바르지 않습니다.');
+        history.replace('/');
+        return;
+      }
+      dispatch(setUser({ email: res.data.email, nickname: res.data.nickname }));
     });
   };
 };
@@ -70,7 +70,7 @@ export default handleActions(
         draft.user.email = action.payload.user.email;
         draft.user.nickname = action.payload.user.nickname;
         draft.is_login = true;
-        console.log(draft.user);
+        console.log(draft.user.email, draft.user.nickname, draft.is_login);
       }),
 
     [LOG_OUT]: (state, action) =>
