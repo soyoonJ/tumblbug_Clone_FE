@@ -331,17 +331,27 @@ const List = (props) => {
   // const comment_list = useSelector((state)=>state.comments.comment_list)
 
   const [isActive, setIsActive] = useState(false);
+  const [isEdit, setEdit] = useState(false);
 
   const modalClick = () => {
     setIsActive(!isActive)
   }
 
   const editCmt = () => {
-
+    setEdit(true);
+    setIsActive(false);
   }
 
+  const editComment = ((e)=> {
+    if(e.key==='Enter') {
+      dispatch(commentActions.editCommentDB(articleId, commentId, comment));
+      setEdit(false)
+    }
+})
+
   const deleteCmt = () => {
-    dispatch(commentActions.deleteCommentDB(commentId, articleId))
+    dispatch(commentActions.deleteCommentDB(commentId, articleId));
+    setIsActive(false);
   }
 
   // const comment_list = useSelector((state)=>state.comments.comments)
@@ -350,7 +360,7 @@ const List = (props) => {
   return (
     <React.Fragment>
       <Item>
-        <div style={{display: "flex", justifyContent:"space-between"}}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
           {/* 사용자정보 */}
           <div style={{ display: "flex" }}>
             {/* 프로필 기본 이미지 */}
@@ -362,51 +372,65 @@ const List = (props) => {
             {/* 사용자 텍스트 정보 */}
             <UserInfo>
               {/* 추가기능으로 할만함: 클릭 시 마이페이지로 넘어가게끔 할지말지 확인해야할듯 -> 약간 아이디 암호화 하는듯*/}
-              <div style={{display:"flex", alignItems:"center"}}>
-                <UserName>
-                  {nickname}
-                </UserName>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <UserName>{nickname}</UserName>
                 <Icon>
                   <svg width="9px" height="9px" viewBox="0 0 48 48">
-                    <path fillRule="evenodd" clipRule="evenodd" d="M14.4941 46.0019C13.1317 46.0019 12.0613 44.9019 12.0613 43.6019C12.0613 43.0019 12.2559 42.4019 12.7425 41.9019L29.4791 24.0019L12.6452 6.20187C11.7694 5.20187 11.7694 3.70187 12.7425 2.70187C13.7156 1.70187 15.1753 1.80187 16.1484 2.80187L36 24.0019L16.1484 45.3019C15.6618 45.7019 15.078 46.0019 14.4941 46.0019Z">
-                  </path></svg>
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M14.4941 46.0019C13.1317 46.0019 12.0613 44.9019 12.0613 43.6019C12.0613 43.0019 12.2559 42.4019 12.7425 41.9019L29.4791 24.0019L12.6452 6.20187C11.7694 5.20187 11.7694 3.70187 12.7425 2.70187C13.7156 1.70187 15.1753 1.80187 16.1484 2.80187L36 24.0019L16.1484 45.3019C15.6618 45.7019 15.078 46.0019 14.4941 46.0019Z"
+                    ></path>
+                  </svg>
                 </Icon>
               </div>
               {/* 작성일자 */}
-              <span style={{color:"rgb(158, 158, 158)", fontSize:"13px"}}>
-                  1일 전
+              <span style={{ color: "rgb(158, 158, 158)", fontSize: "13px" }}>
+                1일 전
               </span>
             </UserInfo>
           </div>
           {/* 수정삭제버튼 */}
-          <div style={{position:'relative',}}>
+          <div style={{ position: "relative" }}>
             {/* 아이콘 */}
             <IconBtn onClick={modalClick}>
               <div name="more">
-                  <svg width="1em" height="1em" viewBox="0 0 48 48">
-                    <path fillRule="evenodd" clipRule="evenodd" d="M6.4 19C8.83 19 10.8 20.97 10.8 23.4C10.8 25.83 8.83 27.8 6.4 27.8C3.97 27.8 2 25.83 2 23.4C2 20.97 3.97 19 6.4 19ZM24.0001 19C26.4301 19 28.4001 20.97 28.4001 23.4C28.4001 25.83 26.4301 27.8 24.0001 27.8C21.5701 27.8 19.6001 25.83 19.6001 23.4C19.6001 20.97 21.5701 19 24.0001 19ZM45.9997 23.4C45.9997 20.97 44.0307 19 41.5997 19C39.1697 19 37.2007 20.97 37.2007 23.4C37.2007 25.83 39.1697 27.8 41.5997 27.8C44.0307 27.8 45.9997 25.83 45.9997 23.4Z">
-                  </path></svg>
+                <svg width="1em" height="1em" viewBox="0 0 48 48">
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M6.4 19C8.83 19 10.8 20.97 10.8 23.4C10.8 25.83 8.83 27.8 6.4 27.8C3.97 27.8 2 25.83 2 23.4C2 20.97 3.97 19 6.4 19ZM24.0001 19C26.4301 19 28.4001 20.97 28.4001 23.4C28.4001 25.83 26.4301 27.8 24.0001 27.8C21.5701 27.8 19.6001 25.83 19.6001 23.4C19.6001 20.97 21.5701 19 24.0001 19ZM45.9997 23.4C45.9997 20.97 44.0307 19 41.5997 19C39.1697 19 37.2007 20.97 37.2007 23.4C37.2007 25.83 39.1697 27.8 41.5997 27.8C44.0307 27.8 45.9997 25.83 45.9997 23.4Z"
+                  ></path>
+                </svg>
               </div>
             </IconBtn>
-            
-            {/* 수정삭제모달 */}
-            {isActive?
-            <Modal>
-              <ul>
-                <li onClick={editCmt}><a>수정</a></li>
-                <li onClick={deleteCmt}><a>삭제</a></li>
-              </ul>
-            </Modal>
-            :
-              null
-            }
-          </div>
 
-        </div> 
+            {/* 수정삭제모달 */}
+            {isActive ? (
+              <Modal>
+                <ul>
+                  <li onClick={editCmt}>
+                    <a>수정</a>
+                  </li>
+                  <li onClick={deleteCmt}>
+                    <a>삭제</a>
+                  </li>
+                </ul>
+              </Modal>
+            ) : null}
+          </div>
+        </div>
         {/* 코멘트 내용 */}
-        <Comment>
-          <div>{comment}</div>
-        </Comment>
+        {!isEdit ? (
+          <Comment>
+            <div>{comment}</div>
+          </Comment>
+        ) : (
+          // 코멘트 수정하기
+          <Comment style={{ margin: "10px 5px" }}>
+            <input defaultValue={comment} onKeyPress={editComment}></input>
+          </Comment>
+        )}
       </Item>
     </React.Fragment>
   );
@@ -522,5 +546,24 @@ word-break: break-all;
   padding-top: 16px;
   line-height: 28px;
   color: rgb(61, 61, 61);
+}
+
+& > input {
+  @media (min-width: 1080px) {
+    padding: 0.5rem 0.5rem;
+    font-size: 16px;
+    line-height: 28px;
+    
+  }
+  overflow: hidden;
+  max-width: 620px;
+  width: 95%;
+  margin: 0px auto;
+  padding-top: 16px;
+  line-height: 28px;
+  color: rgb(61, 61, 61);
+  border-radius: 4px;
+  border: 0.8px solid rgb(242,242,242);
+  box-shadow: rgb(0 0 0 / 4%) 0px 4px 12px, rgb(0 0 0 / 3%) 0px 0.8px 0px;
 }
 `

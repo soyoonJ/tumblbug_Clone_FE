@@ -211,8 +211,8 @@ export default handleActions(
       produce(state, (draft) => {
         // is_donate = {1:soyoon}
         // is_donate = {1:[soyoon, ,,, ,,, ]}
-
-        draft.is_donate[action.payload.articleId].push({userEmail:action.payload.userEmail});
+        console.log(action.payload.articleId, action.payload.userEmail)
+        draft.is_donate[action.payload.articleId].push(action.payload.userEmail);
         console.log("도네이트 정보", draft.is_donate[action.payload.articleId]);
       }),
     // [CANCEL_DONATE]: (state, action) =>

@@ -6,11 +6,13 @@ import axios from "axios";
 // actions
 const SET_COMMENT = "SET_COMMENT";
 const ADD_COMMENT = "ADD_COMMENT";
+const EDIT_COMMENT = "EDIT_COMMENT";
 const DELETE_COMMENT = "DELETE_COMMENT";
 
 // action creators
 const setComment = createAction(SET_COMMENT, (articleId, comments) => ({ articleId, comments }));
 const addComment = createAction(ADD_COMMENT, (articleId, comment) => ({ articleId, comment }));
+const editComment = createAction(EDIT_COMMENT, (articleId, comment) => ({ articleId, comment }));
 const deleteComment = createAction(DELETE_COMMENT, (commentId, articleId) => ({ commentId, articleId }));
 
 // initialState
@@ -74,6 +76,31 @@ const addCommentDB = (articleId, comment) => {
   };
 };
 
+const editCommentDB = (articleId, commentId, comment) => {
+  return function (dispatch, getState, { history }) {
+
+    axios
+      .patch(
+        `http://3.35.176.155:8080/api/comments/modify/${commentId}`,
+        {comment},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("login-token")}`,
+          },
+        }
+      )
+      .then(function (res) {
+        console.log("코멘트수정");
+        // dispatch(editComment());
+      })
+      .catch(function (error) {
+        console.log(error);
+        // 본인의 글이 아닙니다, 내용을 입력해주세요
+      });
+  };
+}
+
+
 const deleteCommentDB = (commentId, articleId) => {
   return function (dispatch, getState, { history }) {
     axios
@@ -103,8 +130,12 @@ export default handleActions(
     }),
 
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
-      console.log(action.payload)
+      // console.log(action.payload)
       draft.comment_list[action.payload.articleId].unshift(action.payload.comment);
+    }),
+
+    [EDIT_COMMENT]: (state, action) => produce(state, (draft) => {
+      draft.comment_list[action.payload.articleId] = action.payload.comment;
     }),
 
     [DELETE_COMMENT]: (state, action) => produce(state, (draft) => {
@@ -121,6 +152,8 @@ const actionCreators = {
   getCommentDB,
   addComment,
   addCommentDB,
+  editComment,
+  editCommentDB,
   deleteComment,
   deleteCommentDB,
 };
