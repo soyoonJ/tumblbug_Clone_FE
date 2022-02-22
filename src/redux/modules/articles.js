@@ -77,11 +77,11 @@ const getPoularArticlesDB = () => {
 //   return function (dispatch, getState, { history }) {
 //     axios
 //       .patch(`http://3.35.176.155:8080/api/article/${articleId}/donation`,
-//       {
-//         headers: {
-//         Authorization: `Bearer ${localStorage.getItem('login-token')}`,
-//         },
-//     })
+    //   {
+    //     headers: {
+    //     Authorization: `Bearer ${localStorage.getItem('login-token')}`,
+    //     },
+    // })
 //       .then(function (res) {
 //         console.log('도네이트',res);
 //         // dispatch(wantDonate(articleId));
@@ -94,19 +94,19 @@ const getPoularArticlesDB = () => {
 
 // const notDonateDB = (articleId) => {
 //   return function (dispatch, getState, { history }) {
-//     axios
-//       .patch(`http://3.35.176.155:8080/api/article/${articleId}/donationCancel`,{
-//         headers: {
-//         Authorization: `Bearer ${localStorage.getItem("login-token")}`,
-//         },
-//     })
-//       .then(function (res) {
-//         console.log(res);
-//         // dispatch(cancelDonate(articleId));
-//       })
-//       .catch(function (error) {
-//         console.log(error);
-//       });
+    // axios
+    //   .patch(`http://3.35.176.155:8080/api/article/${articleId}/donationCancel`,{
+    //     headers: {
+    //     Authorization: `Bearer ${localStorage.getItem("login-token")}`,
+    //     },
+    // })
+    //   .then(function (res) {
+    //     console.log(res);
+    //     // dispatch(cancelDonate(articleId));
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
 //   };
 // };
 
