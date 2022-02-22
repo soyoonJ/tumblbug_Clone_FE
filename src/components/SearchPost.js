@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Text, Grid } from '../elements';
-import { history } from '../redux/configureStore';
+import React from "react";
+import styled from "styled-components";
+import { Text, Grid } from "../elements";
+import { history } from "../redux/configureStore";
 
 const SearchPost = (props) => {
   console.log(props);
