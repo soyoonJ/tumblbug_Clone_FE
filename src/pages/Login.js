@@ -1,39 +1,39 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Grid, Text, Input, Button } from '../elements';
-import { emailCheckReg } from '../shared/emailCheck';
+import React from "react";
+import styled from "styled-components";
+import { Grid, Text, Input, Button } from "../elements";
+import { emailCheckReg } from "../shared/emailCheck";
 
 // redux import
-import { useDispatch } from 'react-redux';
-import { actionCreators as userActions } from '../redux/modules/user';
+import { useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
 
-import { history } from '../redux/configureStore';
+import { history } from "../redux/configureStore";
 
 const Login = () => {
   const dispatch = useDispatch();
 
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
   // 경고창 없애는 함수
   const noneWarningSigns = () => {
-    const warningEmail = document.getElementById('WarningEmail');
-    warningEmail.style.display = 'none';
+    const warningEmail = document.getElementById("WarningEmail");
+    warningEmail.style.display = "none";
 
-    const warningPw = document.getElementById('WarningPw');
-    warningPw.style.display = 'none';
+    const warningPw = document.getElementById("WarningPw");
+    warningPw.style.display = "none";
 
-    const pleaseEmail = document.getElementById('pleaseEmail');
-    pleaseEmail.style.display = 'none';
+    const pleaseEmail = document.getElementById("pleaseEmail");
+    pleaseEmail.style.display = "none";
 
-    const pleasePW = document.getElementById('pleasePW');
-    pleasePW.style.display = 'none';
+    const pleasePW = document.getElementById("pleasePW");
+    pleasePW.style.display = "none";
 
-    const emailInput = document.getElementById('emailInput');
-    emailInput.style.border = '1px solid rgb(230, 230, 230)';
+    const emailInput = document.getElementById("emailInput");
+    emailInput.style.border = "1px solid rgb(230, 230, 230)";
 
-    const pwInput = document.getElementById('pwInput');
-    pwInput.style.border = '1px solid rgb(230, 230, 230)';
+    const pwInput = document.getElementById("pwInput");
+    pwInput.style.border = "1px solid rgb(230, 230, 230)";
   };
 
   // 이메일 입력창
@@ -50,60 +50,60 @@ const Login = () => {
 
   const onClick = () => {
     // 이메일과 비밀번호를 입력하지 않을 경우
-    if (email === '' && password === '') {
-      const emailInput = document.getElementById('emailInput');
-      emailInput.style.border = '1px solid rgb(236, 99, 94)';
+    if (email === "" && password === "") {
+      const emailInput = document.getElementById("emailInput");
+      emailInput.style.border = "1px solid rgb(236, 99, 94)";
 
-      const pleaseEmail = document.getElementById('pleaseEmail');
-      pleaseEmail.style.display = 'block';
+      const pleaseEmail = document.getElementById("pleaseEmail");
+      pleaseEmail.style.display = "block";
 
-      const pwInput = document.getElementById('pwInput');
-      pwInput.style.border = '1px solid rgb(236, 99, 94)';
+      const pwInput = document.getElementById("pwInput");
+      pwInput.style.border = "1px solid rgb(236, 99, 94)";
 
-      const pleasePW = document.getElementById('pleasePW');
-      pleasePW.style.display = 'block';
+      const pleasePW = document.getElementById("pleasePW");
+      pleasePW.style.display = "block";
 
       return;
     }
     // 이메일을 입력하지 않을 경우
-    if (email === '') {
-      const pleaseEmail = document.getElementById('pleaseEmail');
-      pleaseEmail.style.display = 'block';
+    if (email === "") {
+      const pleaseEmail = document.getElementById("pleaseEmail");
+      pleaseEmail.style.display = "block";
 
-      const emailInput = document.getElementById('emailInput');
-      emailInput.style.border = '1px solid rgb(236, 99, 94)';
+      const emailInput = document.getElementById("emailInput");
+      emailInput.style.border = "1px solid rgb(236, 99, 94)";
 
       return;
     }
     // 비밀번호를 입력하지 않을 경우
-    if (password === '') {
-      const pleasePW = document.getElementById('pleasePW');
-      pleasePW.style.display = 'block';
+    if (password === "") {
+      const pleasePW = document.getElementById("pleasePW");
+      pleasePW.style.display = "block";
 
-      const pwInput = document.getElementById('pwInput');
-      pwInput.style.border = '1px solid rgb(236, 99, 94)';
+      const pwInput = document.getElementById("pwInput");
+      pwInput.style.border = "1px solid rgb(236, 99, 94)";
 
       return;
     }
 
     // 비밀번호가 6자 이상이 아닐 경우
     if (password.length < 6) {
-      const warningPw = document.getElementById('WarningPw');
-      warningPw.style.display = 'block';
+      const warningPw = document.getElementById("WarningPw");
+      warningPw.style.display = "block";
 
-      const pwInput = document.getElementById('pwInput');
-      pwInput.style.border = '1px solid rgb(236, 99, 94)';
+      const pwInput = document.getElementById("pwInput");
+      pwInput.style.border = "1px solid rgb(236, 99, 94)";
 
       return;
     }
 
     // 이메일 주소 형식이 맞지 않을 경우
     if (!emailCheckReg(email)) {
-      const warningEmail = document.getElementById('WarningEmail');
-      warningEmail.style.display = 'block';
+      const warningEmail = document.getElementById("WarningEmail");
+      warningEmail.style.display = "block";
 
-      const emailInput = document.getElementById('emailInput');
-      emailInput.style.border = '1px solid rgb(236, 99, 94)';
+      const emailInput = document.getElementById("emailInput");
+      emailInput.style.border = "1px solid rgb(236, 99, 94)";
 
       return;
     }
@@ -119,7 +119,7 @@ const Login = () => {
           <Header>
             <div
               onClick={() => {
-                history.push('/');
+                history.push("/");
               }}
             ></div>
           </Header>
@@ -230,7 +230,7 @@ const Login = () => {
                 아직 텀블벅 계정이 없으신가요?
                 <span
                   onClick={() => {
-                    history.push('/signup');
+                    history.push("/signup");
                   }}
                 >
                   회원가입
@@ -286,7 +286,7 @@ const Header = styled.div`
   background-color: rgb(255, 255, 255);
 
   div {
-    background-image: url('/img/logo.png');
+    background-image: url("/img/logo.png");
     width: 140px;
     height: 40px;
     transition: all 0.3s ease 0s;
@@ -304,7 +304,7 @@ const LoginImage = styled.div`
   height: 100%;
   background-size: cover;
   background-position: center center;
-  background-image: url('https://tumblbug-assets.s3.ap-northeast-1.amazonaws.com/static_assets/login/bg_login_email.jpg');
+  background-image: url("https://tumblbug-assets.s3.ap-northeast-1.amazonaws.com/static_assets/login/bg_login_email.jpg");
   @media (max-width: 1080px) {
     display: none;
   }
@@ -315,7 +315,7 @@ const Line = styled.div`
   height: 1px;
   margin: 12px 0;
   background-color: rgb(230, 230, 230);
-  ${(props) => (props.margin ? `margin: ${props.margin}` : '')}
+  ${(props) => (props.margin ? `margin: ${props.margin}` : "")}
 `;
 
 const CircleBox = styled.div`

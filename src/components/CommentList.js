@@ -2,12 +2,17 @@ import React from 'react';
 import {useState} from 'react';
 import {Grid, Button, Image} from '../elements'
 import styled from 'styled-components';
-
 import { history } from "../redux/configureStore";
-import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as commentActions } from '../redux/modules/comments'
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as commentActions } from "../redux/modules/comments";
 
-const CommentList = ({detail, articleId}) => {
+const CommentList = ({ detail, articleId }) => {
+  // 댓글 작성창 확인하기 위해서 리덕스에 있는 user nickname 뽑아오기
+  // const username = useSelector((state)=>state.user.nickname)
+  // const comment_list = useSelector((state)=>state.comments.comment_list[articleId]);
+  const comment_list = useSelector((state) => state.comments.comment_list);
+  console.log("뷰 코멘트리스트", comment_list);
+
 
     // 댓글 작성창 활용 용도
     const is_login = useSelector((state) => state.user.is_login);
@@ -16,11 +21,19 @@ const CommentList = ({detail, articleId}) => {
     const comment_list = useSelector((state)=>state.comments.comment_list);
     const [writeComment, setComment] = useState('');
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    React.useEffect(()=> {
-      dispatch(commentActions.getCommentDB(articleId));
-    },[])
+
+  React.useEffect(() => {
+    dispatch(commentActions.getCommentDB(articleId));
+  }, []);
+
+  const handlePress = (e) => {
+    if (e.key === "Enter") {
+      console.log("댓글내용", e.target.value);
+      dispatch(commentActions.addCommentDB(articleId, e.target.value));
+    }
+  };
 
     const onChange = (e)=>{
       setComment(e.target.value);
@@ -34,12 +47,15 @@ const CommentList = ({detail, articleId}) => {
   })
 
   if(!comment_list[articleId]) {
+
     return null;
   }
 
-    return (
-      <React.Fragment>
-        <Container>
+  return (
+    <React.Fragment>
+      <Container>
+        <div>
+          {/* 댓글 작성창 */}
           <div>
             {/* 댓글 작성창 */}
             <div>
@@ -55,6 +71,7 @@ const CommentList = ({detail, articleId}) => {
                 placeholder="창작자에게 응원의 한마디!"
                 value={writeComment}
                 onChange={onChange}
+
                 style={{
                   width: "100%",
                   outline: "none",
@@ -63,10 +80,12 @@ const CommentList = ({detail, articleId}) => {
                   color: "rgb(158, 158, 158)",
                 }}
               />
+
               </CommentWrite>
               :
             // 로그인 안했을 때
               <CommentLogin onClick={()=>{
+
                 history.push('/login')
               }}>
                 <Image
@@ -136,22 +155,42 @@ const CommentList = ({detail, articleId}) => {
                       </Icon>
                     </div>
                     <div
+
                       style={{
-                        fontSize: "13px",
-                        color: "#757575",
-                        lineHeight: "22px",
+                        fontSize: "1.1rem",
+                        fontWeight: "700",
                       }}
                     >
-                      2022.02.21
-                    </div>
+                      {detail.nickname}
+                    </span>
+                    <span>창작자</span>
+                    <Icon>
+                      <svg width="9px" height="9px" viewBox="0 0 48 48">
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M14.4941 46.0019C13.1317 46.0019 12.0613 44.9019 12.0613 43.6019C12.0613 43.0019 12.2559 42.4019 12.7425 41.9019L29.4791 24.0019L12.6452 6.20187C11.7694 5.20187 11.7694 3.70187 12.7425 2.70187C13.7156 1.70187 15.1753 1.80187 16.1484 2.80187L36 24.0019L16.1484 45.3019C15.6618 45.7019 15.078 46.0019 14.4941 46.0019Z"
+                        ></path>
+                      </svg>
+                    </Icon>
                   </div>
-                </CreatorInfo>
-              </div>
-              <div>
-                <p>{detail.contents}</p>
-              </div>
-            </Contents>
-            {/* 코멘트 박스 -> map 돌려야 함*/}
+                  <div
+                    style={{
+                      fontSize: "13px",
+                      color: "#757575",
+                      lineHeight: "22px",
+                    }}
+                  >
+                    2022.02.21
+                  </div>
+                </div>
+              </CreatorInfo>
+            </div>
+            <div>
+              <p>{detail.contents}</p>
+            </div>
+          </Contents>
+          {/* 코멘트 박스 -> map 돌려야 함*/}
 
             {comment_list[articleId]?.map((e, i) => {
               return <List key={i} {...e}></List>;
@@ -164,23 +203,23 @@ const CommentList = ({detail, articleId}) => {
 };
 
 const Container = styled.div`
-@media (min-width: 1080px) {
-  width : auto;
-  max-width: 650px;
-  flex-grow: 1;
-  margin: 0px 0.5rem 0px 0px;
-  padding : 25px 0px 40px;
-}
-order: 1;
-display: block;
-
-& > div {
   @media (min-width: 1080px) {
-    min-height: 500px;
+    width: auto;
+    max-width: 650px;
+    flex-grow: 1;
+    margin: 0px 0.5rem 0px 0px;
+    padding: 25px 0px 40px;
   }
-  width : 100%;
-}
-`
+  order: 1;
+  display: block;
+
+  & > div {
+    @media (min-width: 1080px) {
+      min-height: 500px;
+    }
+    width: 100%;
+  }
+`;
 const CommentWrite = styled.div`
 display: flex;
 align-items: center;
@@ -196,7 +235,7 @@ cursor:pointer;
   border: 0.8px solid rgb(208, 208, 208);
 }
 
-`
+`;
 const Profileimg = styled.div`
   width: 40px;
   height: 40px;
@@ -214,8 +253,7 @@ const Profileimg = styled.div`
     font-weight: 700;
     font-size: 14px;
   }
-
-`
+`;
 const CommentDonate = styled.div`
   @media (min-width: 1080px) {
     padding: 1rem 1.5rem;
@@ -228,7 +266,7 @@ const CommentDonate = styled.div`
   box-shadow: rgb(0 0 0 / 3%) 0px 0.8px 0px;
   background: rgb(252, 252, 252);
   font-size: 14px;
-`
+`;
 const CommentLogin = styled.div`
   @media (min-width: 1080px) {
     padding: 1rem 1.5rem;
@@ -244,82 +282,79 @@ const CommentLogin = styled.div`
   cursor: pointer;
 
   :hover {
-    border: 0.8px solid rgb(208, 208, 208)
+    border: 0.8px solid rgb(208, 208, 208);
   }
-`
+`;
 const Contents = styled.div`
-@media (min-width: 1080px) {
-  padding: 24px 10px;
-  margin: 0px;
-  border-top: 0px;
-}
-
-& > div:nth-child(2) {
   @media (min-width: 1080px) {
-    padding: 1.5rem 0;
+    padding: 24px 10px;
+    margin: 0px;
+    border-top: 0px;
   }
-  padding-top: 16px;
-  max-width: 620px;
-  margin: 0px auto;
-  overflow-x: hidden;
-  word-break: break-all;
-  color: rgb(61, 61, 61);
-  line-height: 28px;
-}
 
-& > div:nth-child(2) > p {
-  @media (min-width: 1080px) {
-    font-size: 16px;
-    margin: 0em 0em 1em;
+  & > div:nth-child(2) {
+    @media (min-width: 1080px) {
+      padding: 1.5rem 0;
+    }
+    padding-top: 16px;
+    max-width: 620px;
+    margin: 0px auto;
+    overflow-x: hidden;
+    word-break: break-all;
+    color: rgb(61, 61, 61);
+    line-height: 28px;
   }
-}
 
-`
+  & > div:nth-child(2) > p {
+    @media (min-width: 1080px) {
+      font-size: 16px;
+      margin: 0em 0em 1em;
+    }
+  }
+`;
 const Update = styled.div`
-background: rgb(253, 244, 243);
-color: rgb(248, 100, 83);
-border-radius: 4px;
-padding: 0px 10px;
-height: 26px;
-display: inline-flex;
-align-items: center;
-margin-bottom: 18px;
-font-weight: 500;
-font-size: 12px;
-line-height: 20px;
-
-& > div {
+  background: rgb(253, 244, 243);
+  color: rgb(248, 100, 83);
+  border-radius: 4px;
+  padding: 0px 10px;
+  height: 26px;
   display: inline-flex;
-  align-self: center;
-}
+  align-items: center;
+  margin-bottom: 18px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
 
-svg {
-  fill: rgb(235, 75, 56);
-  margin: auto 6px auto 0px;
-}
-`
+  & > div {
+    display: inline-flex;
+    align-self: center;
+  }
+
+  svg {
+    fill: rgb(235, 75, 56);
+    margin: auto 6px auto 0px;
+  }
+`;
 // 창작자 정보
 const CreatorInfo = styled.div`
- display: flex;
- align-items: start;
+  display: flex;
+  align-items: start;
 
- & > div > div > span:nth-child(2) {
-   background: rgb(248, 100, 83);
-   color: rgb(255, 255, 255);
-   padding: 0px 4px;
-   border-radius: 2px;
-   display: inline-flex;
-   align-items: center;
-   height: 16px;
-   font-size: 10px;
-   font-weight: 500;
-   margin-left: 4px;
- }
-`
+  & > div > div > span:nth-child(2) {
+    background: rgb(248, 100, 83);
+    color: rgb(255, 255, 255);
+    padding: 0px 4px;
+    border-radius: 2px;
+    display: inline-flex;
+    align-items: center;
+    height: 16px;
+    font-size: 10px;
+    font-weight: 500;
+    margin-left: 4px;
+  }
+`;
 
 export default CommentList;
-
-
 
 // 댓글 한 박스
 const List = (props) => {
@@ -354,6 +389,7 @@ const List = (props) => {
     setIsActive(false);
   }
 
+
   // const comment_list = useSelector((state)=>state.comments.comments)
   // console.log('뷰 코멘트리스트'. comment_list)
 
@@ -361,6 +397,7 @@ const List = (props) => {
     <React.Fragment>
       <Item>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
+
           {/* 사용자정보 */}
           <div style={{ display: "flex" }}>
             {/* 프로필 기본 이미지 */}
@@ -373,7 +410,9 @@ const List = (props) => {
             <UserInfo>
               {/* 추가기능으로 할만함: 클릭 시 마이페이지로 넘어가게끔 할지말지 확인해야할듯 -> 약간 아이디 암호화 하는듯*/}
               <div style={{ display: "flex", alignItems: "center" }}>
+
                 <UserName>{nickname}</UserName>
+
                 <Icon>
                   <svg width="9px" height="9px" viewBox="0 0 48 48">
                     <path
@@ -418,6 +457,7 @@ const List = (props) => {
                 </ul>
               </Modal>
             ) : null}
+
           </div>
         </div>
         {/* 코멘트 내용 */}
@@ -434,12 +474,13 @@ const List = (props) => {
       </Item>
     </React.Fragment>
   );
-}
+};
 
 List.defaultProps = {
-  nickname : "작성자",
-  content: "뱃지등 다른 상품까지 구매할게 아니라면 추가공지보고 결정하는게 나으실듯해요.",
-}
+  nickname: "작성자",
+  content:
+    "뱃지등 다른 상품까지 구매할게 아니라면 추가공지보고 결정하는게 나으실듯해요.",
+};
 
 const Item = styled.div`
 @media (min-width: 1080px) {
@@ -507,35 +548,46 @@ li > a {
   font-size: 14px;
 }
 `
+
 const UserInfo = styled.div`
-margin-left : 1rem;
-`
+  margin-left: 1rem;
+`;
 const Icon = styled.div`
   margin: 0px 0px 0px 8px;
 
   & > svg {
     fill: rgb(208, 208, 208);
   }
-`
+`;
 const UserName = styled.div`
   @media (min-width: 1080px) {
     max-width: 320px;
   }
-  color:rgb(61, 61, 61);
+  color: rgb(61, 61, 61);
   font-size: 1.1rem;
   font-weight: 700;
   overflow: hidden;
-`
+`;
 const Comment = styled.div`
-width : 100%;
-margin-botttom: 1rem;
-word-break: break-all;
+  width: 100%;
+  margin-botttom: 1rem;
+  word-break: break-all;
 
-& > div {
-  @media (min-width: 1080px) {
-    padding: 1.5rem 0;
-    font-size: 16px;
+  & > div {
+    @media (min-width: 1080px) {
+      padding: 1.5rem 0;
+      font-size: 16px;
+      line-height: 28px;
+    }
+    min-height: 30px;
+    max-height: 500px;
+    overflow: hidden;
+    max-width: 620px;
+    margin: 0px auto;
+    display: block;
+    padding-top: 16px;
     line-height: 28px;
+    color: rgb(61, 61, 61);
   }
   min-height: 30px;
   max-height: 500px;
