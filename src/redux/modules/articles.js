@@ -20,10 +20,8 @@ const getPopularArticles = createAction(GET_POPULAR_ARTICLES, (articles) => ({
 }));
 
 const setOne = createAction(SET_ONE, (one_list) => ({ one_list }));
-const wantDonate = createAction(WANT_DONATE, (articleId) => ({ articleId }));
-const cancelDonate = createAction(CANCEL_DONATE, (articleId) => ({
-  articleId,
-}));
+// const wantDonate = createAction(WANT_DONATE, (articleId) => ({ articleId }))
+// const cancelDonate = createAction(CANCEL_DONATE, (articleId) => ({ articleId }))
 
 // initialState
 // defaultProps 같은 역할
@@ -61,44 +59,43 @@ const getPopularArticlesDB = () => {
   };
 };
 
-const donateDB = (articleId) => {
-  return function (dispatch, getState, { history }) {
-    axios
-      .patch(`http://3.35.176.155:8080/api/article/${articleId}/donation`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("login-token")}`,
-        },
-      })
-      .then(function (res) {
-        console.log("도네이트", res);
-        // dispatch(getOneDB(articleId));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-};
+// loginCheck 완료되면 가능
+// const donateDB = (articleId) => {
+//   return function (dispatch, getState, { history }) {
+//     axios
+//       .patch(`http://3.35.176.155:8080/api/article/${articleId}/donation`,
+    //   {
+    //     headers: {
+    //     Authorization: `Bearer ${localStorage.getItem('login-token')}`,
+    //     },
+    // })
+//       .then(function (res) {
+//         console.log('도네이트',res);
+//         // dispatch(wantDonate(articleId));
+//       })
+//       .catch(function (error) {
+//         console.log(error);
+//       });
+//   };
+// };
 
-const notDonateDB = (articleId) => {
-  return function (dispatch, getState, { history }) {
-    axios
-      .patch(
-        `http://3.35.176.155:8080/api/article/${articleId}/donationCancel`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("login-token")}`,
-          },
-        }
-      )
-      .then(function (res) {
-        console.log(res);
-        dispatch(getOneDB(articleId));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-};
+// const notDonateDB = (articleId) => {
+//   return function (dispatch, getState, { history }) {
+    // axios
+    //   .patch(`http://3.35.176.155:8080/api/article/${articleId}/donationCancel`,{
+    //     headers: {
+    //     Authorization: `Bearer ${localStorage.getItem("login-token")}`,
+    //     },
+    // })
+    //   .then(function (res) {
+    //     console.log(res);
+    //     // dispatch(cancelDonate(articleId));
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+//   };
+// };
 
 // articleId 샘플 - 21
 const getOneDB = (articleId) => {
@@ -133,15 +130,15 @@ export default handleActions(
         draft.one_list = action.payload.one_list;
       }),
 
-    [WANT_DONATE]: (state, action) =>
-      produce(state, (draft) => {
-        draft.one_list = action.payload.one_list;
-      }),
+    // [WANT_DONATE]: (state, action) =>
+    // produce(state, (draft) => {
+    //   draft.is_donate[action.payload.articleId] = true;
+    // }),
 
-    [CANCEL_DONATE]: (state, action) =>
-      produce(state, (draft) => {
-        draft.one_list = action.payload.one_list;
-      }),
+    // [CANCEL_DONATE]: (state, action) =>
+    // produce(state, (draft) => {
+    //   draft.is_donate[action.payload.articleId] = false;
+    // }),
   },
   initialState
 );
@@ -155,10 +152,10 @@ const actionCreators = {
 
   setOne,
   getOneDB,
-  wantDonate,
-  donateDB,
-  cancelDonate,
-  notDonateDB,
+  // wantDonate,
+  // donateDB,
+  // cancelDonate,
+  // notDonateDB,
 };
 
 export { actionCreators };

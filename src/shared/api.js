@@ -30,9 +30,9 @@ export const apis = {
   cateAriticles: () => api.get("/api/articles/category?category=name"),
   searchAriticles: () => api.get("/api/articles?search=keyword"),
 
-  ariticles: () => api.get("/api/articles?search=keyword"), // 상세 조회
-  donation: () => api.fetch("/api/article/:articleId/donation"), // 후원하기
-  donationCancel: () => api.fetch("/api/article/:articleId/donationCancel"), // 후원취소
+  ariticles: () => api.get('/api/articles?search=keyword'), // 상세 조회
+  donation: () => api.fetch(`/api/article/:articleId/donation`), // 후원하기
+  donationCancel: () => api.fetch('/api/article/:articleId/donationCancel'), // 후원취소
 
   // comment
   comments: () => api.get(`/api/comments/:articleId`),

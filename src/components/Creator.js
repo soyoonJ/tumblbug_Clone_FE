@@ -22,7 +22,7 @@ const Creator = (props) => {
                   {/* 프로필 이미지 */}
                   <Image
                     size="40"
-                    src="https://tumblbug-upi.imgix.net/3e34276d-560a-4028-b5da-fe41acbb055e.jpg?auto=format%2Ccompress&ch=Save-Data&facepad=2.0&fit=facearea&h=250&mask=ellipse&w=200&s=92b8d145317f0a5d7bd31d4f0cca9871"
+                    src={props.creatorImg}
                     marginRight="1rem"
                     marginTop="5px"
                   />
