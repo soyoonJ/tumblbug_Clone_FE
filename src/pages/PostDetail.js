@@ -12,6 +12,7 @@ const PostDetail = (props) => {
   // console.log(isDonate)
 
   // getPostFB가 완성되고 나서 살려야 함
+
   const article = useSelector((state)=> state.articles.one_list)
   const donators = useSelector((state) => state.articles.is_donate)
   console.log('뷰 도네이터', donators)
@@ -61,7 +62,6 @@ const PostDetail = (props) => {
     const wantDonate = () => {
       dispatch(articleActions.donateDB(articleId))
     }
-
 
   const cancelDonate = () => {
     // dispatch(articleActions.notDonateDB(articleId))
@@ -265,6 +265,7 @@ const PostDetail = (props) => {
                   >후원 취소하기</Button>
                 } */}
                   
+
 
                   {/* 후원 취소하기 버튼 */}
                 </div>

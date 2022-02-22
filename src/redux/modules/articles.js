@@ -31,7 +31,6 @@ const setOne = createAction(SET_ONE, (one_list) => ({ one_list }));
 const wantDonate = createAction(WANT_DONATE, (articleId, userEmail) => ({ articleId, userEmail }))
 const cancelDonate = createAction(CANCEL_DONATE, (articleId) => ({ articleId }))
 const donate = createAction(DONATE, (articleId, is_donate) => ({ articleId }));
-
 const getMy = createAction(GET_MY, (my_list) => ({ my_list }));
 const search = createAction(SEARCH, (search_list) => ({ search_list }));
 
@@ -59,7 +58,6 @@ const initialState = {
 
   Mlist: [],
   Plist: [],
-
 };
 
 //주목할 만한 프로젝트
