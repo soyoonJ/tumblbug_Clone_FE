@@ -16,6 +16,7 @@ const CANCEL_DONATE = "CANCEL_DONATE";
 const SET_ONE = "SET_ONE";
 const GET_MY = "GET_MY";
 const SEARCH = "SEARCH";
+const ALL_CATE = "ALL_CATE";
 
 // action creators
 const getMainArticles = createAction(GET_MAIN_ARTICLES, (articles) => ({
@@ -37,6 +38,7 @@ const cancelDonate = createAction(CANCEL_DONATE, (articleId) => ({
 const donate = createAction(DONATE, (articleId, is_donate) => ({ articleId }));
 const getMy = createAction(GET_MY, (my_list) => ({ my_list }));
 const search = createAction(SEARCH, (search_list) => ({ search_list }));
+const allCate = createAction(ALL_CATE, (all_list) => ({ all_list }));
 
 // initialState
 // defaultProps 같은 역할
@@ -192,6 +194,21 @@ const categoryDB = (keyword) => {
   };
 };
 
+// 전체 카테고리 조회하기
+const allcategoryDB = (all) => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .AllAriticles()
+      .then(function (res) {
+        console.log(res);
+        dispatch(allCate(res.data.allProjects));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+};
+
 // 리듀서
 export default handleActions(
   {
@@ -235,6 +252,11 @@ export default handleActions(
         console.log(action.payload.search_list);
         draft.search_list = action.payload.search_list;
       }),
+
+    [ALL_CATE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.all_list = action.payload.all_list;
+      }),
   },
   initialState
 );
@@ -257,6 +279,7 @@ const actionCreators = {
 
   searchDB,
   categoryDB,
+  allcategoryDB,
 };
 
 export { actionCreators };

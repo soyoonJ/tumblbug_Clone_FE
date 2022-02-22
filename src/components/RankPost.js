@@ -30,7 +30,7 @@ const RankPost = (props) => {
           <Grid>
             <A
               onClick={() => {
-                history.replace(`/post/${articleId}`);
+                history.push(`/discover?category=${category}`);
               }}
             >
               {category}
@@ -71,6 +71,7 @@ const PostImg = styled.img`
   background-position-x: center;
   background-position-y: center;
   background-size: cover;
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.05);
@@ -95,6 +96,8 @@ const A = styled.a`
   color: rgb(109 109 109);
   letter-spacing: -0.015em;
   text-decoration: none;
+  cursor: pointer;
+
   :hover {
     text-decoration: underline;
   }

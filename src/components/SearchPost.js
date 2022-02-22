@@ -1,11 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Text, Grid } from "../elements";
+import { Grid } from "../elements";
 import { history } from "../redux/configureStore";
 
 const SearchPost = (props) => {
-  console.log(props);
-
   const {
     category,
     nickname,
@@ -30,14 +28,30 @@ const SearchPost = (props) => {
         <PostImg src={image} />
         <PostContent>
           <Grid padding="0px 0px 2px">
-            <A href="#">{category}</A>
+            <A
+              onClick={() => {
+                history.push(`/discover?category=${category}`);
+              }}
+            >
+              {category}
+            </A>
             <Span>ㅣ</Span>
             <A href="#">{nickname}</A>
           </Grid>
           <Grid margin="0 0 8px">
-            <Title>{title}</Title>
+            <Title
+              onClick={() => {
+                history.push(`/post/${articleId}`);
+              }}
+            >
+              {title}
+            </Title>
           </Grid>
-          <Content>{contents}</Content>
+          <Content>
+            {contents.length > 40
+              ? contents.substring(0, 40) + "..."
+              : contents}
+          </Content>
         </PostContent>
         <Rate>{rate}%</Rate>
       </PostCard>
@@ -47,7 +61,7 @@ const SearchPost = (props) => {
 
 const PostCard = styled.div`
   position: relative;
-  width: 352px;
+  width: 25%;
   padding: 0px 12px;
   margin-bottom: 40px;
 `;
