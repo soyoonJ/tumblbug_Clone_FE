@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Grid, Text } from '../elements';
+import React from "react";
+import styled from "styled-components";
+import { Grid, Text } from "../elements";
 
-import { history } from '../redux/configureStore';
+import { history } from "../redux/configureStore";
 
 const NaviTop = (props) => {
-  const is_token = localStorage.getItem('login-token') ? true : false;
+  const is_token = localStorage.getItem("login-token") ? true : false;
 
   if (is_token) {
     return (
@@ -16,7 +16,6 @@ const NaviTop = (props) => {
             <Button>
               <Image>
                 <svg
-                  className="style__AvatarIcon-zxsodr-36 ixdnbV"
                   width="48"
                   height="48"
                   viewBox="0 0 48 48"
@@ -47,7 +46,7 @@ const NaviTop = (props) => {
             <LogoImg src="/img/logo.png" />
             <Button
               onClick={() => {
-                history.push('/login');
+                history.push("/login");
               }}
             >
               <Text size="12px" bold padding="12px">
