@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Text, Grid } from '../elements';
+import { history } from '../redux/configureStore';
 
-const Post = (props) => {
+const SearchPost = (props) => {
+  console.log(props);
+
   const {
     category,
     nickname,
@@ -11,6 +14,7 @@ const Post = (props) => {
     targetAmount,
     totalAmount,
     contents,
+    articleId,
   } = props;
 
   //달성률구하기
@@ -18,7 +22,11 @@ const Post = (props) => {
 
   return (
     <React.Fragment>
-      <PostCard>
+      <PostCard
+        onClick={() => {
+          history.push(`/post/${articleId}`);
+        }}
+      >
         <PostImg src={image} />
         <PostContent>
           <Grid padding="0px 0px 2px">
@@ -104,4 +112,4 @@ const PostContent = styled.div`
   margin: 0 0 14px;
 `;
 
-export default Post;
+export default SearchPost;

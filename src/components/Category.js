@@ -80,7 +80,7 @@ const Category = (props) => {
           </Li>
           <Li
             onClick={() => {
-              window.location.replace(`/discover?category=캐릭터 · 굿즈`);
+              window.location.replace(`/discover?category=캐릭터 굿즈`);
             }}
           >
             <CateDiv>
