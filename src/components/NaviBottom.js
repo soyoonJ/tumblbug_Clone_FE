@@ -1,9 +1,19 @@
-import React from "react";
-import styled from "styled-components";
-import { Grid, Input, Text } from "../elements";
-import Category from "./Category";
+import React from 'react';
+import styled from 'styled-components';
+import { Grid, Input, Text } from '../elements';
+import Category from './Category';
+import { history } from '../redux/configureStore';
 
 const NaviBottom = () => {
+  const [searchWord, setSearchWord] = React.useState('');
+
+  function onKeyPress(e) {
+    if (e.key === 'Enter') {
+      console.log(searchWord);
+      history.push(`discover?query=${searchWord}`);
+    }
+  }
+
   return (
     <React.Fragment>
       <NaviTopLayout>
@@ -12,7 +22,14 @@ const NaviBottom = () => {
             <CategoryBar></CategoryBar>
           </Grid>
           <Search>
-            <input type="text" placeholder="검색어를 입력해주세요." />
+            <input
+              type="text"
+              placeholder="검색어를 입력해주세요."
+              onKeyPress={onKeyPress}
+              onChange={(e) => {
+                setSearchWord(e.target.value);
+              }}
+            />
           </Search>
         </Grid>
       </NaviTopLayout>
