@@ -10,7 +10,7 @@ const NaviBottom = () => {
   function onKeyPress(e) {
     if (e.key === 'Enter') {
       console.log(searchWord);
-      history.push(`discover?query=${searchWord}`);
+      window.location.replace(`discover?query=${searchWord}`);
     }
   }
 
