@@ -1,16 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Grid, Text } from '../elements';
+import React from "react";
+import styled from "styled-components";
+import { Grid, Text } from "../elements";
 
-import { history } from '../redux/configureStore';
-import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
-import { useDispatch, useSelector } from 'react-redux';
+import { history } from "../redux/configureStore";
+import { actionCreators as userActions } from "../redux/modules/user"; // as : 별명 주는거
+import { useDispatch, useSelector } from "react-redux";
 
 const NaviTop = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
 
-  const is_token = localStorage.getItem('login-token') ? true : false;
+  const is_token = localStorage.getItem("login-token") ? true : false;
 
   React.useEffect(() => {
     if (is_token) {
@@ -28,7 +28,7 @@ const NaviTop = (props) => {
             <Button
               onClick={() => {
                 dispatch(userActions.logOut());
-                window.location.replace('/');
+                window.location.replace("/");
               }}
             >
               <Image>
@@ -50,7 +50,7 @@ const NaviTop = (props) => {
                   ></path>
                 </svg>
               </Image>
-              {user ? user.user.nickname : ''}
+              {user ? user.user.nickname : ""}
             </Button>
           </Grid>
         </NaviTopLayout>
@@ -64,12 +64,11 @@ const NaviTop = (props) => {
             <LogoImg src="/img/logo.png" />
             <Button
               onClick={() => {
-                history.push('/login');
+                history.push("/login");
               }}
             >
               <Image>
                 <svg
-                  className="style__AvatarIcon-zxsodr-36 ixdnbV"
                   width="48"
                   height="48"
                   viewBox="0 0 48 48"

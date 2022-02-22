@@ -1,21 +1,25 @@
-import React from 'react';
+import React from "react";
 
-import styled from 'styled-components';
-import Post from './Post';
-
-import { RESP } from '../shared/response';
-import { useSelector } from 'react-redux';
+import styled from "styled-components";
+import Post from "./Post";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as articlesActions } from "../redux/modules/articles";
 
 const MainPost = (props) => {
-  const mainArticles = RESP.ARTICLES_MAIN1.mainProjects;
+  const dispatch = useDispatch();
 
-  const project_list = useSelector((state) => state.articles.list);
-  console.log(project_list);
+  const main_project_list = useSelector((state) => state.articles.list);
+  console.log(main_project_list);
+
+  React.useEffect(() => {
+    dispatch(articlesActions.getMainArticlesDB());
+  }, []);
+
   return (
     <React.Fragment>
       <Title>주목할 만한 프로젝트</Title>
       <PostBox>
-        {mainArticles.map((a, i) => {
+        {main_project_list.map((a, i) => {
           return <Post key={i} {...a} />;
         })}
       </PostBox>
