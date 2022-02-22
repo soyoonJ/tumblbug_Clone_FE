@@ -1,14 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid } from "../elements";
 
 const Category = (props) => {
-  const [choice, setChoice] = React.useState("카테고리");
-
-  // const setFilter = (num) => {
-  //   setChoice(num === 0 ? "카테고리" : num === 1 ? "" : "");
-  // };
-
   return (
     <>
       <CategoryBox>
@@ -26,10 +19,14 @@ const Category = (props) => {
               <rect x="9" y="33" width="30" height="4"></rect>
             </svg>
           </Image>
-          {choice}
+          카테고리
         </CateDiv>
         <CategoryList>
-          <Full>
+          <Full
+            onClick={() => {
+              window.location.replace(`/discover?all=all`);
+            }}
+          >
             <CateDiv>
               <CateImage>
                 <svg
@@ -60,6 +57,7 @@ const Category = (props) => {
                   <path d="M20 20H30V30H20V20Z" fill="#FF5757"></path>
                 </svg>
               </CateImage>
+              전체
             </CateDiv>
           </Full>
           <Li
@@ -152,6 +150,9 @@ const CategoryBox = styled.ul`
   cursor: pointer;
 
   &:hover {
+    svg {
+      fill: rgb(255, 87, 87);
+    }
     color: rgb(255, 87, 87);
     Li {
       padding: 40px 0px 30px;
@@ -197,11 +198,6 @@ const Image = styled.div`
 const CateDiv = styled.div`
   display: flex;
   align-items: center;
-
-  :hover svg {
-    color: rgb(255, 87, 87);
-    fill: rgb(255, 87, 87);
-  }
 `;
 
 const CateImage = styled.div`

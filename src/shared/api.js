@@ -27,12 +27,13 @@ export const apis = {
   mainAriticles: () => api.get("/api/articles/mainProjects"), // 주목할 만한 프로젝트
   popularAriticles: () => api.get("/api/articles/popularProjects"), //  인기 프로젝트
   myAriticles: () => api.get("/api/articles/myDonatedProjects"),
+  AllAriticles: () => api.get("/api/articles/all"),
   cateAriticles: () => api.get("/api/articles/category?category=name"),
   searchAriticles: () => api.get("/api/articles?search=keyword"),
 
-  ariticles: () => api.get('/api/articles?search=keyword'), // 상세 조회
+  ariticles: () => api.get("/api/articles?search=keyword"), // 상세 조회
   donation: () => api.fetch(`/api/article/:articleId/donation`), // 후원하기
-  donationCancel: () => api.fetch('/api/article/:articleId/donationCancel'), // 후원취소
+  donationCancel: () => api.fetch("/api/article/:articleId/donationCancel"), // 후원취소
 
   // comment
   comments: () => api.get(`/api/comments/:articleId`),

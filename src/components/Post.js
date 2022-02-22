@@ -30,7 +30,7 @@ const Post = (props) => {
           <Grid padding="0px 0px 2px">
             <A
               onClick={() => {
-                history.push(`/post/${articleId}`);
+                history.push(`/discover?category=${category}`);
               }}
             >
               {category}
@@ -71,6 +71,7 @@ const A = styled.a`
   letter-spacing: -0.005em;
   /* line-height: 16px; */
   text-decoration: none;
+  cursor: pointer;
 
   :hover {
     text-decoration: underline;
