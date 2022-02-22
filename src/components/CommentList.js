@@ -10,8 +10,8 @@ const CommentList = ({detail, articleId}) => {
 
     // 댓글 작성창 확인하기 위해서 리덕스에 있는 user nickname 뽑아오기
     // const username = useSelector((state)=>state.user.nickname)
-    // const comment_list = useSelector((state)=>state.comments.comments);
-
+    const comment_list = useSelector((state)=>state.comments.comment_list[articleId]);
+    console.log('뷰 코멘트리스트', comment_list)
 
     const dispatch = useDispatch();
 
@@ -135,9 +135,9 @@ const CommentList = ({detail, articleId}) => {
               </div>
             </Contents>
             {/* 코멘트 박스 -> map 돌려야 함*/}
-            {/* {comment_list.map((e,i)=> {
-              <List key={e.id} />
-            })} */}
+            {comment_list?.map((e,i) => {
+              <List key={e.id} {...e}/>
+            })}
 
 
           </div>
@@ -310,7 +310,6 @@ const List = (props) => {
   // const comment_list = useSelector((state)=>state.comments.comments)
   // console.log('뷰 코멘트리스트'. comment_list)
 
-  const {nickname, content} = props;
   return (
     <React.Fragment>
       <Item>

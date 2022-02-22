@@ -4,16 +4,16 @@ import { produce } from "immer";
 import axios from "axios";
 
 // actions
-const SET_COMMNET = "SET_COMMNET";
-const ADD_COMMNET = "ADD_COMMNET";
+const SET_COMMENT = "SET_COMMENT";
+const ADD_COMMENT = "ADD_COMMENT";
 
 // action creators
-const setComment = createAction(SET_COMMNET, (comment) => ({ comment }));
-const addComment = createAction(ADD_COMMNET, (one_comment) => ({ one_comment }))
+const setComment = createAction(SET_COMMENT, (articleId, comments) => ({ articleId, comments }));
+const addComment = createAction(ADD_COMMENT, (one_comment) => ({ one_comment }));
 
 // initialState
 const initialState = {
-  comments: [
+  comment_list: [
     { 
     commentId :  "123456",
     articleId : "1",
@@ -38,9 +38,9 @@ const getCommentDB = (articleId) => {
     axios
       .get(`http://3.35.176.155:8080/api/comments/${articleId}`)
       .then(function (res) {
-        console.log(res);
+        // console.log('코멘트전체확인',res.data.comments);
         // 코멘트리스트 불러오기
-        // dispatch(setComment(res.data));
+        dispatch(setComment(articleId, res.data.comments));
       })
       .catch(function (error) {
         console.log(error);
@@ -52,13 +52,14 @@ const getCommentDB = (articleId) => {
 // 리듀서
 export default handleActions(
   {
-    [SET_COMMNET]: (state, action) => produce(state, (draft) => {
-      draft.comments = action.payload.comments;
-      // console.log('set코멘트', draft.comments)''
+    [SET_COMMENT]: (state, action) => produce(state, (draft) => {
+      // console.log('코멘트 뜨나요', action.payload.comments)
+      draft.comment_list[action.payload.articleId] = action.payload.comments;
+      // console.log('set코멘트', draft.comment_list[action.payload.articleId]);
     }),
 
-    [ADD_COMMNET]: (state, action) => produce(state, (draft) => {
-      draft.comments.push(action.payload.one_comment);
+    [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
+      draft.comment_list.push(action.payload.one_comment);
       // console.log('set코멘트', draft.comments)''
     }),
 
