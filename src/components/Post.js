@@ -20,20 +20,31 @@ const Post = (props) => {
   return (
     <React.Fragment>
       <PostCard>
-        <PostImg src={image} />
+        <PostImg
+          src={image}
+          onClick={() => {
+            history.push(`/post/${articleId}`);
+          }}
+        />
         <PostContent>
           <Grid padding="0px 0px 2px">
             <A
               onClick={() => {
-                history.replace(`/post/${articleId}`);
+                history.push(`/post/${articleId}`);
               }}
             >
               {category}
             </A>
             <Span>ㅣ</Span>
-            <A href="#">{nickname}</A>
+            <A>{nickname}</A>
           </Grid>
-          <Title>{title}</Title>
+          <Title
+            onClick={() => {
+              history.push(`/post/${articleId}`);
+            }}
+          >
+            {title}
+          </Title>
         </PostContent>
         <Rate>{rate}%</Rate>
       </PostCard>

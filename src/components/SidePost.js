@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Text } from "../elements";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as articlesActions } from "../redux/modules/articles";
-import { history } from "../redux/configureStore";
 
 const SidePost = (props) => {
   const dispatch = useDispatch();

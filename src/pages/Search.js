@@ -11,11 +11,16 @@ import { actionCreators as articlesActions } from '../redux/modules/articles';
 const Search = (props) => {
   const dispatch = useDispatch();
   const search = decodeURI(props.location.search).split('=')[1];
+  console.log(search);
 
   const searchList = useSelector((store) => store.articles.search_list);
 
   React.useEffect(() => {
-    dispatch(articlesActions.searchDB(search));
+    const flag = decodeURI(props.location.search).split('=')[0];
+    console.log(flag);
+
+    if (flag === '?category') dispatch(articlesActions.categoryDB(search));
+    else dispatch(articlesActions.searchDB(search));
   }, []);
 
   return (

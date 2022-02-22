@@ -70,9 +70,9 @@ const Category = (props) => {
                   src="https://tumblbug-assets.imgix.net/categories/svg/stationary.svg"
                   width="40px"
                   height="40px"
-                  alt="디자인문구"
+                  alt="디자인 문구"
                 />
-                디자인문구
+                디자인 문구
               </CateDiv>
             </Li>
           </CateDiv>
@@ -145,6 +145,7 @@ const CategoryBox = styled.ul`
 
 const CategoryList = styled.div`
   overflow: hidden;
+  position: relative;
   display: flex;
   justify-content: space-between;
   flex-flow: row wrap;

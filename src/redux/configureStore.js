@@ -5,7 +5,7 @@ import { connectRouter } from "connected-react-router";
 
 import User from "./modules/user";
 import Articles from "./modules/articles";
-// import Comments from "/modules/comments";
+import Comments from "./modules/comments";
 
 // 히스토리 객체 만들기
 export const history = createBrowserHistory();
@@ -15,7 +15,7 @@ export const history = createBrowserHistory();
 const rootReducer = combineReducers({
   user: User,
   articles: Articles,
-  // comments: Comments,
+  comments: Comments,
   // 만든 history랑 라우터를 연결시켜 줌
   router: connectRouter(history),
 });

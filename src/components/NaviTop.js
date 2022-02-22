@@ -1,16 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Grid, Text } from '../elements';
+import React from "react";
+import styled from "styled-components";
+import { Grid, Text } from "../elements";
 
-import { history } from '../redux/configureStore';
-import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
-import { useDispatch, useSelector } from 'react-redux';
+import { history } from "../redux/configureStore";
+import { actionCreators as userActions } from "../redux/modules/user"; // as : 별명 주는거
+import { useDispatch, useSelector } from "react-redux";
 
 const NaviTop = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
 
-  const is_token = localStorage.getItem('login-token') ? true : false;
+  const is_token = localStorage.getItem("login-token") ? true : false;
 
   React.useEffect(() => {
     if (is_token) {
@@ -26,20 +26,20 @@ const NaviTop = (props) => {
             <LogoImg
               src="/img/logo.png"
               onClick={() => {
-                history.push('/');
+                history.push("/");
               }}
             />
             <Button
               onClick={() => {
                 // dispatch(userActions.logOut());
                 // window.location.replace('/');
-                history.push('/user');
+                history.push("/user");
               }}
             >
               <NameCircle>
-                {user.user.nickname ? user.user.nickname[0] : ''}
+                {user.user.nickname ? user.user.nickname[0] : ""}
               </NameCircle>
-              <Grid margin="0 0 0 10px">{user ? user.user.nickname : ''}</Grid>
+              {user ? user.user.nickname : ""}
             </Button>
           </Grid>
         </NaviTopLayout>
@@ -53,12 +53,12 @@ const NaviTop = (props) => {
             <LogoImg
               src="/img/logo.png"
               onClick={() => {
-                history.push('/');
+                history.push("/");
               }}
             />
             <Button
               onClick={() => {
-                history.push('/login');
+                history.push("/login");
               }}
             >
               <Image>
@@ -110,7 +110,7 @@ const Button = styled.div`
   border-radius: 4px;
   border: 1px solid rgb(223, 223, 223);
   width: auto;
-  min-width: 30px;
+  /* min-width: 30px; */
   max-height: 44px;
   font-size: 12px;
   font-weight: 600;
@@ -145,6 +145,7 @@ const NameCircle = styled.div`
   font-size: 12px;
   line-height: 24px;
   color: #fff;
+  margin-right: 10px;
 `;
 
 export default NaviTop;
