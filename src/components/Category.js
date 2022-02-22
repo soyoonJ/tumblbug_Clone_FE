@@ -1,14 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { Grid } from "../elements";
+import React from 'react';
+import styled from 'styled-components';
+
+import { history } from '../redux/configureStore';
 
 const Category = (props) => {
-  const [choice, setChoice] = React.useState("카테고리");
-
-  // const setFilter = (num) => {
-  //   setChoice(num === 0 ? "카테고리" : num === 1 ? "" : "");
-  // };
-
   return (
     <>
       <CategoryBox>
@@ -26,10 +21,14 @@ const Category = (props) => {
               <rect x="9" y="33" width="30" height="4"></rect>
             </svg>
           </Image>
-          {choice}
+          카테고리
         </CateDiv>
         <CategoryList>
-          <Full>
+          <Full
+            onClick={() => {
+              history.push(`/discover?all=all`);
+            }}
+          >
             <CateDiv>
               <CateImage>
                 <svg
@@ -60,11 +59,12 @@ const Category = (props) => {
                   <path d="M20 20H30V30H20V20Z" fill="#FF5757"></path>
                 </svg>
               </CateImage>
+              전체
             </CateDiv>
           </Full>
           <Li
             onClick={() => {
-              window.location.replace(`/discover?category=디자인 문구`);
+              history.push(`/discover?category=디자인 문구`);
             }}
           >
             <CateDiv>
@@ -79,7 +79,7 @@ const Category = (props) => {
           </Li>
           <Li
             onClick={() => {
-              window.location.replace(`/discover?category=캐릭터 굿즈`);
+              history.push(`/discover?category=캐릭터 굿즈`);
             }}
           >
             <CateDiv>
@@ -94,7 +94,7 @@ const Category = (props) => {
           </Li>
           <Li
             onClick={() => {
-              window.location.replace(`/discover?category=푸드`);
+              history.push(`/discover?category=푸드`);
             }}
           >
             <CateDiv>
@@ -109,7 +109,7 @@ const Category = (props) => {
           </Li>
           <Li
             onClick={() => {
-              window.location.replace(`/discover?category=향수 · 뷰티`);
+              history.push(`/discover?category=향수 · 뷰티`);
             }}
           >
             <CateDiv>
@@ -124,7 +124,7 @@ const Category = (props) => {
           </Li>
           <Li
             onClick={() => {
-              window.location.replace(`/discover?category=음악`);
+              history.push(`/discover?category=음악`);
             }}
           >
             <CateDiv>
@@ -152,6 +152,9 @@ const CategoryBox = styled.ul`
   cursor: pointer;
 
   &:hover {
+    svg {
+      fill: rgb(255, 87, 87);
+    }
     color: rgb(255, 87, 87);
     Li {
       padding: 40px 0px 30px;
@@ -197,11 +200,6 @@ const Image = styled.div`
 const CateDiv = styled.div`
   display: flex;
   align-items: center;
-
-  :hover svg {
-    color: rgb(255, 87, 87);
-    fill: rgb(255, 87, 87);
-  }
 `;
 
 const CateImage = styled.div`

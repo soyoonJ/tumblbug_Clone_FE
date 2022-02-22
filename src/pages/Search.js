@@ -14,15 +14,35 @@ const Search = (props) => {
   console.log(search);
 
   const searchList = useSelector((store) => store.articles.search_list);
+  const allList = useSelector((store) => store.articles.all_list);
+  console.log(allList);
 
   React.useEffect(() => {
     const flag = decodeURI(props.location.search).split('=')[0];
     console.log(flag);
 
+    dispatch(articlesActions.allcategoryDB());
+
     if (flag === '?category') dispatch(articlesActions.categoryDB(search));
     else dispatch(articlesActions.searchDB(search));
-  }, []);
+  }, [search]);
 
+  if (search === 'all') {
+    return (
+      <React.Fragment>
+        <Header />
+        <Container>
+          <PostBox>
+            {allList
+              ? allList.map((a, i) => {
+                  return <SearchPost key={i} {...a} />;
+                })
+              : ''}
+          </PostBox>
+        </Container>
+      </React.Fragment>
+    );
+  }
   return (
     <React.Fragment>
       <Header />
