@@ -2,38 +2,26 @@ import React from 'react';
 import {useState} from 'react';
 import {Grid, Button, Image} from '../elements'
 import styled from 'styled-components';
+
 import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as commentActions } from "../redux/modules/comments";
 
 const CommentList = ({ detail, articleId }) => {
   // 댓글 작성창 확인하기 위해서 리덕스에 있는 user nickname 뽑아오기
-  // const username = useSelector((state)=>state.user.nickname)
-  // const comment_list = useSelector((state)=>state.comments.comment_list[articleId]);
-  const comment_list = useSelector((state) => state.comments.comment_list);
-  console.log("뷰 코멘트리스트", comment_list);
-
+  // console.log("뷰 코멘트리스트", comment_list);
 
     // 댓글 작성창 활용 용도
-    const is_login = useSelector((state) => state.user.is_login);
-    const username = useSelector((state)=>state.user.user.nickname);
-    
-    const comment_list = useSelector((state)=>state.comments.comment_list);
-    const [writeComment, setComment] = useState('');
-
+  const is_login = useSelector((state) => state.user.is_login);
+  const username = useSelector((state)=>state.user.user.nickname);
+  const comment_list = useSelector((state)=>state.comments.comment_list);
+  const [writeComment, setComment] = useState('');
   const dispatch = useDispatch();
 
 
   React.useEffect(() => {
     dispatch(commentActions.getCommentDB(articleId));
   }, []);
-
-  const handlePress = (e) => {
-    if (e.key === "Enter") {
-      console.log("댓글내용", e.target.value);
-      dispatch(commentActions.addCommentDB(articleId, e.target.value));
-    }
-  };
 
     const onChange = (e)=>{
       setComment(e.target.value);
@@ -80,7 +68,6 @@ const CommentList = ({ detail, articleId }) => {
                   color: "rgb(158, 158, 158)",
                 }}
               />
-
               </CommentWrite>
               :
             // 로그인 안했을 때
@@ -154,26 +141,7 @@ const CommentList = ({ detail, articleId }) => {
                         </svg>
                       </Icon>
                     </div>
-                    <div
 
-                      style={{
-                        fontSize: "1.1rem",
-                        fontWeight: "700",
-                      }}
-                    >
-                      {detail.nickname}
-                    </span>
-                    <span>창작자</span>
-                    <Icon>
-                      <svg width="9px" height="9px" viewBox="0 0 48 48">
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M14.4941 46.0019C13.1317 46.0019 12.0613 44.9019 12.0613 43.6019C12.0613 43.0019 12.2559 42.4019 12.7425 41.9019L29.4791 24.0019L12.6452 6.20187C11.7694 5.20187 11.7694 3.70187 12.7425 2.70187C13.7156 1.70187 15.1753 1.80187 16.1484 2.80187L36 24.0019L16.1484 45.3019C15.6618 45.7019 15.078 46.0019 14.4941 46.0019Z"
-                        ></path>
-                      </svg>
-                    </Icon>
-                  </div>
                   <div
                     style={{
                       fontSize: "13px",
@@ -196,6 +164,7 @@ const CommentList = ({ detail, articleId }) => {
               return <List key={i} {...e}></List>;
             })}
             {/* <List></List> */}
+          </div>
           </div>
         </Container>
       </React.Fragment>
@@ -388,7 +357,6 @@ const List = (props) => {
     dispatch(commentActions.deleteCommentDB(commentId, articleId));
     setIsActive(false);
   }
-
 
   // const comment_list = useSelector((state)=>state.comments.comments)
   // console.log('뷰 코멘트리스트'. comment_list)
@@ -589,6 +557,7 @@ const Comment = styled.div`
     line-height: 28px;
     color: rgb(61, 61, 61);
   }
+
   min-height: 30px;
   max-height: 500px;
   overflow: hidden;
