@@ -6,12 +6,14 @@ import { Grid, Button, Image } from "../elements";
 import { CommentList, Creator, Header } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as articleActions } from "../redux/modules/articles";
+import { history } from "../redux/configureStore";
 
 const PostDetail = (props) => {
   const dispatch = useDispatch();
   // console.log(isDonate)
 
   // getPostFB가 완성되고 나서 살려야 함
+  const is_login = useSelector((state) => state.user.is_login);
 
   const article = useSelector((state)=> state.articles.one_list)
   const donators = useSelector((state) => state.articles.is_donate)
@@ -20,7 +22,6 @@ const PostDetail = (props) => {
   
   // const isDonate = useSelector((state) => state.articles.is_donate)
   // const userEmail = useSelector((state)=>state.user.user.email)
-
 
   // articleId 파라미터 가져오기
   const articleId = props.match.params.id;
@@ -53,6 +54,7 @@ const PostDetail = (props) => {
   React.useEffect(() => {
     // 아티클 정보 불러오기
     dispatch(articleActions.getOneDB(articleId));
+    
     // 코멘트 정보 불러오기
     // dispatch(commentActions.getCommentDB(articleId))
     // 후원자 정보 바뀔 때마다 변경해주기
@@ -60,7 +62,12 @@ const PostDetail = (props) => {
   }, []);
 
     const wantDonate = () => {
-      dispatch(articleActions.donateDB(articleId))
+      if(!is_login) {
+        window.alert('로그인 후 후원 가능합니다!')
+        history.push('/login')
+      } else {
+        dispatch(articleActions.donateDB(articleId))
+      }
     }
 
   const cancelDonate = () => {

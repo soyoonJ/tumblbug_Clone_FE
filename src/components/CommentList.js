@@ -1,4 +1,5 @@
 import React from 'react';
+import {useState} from 'react';
 import {Grid, Button, Image} from '../elements'
 import styled from 'styled-components';
 
@@ -8,11 +9,11 @@ import { actionCreators as commentActions } from '../redux/modules/comments'
 
 const CommentList = ({detail, articleId}) => {
 
-    // 댓글 작성창 확인하기 위해서 리덕스에 있는 user nickname 뽑아오기
-    // const username = useSelector((state)=>state.user.nickname)
-    // const comment_list = useSelector((state)=>state.comments.comment_list[articleId]);
+    // 댓글 작성창 활용 용도
+    const username = useSelector((state)=>state.user.user.nickname)
     const comment_list = useSelector((state)=>state.comments.comment_list);
-    console.log('뷰 코멘트리스트', comment_list)
+    const is_login = useSelector((state) => state.user.is_login);
+
 
     const dispatch = useDispatch();
 
@@ -38,31 +39,27 @@ const CommentList = ({detail, articleId}) => {
             {/* 댓글 작성창 */}
             <div>
               {/* 로그인+후원까지 했을 때 댓글 창 */}
+              {is_login ?
               <CommentWrite onKeyPress={handlePress}>
+              {username && (
                 <Profileimg>
-                  <span>정</span>
-                  {/* <span>{username[0]}</span> */}
+                  <span>{username[0]}</span>
                 </Profileimg>
-                <input
-                  placeholder="창작자에게 응원의 한마디!"
-                  style={{
-                    width: "100%",
-                    outline: "none",
-                    border: "none",
-                    fontSize: "14px",
-                    color: "rgb(158, 158, 158)",
-                  }}
-                />
+              )}
+              <input
+                placeholder="창작자에게 응원의 한마디!"
+                style={{
+                  width: "100%",
+                  outline: "none",
+                  border: "none",
+                  fontSize: "14px",
+                  color: "rgb(158, 158, 158)",
+                }}
+              />
               </CommentWrite>
-              {/* 후원 안했을 때 댓글 창 */}
-              {/* <CommentDonate>
-                <Profileimg>
-                  <span>정</span>
-                </Profileimg>
-                <span>후원자만 글을 쓸 수 있어요.</span>
-              </CommentDonate> */}
-              {/* 로그인 안했을 때 댓글창 */}
-              {/* <CommentLogin onClick={()=>{
+              :
+            // 로그인 안했을 때
+              <CommentLogin onClick={()=>{
                 history.push('/login')
               }}>
                 <Image
@@ -72,7 +69,17 @@ const CommentList = ({detail, articleId}) => {
                     marginTop="5px"
                   />
                 <span>로그인 해주세요.</span>
-              </CommentLogin> */}
+              </CommentLogin>
+
+            }
+              {/* 후원 안했을 때 댓글 창 */}
+              {/* <CommentDonate>
+                <Profileimg>
+                  <span>정</span>
+                </Profileimg>
+                <span>후원자만 글을 쓸 수 있어요.</span>
+              </CommentDonate> */}
+
             </div>
             {/* contents 부분 */}
             <Contents>
@@ -139,13 +146,10 @@ const CommentList = ({detail, articleId}) => {
             </Contents>
             {/* 코멘트 박스 -> map 돌려야 함*/}
 
-            {comment_list[articleId]?.map((e,i) => {
-              return (
-                <List key={i} {...e}></List>
-              )
+            {comment_list[articleId]?.map((e, i) => {
+              return <List key={i} {...e}></List>;
             })}
             {/* <List></List> */}
-
           </div>
         </Container>
       </React.Fragment>
@@ -313,13 +317,32 @@ export default CommentList;
 // 댓글 한 박스
 const List = (props) => {
 
+  // console.log('댓글props',props)
+  const { commentId, articleId, comment, nickname } = props;
+
+  const dispatch = useDispatch();
+
+  const [isActive, setIsActive] = useState(false);
+
+  const modalClick = () => {
+    setIsActive(!isActive)
+  }
+
+  const editCmt = () => {
+
+  }
+
+  const deleteCmt = () => {
+    dispatch(commentActions.deleteCommentDB(commentId, articleId))
+  }
+
   // const comment_list = useSelector((state)=>state.comments.comments)
   // console.log('뷰 코멘트리스트'. comment_list)
 
   return (
     <React.Fragment>
       <Item>
-        <div style={{display: "flex"}}>
+        <div style={{display: "flex", justifyContent:"space-between"}}>
           {/* 사용자정보 */}
           <div style={{ display: "flex" }}>
             {/* 프로필 기본 이미지 */}
@@ -333,7 +356,7 @@ const List = (props) => {
               {/* 추가기능으로 할만함: 클릭 시 마이페이지로 넘어가게끔 할지말지 확인해야할듯 -> 약간 아이디 암호화 하는듯*/}
               <div style={{display:"flex", alignItems:"center"}}>
                 <UserName>
-                  {props.nickname}
+                  {nickname}
                 </UserName>
                 <Icon>
                   <svg width="9px" height="9px" viewBox="0 0 48 48">
@@ -347,16 +370,34 @@ const List = (props) => {
               </span>
             </UserInfo>
           </div>
-          {/* 아이콘 */}
-          <div name="more" class="Icon__SVGICON-sc-1xkf9cp-0 ccxeYs">
-              <svg viewBox="0 0 48 48">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.4 19C8.83 19 10.8 20.97 10.8 23.4C10.8 25.83 8.83 27.8 6.4 27.8C3.97 27.8 2 25.83 2 23.4C2 20.97 3.97 19 6.4 19ZM24.0001 19C26.4301 19 28.4001 20.97 28.4001 23.4C28.4001 25.83 26.4301 27.8 24.0001 27.8C21.5701 27.8 19.6001 25.83 19.6001 23.4C19.6001 20.97 21.5701 19 24.0001 19ZM45.9997 23.4C45.9997 20.97 44.0307 19 41.5997 19C39.1697 19 37.2007 20.97 37.2007 23.4C37.2007 25.83 39.1697 27.8 41.5997 27.8C44.0307 27.8 45.9997 25.83 45.9997 23.4Z">
-              </path></svg>
+          {/* 수정삭제버튼 */}
+          <div style={{position:'relative',}}>
+            {/* 아이콘 */}
+            <IconBtn onClick={modalClick}>
+              <div name="more">
+                  <svg width="1em" height="1em" viewBox="0 0 48 48">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M6.4 19C8.83 19 10.8 20.97 10.8 23.4C10.8 25.83 8.83 27.8 6.4 27.8C3.97 27.8 2 25.83 2 23.4C2 20.97 3.97 19 6.4 19ZM24.0001 19C26.4301 19 28.4001 20.97 28.4001 23.4C28.4001 25.83 26.4301 27.8 24.0001 27.8C21.5701 27.8 19.6001 25.83 19.6001 23.4C19.6001 20.97 21.5701 19 24.0001 19ZM45.9997 23.4C45.9997 20.97 44.0307 19 41.5997 19C39.1697 19 37.2007 20.97 37.2007 23.4C37.2007 25.83 39.1697 27.8 41.5997 27.8C44.0307 27.8 45.9997 25.83 45.9997 23.4Z">
+                  </path></svg>
+              </div>
+            </IconBtn>
+            
+            {/* 수정삭제모달 */}
+            {isActive?
+            <Modal>
+              <ul>
+                <li onClick={editCmt}><a>수정</a></li>
+                <li onClick={deleteCmt}><a>삭제</a></li>
+              </ul>
+            </Modal>
+            :
+              null
+            }
           </div>
-        </div>
+
+        </div> 
         {/* 코멘트 내용 */}
         <Comment>
-          <div>{props.comment}</div>
+          <div>{comment}</div>
         </Comment>
       </Item>
     </React.Fragment>
@@ -376,6 +417,63 @@ const Item = styled.div`
 }
 box-shadow: rgb(0 0 0 / 8%) 0px 1px 0px;
 display: block;
+`
+const IconBtn = styled.button`
+padding:10px;
+height:auto;
+cursor: pointer;
+outline: none;
+background-color: transparent;
+border: none;
+
+cursor: pointer;
+
+& > div > svg {
+  transform:rotate(90deg);
+  fill: rgb(158, 158, 158);
+}
+
+& > div > svg:hover {
+  fill: black;
+}
+`
+const Modal = styled.div`
+width: 205px;
+position: absolute;
+top:33px;
+right:20px;
+border: 1px solid rgb(240, 240, 240);
+box-shadow: rgb(0 0 0 / 5%) 0px 2px 8px, rgb(0 0 0 / 10%) 0px 1px 0px;
+border-radius: 4px;
+background: rgb(255, 255, 255);
+z-index: 10;
+display: block;
+
+ul {
+  padding: 8px 0px;
+  margin: 0px;
+}
+
+li {
+  list-style: none;
+  display: list-item;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: rgb(246, 245, 245);
+}
+
+li > a {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  padding: 0px 0px 0px 19px;
+  line-height: 24px;
+  width: 100%;
+  height: 44px;
+  font-size: 14px;
+}
 `
 const UserInfo = styled.div`
 margin-left : 1rem;
