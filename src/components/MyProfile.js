@@ -3,22 +3,38 @@ import styled from 'styled-components';
 import { BiSearch } from 'react-icons/bi';
 import { Text } from '../elements/index';
 
+import SearchPost from './SearchPost';
+
+import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
+import { actionCreators as articlesActions } from '../redux/modules/articles'; // as : 별명 주는거
+
+import { useDispatch, useSelector } from 'react-redux';
+
 const MyProfile = () => {
-  const [projectNum, setProjectNum] = React.useState(0);
-  const [name, setNeme] = React.useState('박수민');
+  const dispatch = useDispatch();
+  const user = useSelector((store) => store.user);
+  const myList = useSelector((store) => store.articles.my_list);
 
-  React.useEffect(() => {}, []);
+  const is_token = localStorage.getItem('login-token') ? true : false;
 
+  React.useEffect(() => {
+    if (is_token) {
+      dispatch(userActions.loginCheckDB());
+      dispatch(articlesActions.getMyDB());
+    }
+  }, []);
   return (
     <Box>
       <div className="boxTop">
         <UserBox>
           <div className="userContainer">
             <div className="lastbox">
-              <div className="lastname">{name[0]}</div>
+              <div className="lastname">
+                {user.user.nickname ? user.user.nickname[0] : ''}
+              </div>
             </div>
             <div className="userInfo">
-              <div className="userName">{name}</div>
+              <div className="userName">{user ? user.user.nickname : ''}</div>
               <div className="signAt">15시간 전 가입</div>
             </div>
           </div>
@@ -32,10 +48,10 @@ const MyProfile = () => {
       <Line></Line>
       <div className="boxBottom">
         <ProjectCounter>
-          <span>{projectNum}</span>개의 프로젝트가 있습니다
+          <span>{myList ? myList.length : 0}</span>개의 프로젝트가 있습니다
         </ProjectCounter>
         <ProjectList>
-          {projectNum === 0 ? (
+          {myList && myList.length === 0 ? (
             <div className="emptyBox">
               <BiSearch size={100} color="rgb(208, 208, 208)" />
               <Text color="rgb(158, 158, 158)" size="20px">
@@ -43,7 +59,13 @@ const MyProfile = () => {
               </Text>
             </div>
           ) : (
-            ''
+            <PostBox>
+              {myList
+                ? myList.map((a, i) => {
+                    return <SearchPost key={i} {...a} />;
+                  })
+                : ''}
+            </PostBox>
           )}
         </ProjectList>
       </div>
@@ -159,11 +181,14 @@ const LabelBox = styled.div`
 
 const ProjectCounter = styled.div`
   margin: 14px 24px 24px;
+  font-size: 16px;
+  line-height: 27px;
   span {
     color: rgb(255, 87, 87);
   }
   @media (max-width: 1080px) {
     font-size: 14px;
+    line-height: 24px;
     margin: 14px 16px 24px;
   }
 `;
@@ -194,6 +219,12 @@ const Line = styled.div`
   width: 100%;
   height: 1px;
   background-color: rgb(230, 230, 230);
+`;
+
+const PostBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0px -6px;
 `;
 
 export default MyProfile;

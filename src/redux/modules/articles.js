@@ -1,33 +1,46 @@
 // 액션 만들어주는 것들
+
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import axios from 'axios';
+import { apis } from '../../shared/api';
 
 // import { api } from "../../shared/api";
 
 // actions
 const GET_MAIN_ARTICLES = 'GET_MAIN_ARTICLES';
-const GET_POULAR_ARTICLES = 'GET_POULAR_ARTICLES';
-const SET_ONE = 'SET_ONE';
+const GET_POPULAR_ARTICLES = 'GET_POPULAR_ARTICLES';
+const DONATE = 'DONATE';
 const WANT_DONATE = 'WANT_DONATE';
 const CANCEL_DONATE = 'CANCEL_DONATE';
+const SET_ONE = 'SET_ONE';
+const GET_MY = 'GET_MY';
+const SEARCH = 'SEARCH';
+
 
 // action creators
-// const logIn = createAction(LOG_IN, (user)=> ({user}));
 const getMainArticles = createAction(GET_MAIN_ARTICLES, (articles) => ({
   articles,
 }));
-const getPoularArticles = createAction(GET_POULAR_ARTICLES, (articles) => ({
+const getPopularArticles = createAction(GET_POPULAR_ARTICLES, (articles) => ({
   articles,
 }));
+
+const setOne = createAction(SET_ONE, (one_list) => ({
+  one_list,
+}));
 const setOne = createAction(SET_ONE, (one_list) => ({ one_list }));
+
 const wantDonate = createAction(WANT_DONATE, (articleId, userEmail) => ({ articleId, userEmail }))
 const cancelDonate = createAction(CANCEL_DONATE, (articleId) => ({ articleId }))
+const donate = createAction(DONATE, (articleId, is_donate) => ({ articleId }));
+const getMy = createAction(GET_MY, (my_list) => ({ my_list }));
+const search = createAction(SEARCH, (search_list) => ({ search_list }));
 
 // initialState
 // defaultProps 같은 역할
 const initialState = {
-  list: [],
+
   is_donate: {},
   one_list: {
     donatorNum: 1,
@@ -46,30 +59,36 @@ const initialState = {
   },
 };
 
-const initialArticles = {
-  category: '향수·뷰티',
-  nickname: '유저로프트하우스 케미스트',
-  title: '발트해의 태양과 바람, 신비로운 5월의 여왕 <미드솜마르>',
-  image:
-    'https://tumblbug-pci.imgix.net/65ad363adfe9e6e9f8f7479e8bf05c9db58fe5da/7d5e7d09142907e8f7e23da40ce8bc2e3cf13daf/7a6660ad741ebdc45e2a06a662b33ef910a46f0e/9bed4237-201a-4806-898c-19bec6afa9ca.jpeg?ixlib=rb-1.1.0&w=1240&h=930&auto=format%2Ccompress&lossless=true&fit=crop&s=c83e15c1546fdd3d4ff9675e28196574',
-  targetAmount: 500000,
-  totalAmount: 23748000,
-  deadline: '2022-03-07',
-  contents:
-    '화관을 쓰고 첫 수확한 여름 딸기를 먹으며 백야의 축제를 즐길 거예요. 마법과 함께.',
+  Mlist: [],
+  Plist: [],
 };
 
 //주목할 만한 프로젝트
 const getMainArticlesDB = () => {
   return function (dispatch, getState, { history }) {
-    // api.then(function (res) {
-    //   dispatch(getMainArticles(res.data.articles));
-    // });
+    apis
+      .mainAriticles()
+      .then(function (res) {
+        dispatch(getMainArticles(res.data.mainProjects));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 };
 
-const getPoularArticlesDB = () => {
-  return function (dispatch, getState, { history }) {};
+//인기 프로젝트
+const getPopularArticlesDB = () => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .popularAriticles()
+      .then(function (res) {
+        dispatch(getPopularArticles(res.data.popularProjects));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 };
 
 // loginCheck 완료되면 가능
@@ -94,21 +113,22 @@ const donateDB = (articleId) => {
   }
 }
 
+
 // const notDonateDB = (articleId) => {
 //   return function (dispatch, getState, { history }) {
-    // axios
-    //   .patch(`http://3.35.176.155:8080/api/article/${articleId}/donationCancel`,{
-    //     headers: {
-    //     Authorization: `Bearer ${localStorage.getItem("login-token")}`,
-    //     },
-    // })
-    //   .then(function (res) {
-    //     console.log(res);
-    //     // dispatch(cancelDonate(articleId));
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+// axios
+//   .patch(`http://3.35.176.155:8080/api/article/${articleId}/donationCancel`,{
+//     headers: {
+//     Authorization: `Bearer ${localStorage.getItem("login-token")}`,
+//     },
+// })
+//   .then(function (res) {
+//     console.log(res);
+//     // dispatch(cancelDonate(articleId));
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   });
 //   };
 // };
 
@@ -127,19 +147,45 @@ const getOneDB = (articleId) => {
   };
 };
 
+// 마이페이지
+const getMyDB = () => {
+  return function (dispatch, getState, { history }) {
+    apis.myAriticles().then((res) => {
+      console.log(res);
+      if (!res.data.result) {
+        return;
+      }
+      dispatch(getMy(res.data.donatedProjects));
+    });
+  };
+};
+
+// 검색하기
+const searchDB = (keyword) => {
+  return function (dispatch, getState, { history }) {
+    axios
+      .get(`http://3.35.176.155:8080/api/articles?search=${keyword}`)
+      .then(function (res) {
+        console.log(res.data.matchedProjects);
+        dispatch(search(res.data.matchedProjects));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+};
+
 // 리듀서
 export default handleActions(
   {
     [GET_MAIN_ARTICLES]: (state, action) =>
       produce(state, (draft) => {
-        draft.list = action.payload.articles;
-        console.log(draft.list);
+        draft.Mlist = action.payload.articles;
       }),
 
-    [GET_POULAR_ARTICLES]: (state, action) =>
+    [GET_POPULAR_ARTICLES]: (state, action) =>
       produce(state, (draft) => {
-        draft.list = action.payload.articles;
-        console.log(draft.list);
+        draft.Plist = action.payload.articles;
       }),
 
     [SET_ONE]: (state, action) =>
@@ -161,6 +207,17 @@ export default handleActions(
     // produce(state, (draft) => {
     //   draft.is_donate[action.payload.articleId] = false;
     // }),
+
+    [GET_MY]: (state, action) =>
+      produce(state, (draft) => {
+        draft.my_list = action.payload.my_list;
+      }),
+
+    [SEARCH]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload.search_list);
+        draft.search_list = action.payload.search_list;
+      }),
   },
   initialState
 );
@@ -168,9 +225,11 @@ export default handleActions(
 // action creator export
 const actionCreators = {
   getMainArticles,
-  getPoularArticles,
   getMainArticlesDB,
-  getPoularArticlesDB,
+  getPopularArticles,
+  getPopularArticlesDB,
+
+  getMyDB,
 
   setOne,
   getOneDB,
@@ -178,6 +237,8 @@ const actionCreators = {
   donateDB,
   // cancelDonate,
   // notDonateDB,
+
+  searchDB,
 };
 
 export { actionCreators };

@@ -11,12 +11,16 @@ const RankPost = (props) => {
     <React.Fragment>
       <SidePostCard>
         <PostImg src={image} />
-        <Rank>1</Rank>
+        <Rank></Rank>
         <PostContent>
           <Grid>
             <A href="#">{category}</A>
             <Span>ㅣ</Span>
-            <A href="#">{nickname}</A>
+            <A href="#">
+              {nickname.length > 10
+                ? nickname.substring(0, 10) + "..."
+                : nickname}
+            </A>
           </Grid>
           <Title>
             {title.length > 30 ? title.substring(0, 30) + "..." : title}
