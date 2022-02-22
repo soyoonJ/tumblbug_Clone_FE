@@ -2,6 +2,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import axios from 'axios';
+import { apis } from '../../shared/api';
 
 // import { api } from "../../shared/api";
 
@@ -12,6 +13,7 @@ const DONATE = 'DONATE';
 const WANT_DONATE = 'WANT_DONATE';
 const CANCEL_DONATE = 'CANCEL_DONATE';
 const SET_ONE = 'SET_ONE';
+const GET_MY = 'GET_MY';
 
 // action creators
 // const logIn = createAction(LOG_IN, (user)=> ({user}));
@@ -28,6 +30,8 @@ const wantDonate = createAction(WANT_DONATE, (articleId) => ({ articleId }));
 const cancelDonate = createAction(CANCEL_DONATE, (articleId) => ({
   articleId,
 }));
+
+const getMy = createAction(GET_MY, (my_list) => ({ my_list }));
 
 // initialState
 // defaultProps 같은 역할
@@ -80,12 +84,15 @@ const getPoularArticlesDB = () => {
 const donateDB = (articleId) => {
   return function (dispatch, getState, { history }) {
     axios
-
-      .patch(`http://3.35.176.155:8080/api/article/${articleId}/donation`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('login-token')}`,
-        },
-      })
+      .patch(
+        `http://3.35.176.155:8080/api/article/${articleId}/donation`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('login-token')}`,
+          },
+        }
+      )
       .then(function (res) {
         console.log('도네이트', res);
         // dispatch(getOneDB(articleId));
@@ -131,6 +138,18 @@ const getOneDB = (articleId) => {
   };
 };
 
+const getMyDB = () => {
+  return function (dispatch, getState, { history }) {
+    apis.myAriticles().then((res) => {
+      console.log(res);
+      if (!res.data.result) {
+        return;
+      }
+      dispatch(getMy(res.data.donatedProjects));
+    });
+  };
+};
+
 // 리듀서
 export default handleActions(
   {
@@ -165,6 +184,11 @@ export default handleActions(
       produce(state, (draft) => {
         draft.one_list = action.payload.one_list;
       }),
+
+    [GET_MY]: (state, action) =>
+      produce(state, (draft) => {
+        draft.my_list = action.payload.my_list;
+      }),
   },
   initialState
 );
@@ -175,6 +199,8 @@ const actionCreators = {
   getPoularArticles,
   getMainArticlesDB,
   getPoularArticlesDB,
+
+  getMyDB,
 
   setOne,
   getOneDB,

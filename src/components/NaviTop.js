@@ -31,8 +31,9 @@ const NaviTop = (props) => {
             />
             <Button
               onClick={() => {
-                dispatch(userActions.logOut());
-                window.location.replace('/');
+                // dispatch(userActions.logOut());
+                // window.location.replace('/');
+                history.push('/user');
               }}
             >
               <NameCircle>
