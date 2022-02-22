@@ -1,9 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import { Text, Grid } from "../elements";
+import { Grid } from "../elements";
+import { history } from "../redux/configureStore";
 
 const Post = (props) => {
-  const { category, nickname, image, title, targetAmount, totalAmount } = props;
+  const {
+    articleId,
+    category,
+    nickname,
+    image,
+    title,
+    targetAmount,
+    totalAmount,
+  } = props;
 
   //달성률구하기
   const rate = Math.floor((totalAmount / targetAmount) * 100);
@@ -14,7 +23,13 @@ const Post = (props) => {
         <PostImg src={image} />
         <PostContent>
           <Grid padding="0px 0px 2px">
-            <A href="#">{category}</A>
+            <A
+              onClick={() => {
+                history.replace(`/post/${articleId}`);
+              }}
+            >
+              {category}
+            </A>
             <Span>ㅣ</Span>
             <A href="#">{nickname}</A>
           </Grid>

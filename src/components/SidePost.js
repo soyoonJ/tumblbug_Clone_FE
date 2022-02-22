@@ -2,10 +2,19 @@ import React from "react";
 import RankPost from "./RankPost";
 import styled from "styled-components";
 import { Text } from "../elements";
-import { RESP } from "../shared/response";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as articlesActions } from "../redux/modules/articles";
+import { history } from "../redux/configureStore";
 
 const SidePost = (props) => {
-  const populArticles = RESP.ARTICLES_MAIN2.mainProjects;
+  const dispatch = useDispatch();
+
+  const popular_project_list = useSelector((state) => state.articles.Plist);
+  // console.log(popular_project_list);
+
+  React.useEffect(() => {
+    dispatch(articlesActions.getPopularArticlesDB());
+  }, []);
 
   let today = new Date();
   let year = today.getFullYear().toString().slice(-2);
@@ -22,8 +31,10 @@ const SidePost = (props) => {
         {date} 기준
       </Text>
       <PostBox>
-        {populArticles.map((a, i) => {
-          return <RankPost key={i} {...a} />;
+        {popular_project_list.map((a, i) => {
+          if (i < 8) {
+            return <RankPost key={i} {...a} />;
+          }
         })}
       </PostBox>
     </React.Fragment>
