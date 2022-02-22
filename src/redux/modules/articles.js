@@ -26,9 +26,6 @@ const getPopularArticles = createAction(GET_POPULAR_ARTICLES, (articles) => ({
   articles,
 }));
 
-const setOne = createAction(SET_ONE, (one_list) => ({
-  one_list,
-}));
 const setOne = createAction(SET_ONE, (one_list) => ({ one_list }));
 
 const wantDonate = createAction(WANT_DONATE, (articleId, userEmail) => ({ articleId, userEmail }))
@@ -36,6 +33,7 @@ const cancelDonate = createAction(CANCEL_DONATE, (articleId) => ({ articleId }))
 const donate = createAction(DONATE, (articleId, is_donate) => ({ articleId }));
 const getMy = createAction(GET_MY, (my_list) => ({ my_list }));
 const search = createAction(SEARCH, (search_list) => ({ search_list }));
+
 
 // initialState
 // defaultProps 같은 역할
@@ -57,7 +55,6 @@ const initialState = {
         'contents 내용을 써볼거예요. 예뻤으면 좋겠는데 어떻게 될지 궁금하네요 contents 내용을 써볼거예요. 예뻤으면 좋겠는데 어떻게 될지 궁금하네요 contents 내용을 써볼거예요. 예뻤으면 좋겠는데 어떻게 될지 궁금하네요 contents 내용을 써볼거예요. 예뻤으면 좋겠는데 어떻게 될지 궁금하네요',
     },
   },
-};
 
   Mlist: [],
   Plist: [],

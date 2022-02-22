@@ -266,7 +266,7 @@ const PostDetail = (props) => {
                 } */}
                   
 
-                 
+
                   {/* 후원 취소하기 버튼 */}
                 </div>
               </DetailButtons>
