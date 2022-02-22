@@ -10,6 +10,7 @@ import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import PostDetail from '../pages/PostDetail';
 import MyPage from '../pages/MyPage';
+import Search from '../pages/Search';
 
 import './App.css';
 
@@ -24,7 +25,8 @@ function App() {
         <Route path="/login" exact component={Login}></Route>
         <Route path="/signup" exact component={Signup}></Route>
         <Route path="/post/:id" exact component={PostDetail}></Route>
-        <Route path="/user/:userid" exact component={MyPage}></Route>
+        <Route path="/user" exact component={MyPage}></Route>
+        <Route path="/discover" exact component={Search}></Route>
       </ConnectedRouter>
     </React.Fragment>
   );

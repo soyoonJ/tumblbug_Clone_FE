@@ -1,15 +1,21 @@
 // 액션 만들어주는 것들
-import { createAction, handleActions } from "redux-actions";
-import { produce } from "immer";
-import { apis } from "../../shared/api";
-import axios from "axios";
+
+import { createAction, handleActions } from 'redux-actions';
+import { produce } from 'immer';
+import axios from 'axios';
+import { apis } from '../../shared/api';
+
+// import { api } from "../../shared/api";
 
 // actions
-const GET_MAIN_ARTICLES = "GET_ARTICLES";
-const GET_POPULAR_ARTICLES = "GET_POPULAR_ARTICLES";
-const SET_ONE = "SET_ONE";
-// const WANT_DONATE = "WANT_DONATE";
-// const CANCEL_DONATE = "CANCEL_DONATE";
+const GET_MAIN_ARTICLES = 'GET_MAIN_ARTICLES';
+const GET_POPULAR_ARTICLES = 'GET_POPULAR_ARTICLES';
+const DONATE = 'DONATE';
+const WANT_DONATE = 'WANT_DONATE';
+const CANCEL_DONATE = 'CANCEL_DONATE';
+const SET_ONE = 'SET_ONE';
+const GET_MY = 'GET_MY';
+const SEARCH = 'SEARCH';
 
 // action creators
 const getMainArticles = createAction(GET_MAIN_ARTICLES, (articles) => ({
@@ -22,8 +28,17 @@ const getPopularArticles = createAction(GET_POPULAR_ARTICLES, (articles) => ({
 const setOne = createAction(SET_ONE, (one_list) => ({
   one_list,
 }));
-// const wantDonate = createAction(WANT_DONATE, (articleId) => ({ articleId }))
-// const cancelDonate = createAction(CANCEL_DONATE, (articleId) => ({ articleId }))
+const setOne = createAction(SET_ONE, (one_list) => ({ one_list }));
+
+const donate = createAction(DONATE, (articleId, is_donate) => ({ articleId }));
+const wantDonate = createAction(WANT_DONATE, (articleId) => ({ articleId }));
+const cancelDonate = createAction(CANCEL_DONATE, (articleId) => ({
+  articleId,
+}));
+
+const getMy = createAction(GET_MY, (my_list) => ({ my_list }));
+
+const search = createAction(SEARCH, (search_list) => ({ search_list }));
 
 // initialState
 // defaultProps 같은 역할
@@ -113,6 +128,34 @@ const getOneDB = (articleId) => {
   };
 };
 
+// 마이페이지
+const getMyDB = () => {
+  return function (dispatch, getState, { history }) {
+    apis.myAriticles().then((res) => {
+      console.log(res);
+      if (!res.data.result) {
+        return;
+      }
+      dispatch(getMy(res.data.donatedProjects));
+    });
+  };
+};
+
+// 검색하기
+const searchDB = (keyword) => {
+  return function (dispatch, getState, { history }) {
+    axios
+      .get(`http://3.35.176.155:8080/api/articles?search=${keyword}`)
+      .then(function (res) {
+        console.log(res.data.matchedProjects);
+        dispatch(search(res.data.matchedProjects));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+};
+
 // 리듀서
 export default handleActions(
   {
@@ -140,6 +183,17 @@ export default handleActions(
     // produce(state, (draft) => {
     //   draft.is_donate[action.payload.articleId] = false;
     // }),
+
+    [GET_MY]: (state, action) =>
+      produce(state, (draft) => {
+        draft.my_list = action.payload.my_list;
+      }),
+
+    [SEARCH]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload.search_list);
+        draft.search_list = action.payload.search_list;
+      }),
   },
   initialState
 );
@@ -151,12 +205,16 @@ const actionCreators = {
   getPopularArticles,
   getPopularArticlesDB,
 
+  getMyDB,
+
   setOne,
   getOneDB,
   // wantDonate,
   // donateDB,
   // cancelDonate,
   // notDonateDB,
+
+  searchDB,
 };
 
 export { actionCreators };
