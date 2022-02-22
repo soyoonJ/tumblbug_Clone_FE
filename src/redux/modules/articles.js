@@ -28,10 +28,7 @@ const getPopularArticles = createAction(GET_POPULAR_ARTICLES, (articles) => ({
 
 const setOne = createAction(SET_ONE, (one_list) => ({ one_list }));
 
-const wantDonate = createAction(WANT_DONATE, (articleId, userEmail) => ({
-  articleId,
-  userEmail,
-}));
+const wantDonate = createAction(WANT_DONATE, (articleId, userEmail) => ({articleId,userEmail}));
 const cancelDonate = createAction(CANCEL_DONATE, (articleId) => ({
   articleId,
 }));
@@ -43,7 +40,7 @@ const allCate = createAction(ALL_CATE, (all_list) => ({ all_list }));
 // initialState
 // defaultProps 같은 역할
 const initialState = {
-  is_donate: {},
+  is_donate: [],
   one_list: {
     donatorNum: 1,
     detailedProjects: {
@@ -109,7 +106,7 @@ const donateDB = (articleId) => {
         }
       )
       .then(function (res) {
-        console.log("도네이트", res);
+        // console.log("도네이트", articleId, userEmail);
         dispatch(wantDonate(articleId, userEmail));
       })
       .catch(function (error) {
@@ -229,12 +226,10 @@ export default handleActions(
 
     [WANT_DONATE]: (state, action) =>
       produce(state, (draft) => {
-        // draft.is_donate[action.payload.articleId].unshift(action.payload.userEmail)
         // is_donate = {1:soyoon}
         // is_donate = {1:[soyoon, ,,, ,,, ]}
-
-        // draft.is_donate[action.payload.articleId] = action.payload.userEmail;
-        // draft.is_donate[action.payload.articleId].push(action.payload.userEmail);
+        console.log(action.payload.articleId, action.payload.userEmail)
+        draft.is_donate[action.payload.articleId].push(action.payload.userEmail);
         console.log("도네이트 정보", draft.is_donate[action.payload.articleId]);
       }),
     // [CANCEL_DONATE]: (state, action) =>
