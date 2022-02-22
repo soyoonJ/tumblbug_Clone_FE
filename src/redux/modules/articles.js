@@ -1,21 +1,21 @@
 // 액션 만들어주는 것들
 
-import { createAction, handleActions } from 'redux-actions';
-import { produce } from 'immer';
-import axios from 'axios';
-import { apis } from '../../shared/api';
+import { createAction, handleActions } from "redux-actions";
+import { produce } from "immer";
+import axios from "axios";
+import { apis } from "../../shared/api";
 
 // import { api } from "../../shared/api";
 
 // actions
-const GET_MAIN_ARTICLES = 'GET_MAIN_ARTICLES';
-const GET_POPULAR_ARTICLES = 'GET_POPULAR_ARTICLES';
-const DONATE = 'DONATE';
-const WANT_DONATE = 'WANT_DONATE';
-const CANCEL_DONATE = 'CANCEL_DONATE';
-const SET_ONE = 'SET_ONE';
-const GET_MY = 'GET_MY';
-const SEARCH = 'SEARCH';
+const GET_MAIN_ARTICLES = "GET_MAIN_ARTICLES";
+const GET_POPULAR_ARTICLES = "GET_POPULAR_ARTICLES";
+const DONATE = "DONATE";
+const WANT_DONATE = "WANT_DONATE";
+const CANCEL_DONATE = "CANCEL_DONATE";
+const SET_ONE = "SET_ONE";
+const GET_MY = "GET_MY";
+const SEARCH = "SEARCH";
 
 // action creators
 const getMainArticles = createAction(GET_MAIN_ARTICLES, (articles) => ({
@@ -28,7 +28,6 @@ const getPopularArticles = createAction(GET_POPULAR_ARTICLES, (articles) => ({
 const setOne = createAction(SET_ONE, (one_list) => ({
   one_list,
 }));
-const setOne = createAction(SET_ONE, (one_list) => ({ one_list }));
 
 const donate = createAction(DONATE, (articleId, is_donate) => ({ articleId }));
 const wantDonate = createAction(WANT_DONATE, (articleId) => ({ articleId }));

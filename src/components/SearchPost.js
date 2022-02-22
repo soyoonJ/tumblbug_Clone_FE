@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Text, Grid } from '../elements';
+import React from "react";
+import styled from "styled-components";
+import { Grid } from "../elements";
 
 const Post = (props) => {
   const {
