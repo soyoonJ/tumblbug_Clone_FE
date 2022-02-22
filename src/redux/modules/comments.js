@@ -9,7 +9,7 @@ const ADD_COMMENT = "ADD_COMMENT";
 
 // action creators
 const setComment = createAction(SET_COMMENT, (articleId, comments) => ({ articleId, comments }));
-const addComment = createAction(ADD_COMMENT, (one_comment) => ({ one_comment }));
+const addComment = createAction(ADD_COMMENT, (articleId, comment) => ({ articleId, comment }));
 
 // initialState
 const initialState = {
@@ -48,6 +48,31 @@ const getCommentDB = (articleId) => {
   };
 };
 
+const addCommentDB = (articleId, comment) => {
+  return function (dispatch, getState, { history }) {
+    console.log('addComment', articleId, comment);
+    axios
+    .post(`http://3.35.176.155:8080/api/comments/${articleId}`,
+      {
+        comment,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('login-token')}`,
+        },
+      },
+    )
+    .then(function (res) {
+      console.log(res);
+      dispatch(addComment(articleId, comment))
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  };
+};
+
 
 // 리듀서
 export default handleActions(
@@ -59,8 +84,8 @@ export default handleActions(
     }),
 
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
-      draft.comment_list.push(action.payload.one_comment);
-      // console.log('set코멘트', draft.comments)''
+      draft.comment_list[action.payload.articleId].push(action.payload.comment);
+      // console.log('set코멘트', draft.comments)
     }),
 
   },
@@ -72,6 +97,7 @@ const actionCreators = {
   setComment,
   getCommentDB,
   addComment,
+  addCommentDB,
 };
 
 export { actionCreators };

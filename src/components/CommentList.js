@@ -10,24 +10,26 @@ const CommentList = ({detail, articleId}) => {
 
     // 댓글 작성창 확인하기 위해서 리덕스에 있는 user nickname 뽑아오기
     // const username = useSelector((state)=>state.user.nickname)
-    const comment_list = useSelector((state)=>state.comments.comment_list[articleId]);
+    // const comment_list = useSelector((state)=>state.comments.comment_list[articleId]);
+    const comment_list = useSelector((state)=>state.comments.comment_list);
     console.log('뷰 코멘트리스트', comment_list)
 
     const dispatch = useDispatch();
 
     React.useEffect(()=> {
-
-      // 아티클 정보 불러오기
       dispatch(commentActions.getCommentDB(articleId));
-      // 코멘트 정보 불러오기
     },[])
 
     const handlePress = ((e)=> {
       if(e.key==='Enter') {
           console.log('댓글내용', e.target.value)
-          // dispatch(commentActions.addComment(e.target.value))
+          dispatch(commentActions.addCommentDB(articleId, e.target.value))
       }
   })
+
+  if(!comment_list[articleId]) {
+    return null;
+  }
 
     return (
       <React.Fragment>
@@ -44,6 +46,7 @@ const CommentList = ({detail, articleId}) => {
                 <input
                   placeholder="창작자에게 응원의 한마디!"
                   style={{
+                    width: "100%",
                     outline: "none",
                     border: "none",
                     fontSize: "14px",
@@ -135,10 +138,13 @@ const CommentList = ({detail, articleId}) => {
               </div>
             </Contents>
             {/* 코멘트 박스 -> map 돌려야 함*/}
-            {comment_list?.map((e,i) => {
-              <List key={e.id} {...e}/>
-            })}
 
+            {comment_list[articleId]?.map((e,i) => {
+              return (
+                <List key={i} {...e}></List>
+              )
+            })}
+            {/* <List></List> */}
 
           </div>
         </Container>
@@ -350,7 +356,7 @@ const List = (props) => {
         </div>
         {/* 코멘트 내용 */}
         <Comment>
-          <div>{props.content}</div>
+          <div>{props.comment}</div>
         </Comment>
       </Item>
     </React.Fragment>
