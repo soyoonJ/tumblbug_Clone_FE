@@ -128,6 +128,7 @@ const CommentList = ({ detail, articleId }) => {
                           fontWeight: "700",
                         }}
                       >
+                        
                         {detail.nickname}
                       </span>
                       <span>창작자</span>
