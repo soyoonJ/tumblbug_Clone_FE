@@ -46,6 +46,7 @@ const CommentList = ({detail, articleId}) => {
                 <input
                   placeholder="창작자에게 응원의 한마디!"
                   style={{
+                    width: "100%",
                     outline: "none",
                     border: "none",
                     fontSize: "14px",
