@@ -7,6 +7,8 @@ const MyProfile = () => {
   const [projectNum, setProjectNum] = React.useState(0);
   const [name, setNeme] = React.useState('박수민');
 
+  React.useEffect(() => {}, []);
+
   return (
     <Box>
       <div className="boxTop">

@@ -3,14 +3,29 @@ import {Grid, Button, Image} from '../elements'
 import styled from 'styled-components';
 
 import { history } from "../redux/configureStore";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as commentActions } from '../redux/modules/comments'
 
-const CommentList = ({detail}) => {
+const CommentList = ({detail, articleId}) => {
+
+    // 댓글 작성창 확인하기 위해서 리덕스에 있는 user nickname 뽑아오기
+    // const username = useSelector((state)=>state.user.nickname)
+    // const comment_list = useSelector((state)=>state.comments.comments);
+
+
+    const dispatch = useDispatch();
+
+    React.useEffect(()=> {
+
+      // 아티클 정보 불러오기
+      dispatch(commentActions.getCommentDB(articleId));
+      // 코멘트 정보 불러오기
+    },[])
 
     const handlePress = ((e)=> {
       if(e.key==='Enter') {
-          console.log('댓글내용',e.target.value)
-          // dispatch(postActions.searchFB(e.target.value))
+          console.log('댓글내용', e.target.value)
+          // dispatch(commentActions.addComment(e.target.value))
       }
   })
 
@@ -24,6 +39,7 @@ const CommentList = ({detail}) => {
               <CommentWrite onKeyPress={handlePress}>
                 <Profileimg>
                   <span>정</span>
+                  {/* <span>{username[0]}</span> */}
                 </Profileimg>
                 <input
                   placeholder="창작자에게 응원의 한마디!"
@@ -119,9 +135,11 @@ const CommentList = ({detail}) => {
               </div>
             </Contents>
             {/* 코멘트 박스 -> map 돌려야 함*/}
-            <List />
-            <List />
-            <List />
+            {/* {comment_list.map((e,i)=> {
+              <List key={e.id} />
+            })} */}
+
+
           </div>
         </Container>
       </React.Fragment>
@@ -162,7 +180,6 @@ cursor:pointer;
 }
 
 `
-
 const Profileimg = styled.div`
   width: 40px;
   height: 40px;
@@ -182,7 +199,6 @@ const Profileimg = styled.div`
   }
 
 `
-
 const CommentDonate = styled.div`
   @media (min-width: 1080px) {
     padding: 1rem 1.5rem;
@@ -214,7 +230,6 @@ const CommentLogin = styled.div`
     border: 0.8px solid rgb(208, 208, 208)
   }
 `
-
 const Contents = styled.div`
 @media (min-width: 1080px) {
   padding: 24px 10px;
@@ -291,6 +306,9 @@ export default CommentList;
 
 // 댓글 한 박스
 const List = (props) => {
+
+  // const comment_list = useSelector((state)=>state.comments.comments)
+  // console.log('뷰 코멘트리스트'. comment_list)
 
   const {nickname, content} = props;
   return (

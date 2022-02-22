@@ -5,30 +5,62 @@ import axios from "axios";
 
 // actions
 const SET_COMMNET = "SET_COMMNET";
-
+const ADD_COMMNET = "ADD_COMMNET";
 
 // action creators
-// const logIn = createAction(LOG_IN, (user)=> ({user}));
-const setComment = createAction(SET_COMMNET, (comment_list) => ({ comment_list }));
+const setComment = createAction(SET_COMMNET, (comment) => ({ comment }));
+const addComment = createAction(ADD_COMMNET, (one_comment) => ({ one_comment }))
 
 // initialState
-// defaultProps 같은 역할
 const initialState = {
-  // user: null,
-  // is_login: false,
+  comments: [
+    { 
+    commentId :  "123456",
+    articleId : "1",
+    nickname : "댓글작성자1",
+    comment: "1번작성자의 댓글내용입니다. 어떤 내용으로 채워질지~",
+    email: "aaa@aaa.com",
+  },
+  { 
+    commentId :  "987654321",
+    articleId : "1",
+    nickname : "댓글작성자2",
+    comment: "2번작성자의 댓글내용입니다. 어떤 내용으로 채워질지~",
+    email: "aaa@aaa.com",
+  }
+]
 };
 
 
 // 미들웨어
-const getCommentDB = () => {
-  return function (dispatch, getState, { history }) {};
+const getCommentDB = (articleId) => {
+  return function (dispatch, getState, { history }) {
+    axios
+      .get(`http://3.35.176.155:8080/api/comments/${articleId}`)
+      .then(function (res) {
+        console.log(res);
+        // 코멘트리스트 불러오기
+        // dispatch(setComment(res.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 };
 
 
 // 리듀서
 export default handleActions(
   {
-    [SET_COMMNET]: (state, action) => produce(state, (draft) => {}),
+    [SET_COMMNET]: (state, action) => produce(state, (draft) => {
+      draft.comments = action.payload.comments;
+      // console.log('set코멘트', draft.comments)''
+    }),
+
+    [ADD_COMMNET]: (state, action) => produce(state, (draft) => {
+      draft.comments.push(action.payload.one_comment);
+      // console.log('set코멘트', draft.comments)''
+    }),
 
   },
   initialState
@@ -38,6 +70,7 @@ export default handleActions(
 const actionCreators = {
   setComment,
   getCommentDB,
+  addComment,
 };
 
 export { actionCreators };
