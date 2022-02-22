@@ -48,10 +48,10 @@ const MyProfile = () => {
       <Line></Line>
       <div className="boxBottom">
         <ProjectCounter>
-          <span>{myList.length}</span>개의 프로젝트가 있습니다
+          <span>{myList ? myList.length : 0}</span>개의 프로젝트가 있습니다
         </ProjectCounter>
         <ProjectList>
-          {myList.length === 0 ? (
+          {myList && myList.length === 0 ? (
             <div className="emptyBox">
               <BiSearch size={100} color="rgb(208, 208, 208)" />
               <Text color="rgb(158, 158, 158)" size="20px">
@@ -60,9 +60,11 @@ const MyProfile = () => {
             </div>
           ) : (
             <PostBox>
-              {myList.map((a, i) => {
-                return <SearchPost key={i} {...a} />;
-              })}
+              {myList
+                ? myList.map((a, i) => {
+                    return <SearchPost key={i} {...a} />;
+                  })
+                : ''}
             </PostBox>
           )}
         </ProjectList>
