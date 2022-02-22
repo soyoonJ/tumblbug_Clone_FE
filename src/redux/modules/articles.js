@@ -9,8 +9,8 @@ import axios from 'axios';
 const GET_MAIN_ARTICLES = 'GET_MAIN_ARTICLES';
 const GET_POULAR_ARTICLES = 'GET_POULAR_ARTICLES';
 const SET_ONE = 'SET_ONE';
-// const WANT_DONATE = 'WANT_DONATE';
-// const CANCEL_DONATE = 'CANCEL_DONATE';
+const WANT_DONATE = 'WANT_DONATE';
+const CANCEL_DONATE = 'CANCEL_DONATE';
 
 // action creators
 // const logIn = createAction(LOG_IN, (user)=> ({user}));
@@ -21,14 +21,14 @@ const getPoularArticles = createAction(GET_POULAR_ARTICLES, (articles) => ({
   articles,
 }));
 const setOne = createAction(SET_ONE, (one_list) => ({ one_list }));
-// const wantDonate = createAction(WANT_DONATE, (articleId) => ({ articleId }))
-// const cancelDonate = createAction(CANCEL_DONATE, (articleId) => ({ articleId }))
+const wantDonate = createAction(WANT_DONATE, (articleId, userEmail) => ({ articleId, userEmail }))
+const cancelDonate = createAction(CANCEL_DONATE, (articleId) => ({ articleId }))
 
 // initialState
 // defaultProps 같은 역할
 const initialState = {
   list: [],
-  is_donate: [],
+  is_donate: {},
   one_list: {
     donatorNum: 1,
     detailedProjects: {
@@ -73,24 +73,26 @@ const getPoularArticlesDB = () => {
 };
 
 // loginCheck 완료되면 가능
-// const donateDB = (articleId) => {
-//   return function (dispatch, getState, { history }) {
-//     axios
-//       .patch(`http://3.35.176.155:8080/api/article/${articleId}/donation`,
-    //   {
-    //     headers: {
-    //     Authorization: `Bearer ${localStorage.getItem('login-token')}`,
-    //     },
-    // })
-//       .then(function (res) {
-//         console.log('도네이트',res);
-//         // dispatch(wantDonate(articleId));
-//       })
-//       .catch(function (error) {
-//         console.log(error);
-//       });
-//   };
-// };
+const donateDB = (articleId) => {
+  return function (dispatch, getState, { history }) {
+  const userEmail = getState().user.user.email
+  // console.log('후원유저', userEmail)
+  // user에서 로그인 여부 받아와서 나눠주기
+  axios
+    .patch(`http://3.35.176.155:8080/api/article/${articleId}/donation`,{}, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('login-token')}`,
+      },
+    })
+    .then(function (res) {
+      console.log("도네이트", res);
+      dispatch(wantDonate(articleId, userEmail));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+}
 
 // const notDonateDB = (articleId) => {
 //   return function (dispatch, getState, { history }) {
@@ -145,11 +147,16 @@ export default handleActions(
         draft.one_list = action.payload.one_list;
       }),
 
-    // [WANT_DONATE]: (state, action) =>
-    // produce(state, (draft) => {
-    //   draft.is_donate[action.payload.articleId] = true;
-    // }),
+    [WANT_DONATE]: (state, action) =>
+    produce(state, (draft) => {
+      // draft.is_donate[action.payload.articleId].unshift(action.payload.userEmail)
+      // is_donate = {1:soyoon}
+      // is_donate = {1:[soyoon, ,,, ,,, ]}
 
+      // draft.is_donate[action.payload.articleId] = action.payload.userEmail;
+      // draft.is_donate[action.payload.articleId].push(action.payload.userEmail);
+      console.log('도네이트 정보',draft.is_donate[action.payload.articleId])
+    }),
     // [CANCEL_DONATE]: (state, action) =>
     // produce(state, (draft) => {
     //   draft.is_donate[action.payload.articleId] = false;
@@ -167,8 +174,8 @@ const actionCreators = {
 
   setOne,
   getOneDB,
-  // wantDonate,
-  // donateDB,
+  wantDonate,
+  donateDB,
   // cancelDonate,
   // notDonateDB,
 };
