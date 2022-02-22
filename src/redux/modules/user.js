@@ -21,16 +21,20 @@ const initialState = {
 // 로그인
 const loginDB = (email, password) => {
   return function (dispatch, getState, { history }) {
-    apis.login(email, password).then((res) => {
-      if (!res.data.result) {
-        alert('회원정보가 올바르지 않습니다.');
-        history.replace('/');
-        return;
-      }
-      localStorage.setItem('login-token', res.data.token);
-      dispatch(setUser({ email }));
-      window.location.replace('/');
-    });
+    apis
+      .login(email, password)
+      .then((res) => {
+        if (!res.data.result) {
+          alert('회원정보가 올바르지 않습니다.');
+          return;
+        }
+        localStorage.setItem('login-token', res.data.token);
+        dispatch(setUser({ email }));
+        window.location.replace('/');
+      })
+      .catch(function (error) {
+        alert('아이디 또는 비밀번호를 확인해주세요.');
+      });
   };
 };
 
