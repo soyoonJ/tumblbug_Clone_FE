@@ -4,12 +4,13 @@ import styled from "styled-components";
 import { Text } from "../elements";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as articlesActions } from "../redux/modules/articles";
+import { history } from "../redux/configureStore";
 
 const SidePost = (props) => {
   const dispatch = useDispatch();
 
-  const popular_project_list = useSelector((store) => store.articles.list);
-  console.log(popular_project_list);
+  const popular_project_list = useSelector((state) => state.articles.Plist);
+  // console.log(popular_project_list);
 
   React.useEffect(() => {
     dispatch(articlesActions.getPopularArticlesDB());
@@ -31,7 +32,9 @@ const SidePost = (props) => {
       </Text>
       <PostBox>
         {popular_project_list.map((a, i) => {
-          return <RankPost key={i} {...a} />;
+          if (i < 8) {
+            return <RankPost key={i} {...a} />;
+          }
         })}
       </PostBox>
     </React.Fragment>

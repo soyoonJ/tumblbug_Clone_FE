@@ -8,8 +8,8 @@ import { actionCreators as articlesActions } from "../redux/modules/articles";
 const MainPost = (props) => {
   const dispatch = useDispatch();
 
-  const main_project_list = useSelector((state) => state.articles.list);
-  console.log(main_project_list);
+  const main_project_list = useSelector((state) => state.articles.Mlist);
+  // console.log(main_project_list);
 
   React.useEffect(() => {
     dispatch(articlesActions.getMainArticlesDB());

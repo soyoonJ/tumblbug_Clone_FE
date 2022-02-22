@@ -8,8 +8,8 @@ import axios from "axios";
 const GET_MAIN_ARTICLES = "GET_ARTICLES";
 const GET_POPULAR_ARTICLES = "GET_POPULAR_ARTICLES";
 const SET_ONE = "SET_ONE";
-const WANT_DONATE = "WANT_DONATE";
-const CANCEL_DONATE = "CANCEL_DONATE";
+// const WANT_DONATE = "WANT_DONATE";
+// const CANCEL_DONATE = "CANCEL_DONATE";
 
 // action creators
 const getMainArticles = createAction(GET_MAIN_ARTICLES, (articles) => ({
@@ -19,14 +19,17 @@ const getPopularArticles = createAction(GET_POPULAR_ARTICLES, (articles) => ({
   articles,
 }));
 
-const setOne = createAction(SET_ONE, (one_list) => ({ one_list }));
+const setOne = createAction(SET_ONE, (one_list) => ({
+  one_list,
+}));
 // const wantDonate = createAction(WANT_DONATE, (articleId) => ({ articleId }))
 // const cancelDonate = createAction(CANCEL_DONATE, (articleId) => ({ articleId }))
 
 // initialState
 // defaultProps 같은 역할
 const initialState = {
-  list: [],
+  Mlist: [],
+  Plist: [],
 };
 
 //주목할 만한 프로젝트
@@ -36,7 +39,6 @@ const getMainArticlesDB = () => {
       .mainAriticles()
       .then(function (res) {
         dispatch(getMainArticles(res.data.mainProjects));
-        console.log(res.data.mainProjects);
       })
       .catch((error) => {
         console.error(error);
@@ -51,7 +53,6 @@ const getPopularArticlesDB = () => {
       .popularAriticles()
       .then(function (res) {
         dispatch(getPopularArticles(res.data.popularProjects));
-        console.log(res.data.popularProjects);
       })
       .catch((error) => {
         console.error(error);
@@ -64,11 +65,11 @@ const getPopularArticlesDB = () => {
 //   return function (dispatch, getState, { history }) {
 //     axios
 //       .patch(`http://3.35.176.155:8080/api/article/${articleId}/donation`,
-    //   {
-    //     headers: {
-    //     Authorization: `Bearer ${localStorage.getItem('login-token')}`,
-    //     },
-    // })
+//   {
+//     headers: {
+//     Authorization: `Bearer ${localStorage.getItem('login-token')}`,
+//     },
+// })
 //       .then(function (res) {
 //         console.log('도네이트',res);
 //         // dispatch(wantDonate(articleId));
@@ -81,19 +82,19 @@ const getPopularArticlesDB = () => {
 
 // const notDonateDB = (articleId) => {
 //   return function (dispatch, getState, { history }) {
-    // axios
-    //   .patch(`http://3.35.176.155:8080/api/article/${articleId}/donationCancel`,{
-    //     headers: {
-    //     Authorization: `Bearer ${localStorage.getItem("login-token")}`,
-    //     },
-    // })
-    //   .then(function (res) {
-    //     console.log(res);
-    //     // dispatch(cancelDonate(articleId));
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+// axios
+//   .patch(`http://3.35.176.155:8080/api/article/${articleId}/donationCancel`,{
+//     headers: {
+//     Authorization: `Bearer ${localStorage.getItem("login-token")}`,
+//     },
+// })
+//   .then(function (res) {
+//     console.log(res);
+//     // dispatch(cancelDonate(articleId));
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   });
 //   };
 // };
 
@@ -117,12 +118,12 @@ export default handleActions(
   {
     [GET_MAIN_ARTICLES]: (state, action) =>
       produce(state, (draft) => {
-        draft.list = action.payload.articles;
+        draft.Mlist = action.payload.articles;
       }),
 
     [GET_POPULAR_ARTICLES]: (state, action) =>
       produce(state, (draft) => {
-        draft.list = action.payload.articles;
+        draft.Plist = action.payload.articles;
       }),
 
     [SET_ONE]: (state, action) =>

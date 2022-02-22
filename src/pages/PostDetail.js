@@ -1,23 +1,25 @@
 import React from "react";
 import styled from "styled-components";
-import axios from 'axios';
+import axios from "axios";
 
 import { Grid, Button, Image } from "../elements";
 import { CommentList, Creator, Header } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as articleActions } from "../redux/modules/articles";
 
-
 const PostDetail = (props) => {
   const dispatch = useDispatch();
   // console.log(isDonate)
 
   // getPostFB가 완성되고 나서 살려야 함
-  const article = useSelector((state)=> state.articles.one_list)
-  const donators = useSelector((state) => state.articles.one_list.detailedProjects.donator)
+  const article = useSelector((state) => state.articles.one_list);
+  const donators = useSelector(
+    (state) => state.articles.one_list.detailedProjects.donator
+  );
   // const isDonate = useSelector((state) => state.articles.is_donate)
-  const userEmail = useSelector((state)=>state.user.user.email)
-  const donateCheck = (donators?.filter(e=>e === userEmail).length !== 0)?true:false;
+  const userEmail = useSelector((state) => state.user.user.email);
+  const donateCheck =
+    donators?.filter((e) => e === userEmail).length !== 0 ? true : false;
 
   // articleId 파라미터 가져오기
   const articleId = props.match.params.id;
@@ -32,16 +34,22 @@ const PostDetail = (props) => {
   // let todayDate = `${year}-${month}-${day}`
   // // console.log(`${year}-${month}-${day}`);
   // let targetDate = new Date(detail.deadline)
-  
+
   // let deadline = (targetDate.getTime() - todayDate.getTime()) / (1000*60*60*24);
   // console.log(deadline)
 
-  let total = detail.totalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-  let target = detail.targetAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-  let achieve = detail.totalAmount/detail.targetAmount*100
-  let donator = article.donatorNum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  let total = detail.totalAmount
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  let target = detail.targetAmount
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  let achieve = (detail.totalAmount / detail.targetAmount) * 100;
+  let donator = article.donatorNum
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-  React.useEffect(()=> {
+  React.useEffect(() => {
     // 아티클 정보 불러오기
     dispatch(articleActions.getOneDB(articleId));
     // 코멘트 정보 불러오기
@@ -53,9 +61,9 @@ const PostDetail = (props) => {
   const wantDonate = () => {
     // user에서 로그인 여부 받아와서 나눠주기
     // dispatch(articleActions.donateDB(articleId))
-    console.log('아이디', articleId)
-    console.log('찍혀라 좀')
-    
+    console.log("아이디", articleId);
+    console.log("찍혀라 좀");
+
     axios
       .patch(`http://3.35.176.155:8080/api/article/${articleId}/donation`, {
         headers: {
@@ -69,7 +77,7 @@ const PostDetail = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
 
   const cancelDonate = () => {
     // dispatch(articleActions.notDonateDB(articleId))
@@ -86,7 +94,7 @@ const PostDetail = (props) => {
     //   .catch(function (error) {
     //     console.log(error);
     //   });
-  }
+  };
 
   return (
     <React.Fragment>
@@ -184,11 +192,11 @@ const PostDetail = (props) => {
                 </Grid>
                 {/* 후원자 */}
                 <Grid marginBottom="1.75rem">
-                <InfoTitle>후원자</InfoTitle>
-                <InfoNum>
-                  <span>{donator}</span>
-                  <span>명</span>
-                </InfoNum>
+                  <InfoTitle>후원자</InfoTitle>
+                  <InfoNum>
+                    <span>{donator}</span>
+                    <span>명</span>
+                  </InfoNum>
                 </Grid>
               </div>
               {/* 펀딩 진행중 안내 박스 */}
@@ -259,18 +267,35 @@ const PostDetail = (props) => {
                   </div>
                   {/* 후원상태가 true라면 밑에 버튼, false면 회색버튼 추가 */}
                   {/* 후원하기 버튼 */}
-                  {!donateCheck ?
-                  <Button
-                  _onClick={wantDonate}
-                  donateHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold>
-                    이 프로젝트 후원하기</Button>
-                    :
-                  <Button
-                  _onClick={cancelDonate}
-                  CancelHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold
-                    color="rgba(0, 0, 0, 0.6)" bg="rgb(231, 231, 231)"
-                  >후원 취소하기</Button>
-                }
+                  {!donateCheck ? (
+                    <Button
+                      _onClick={wantDonate}
+                      donateHover
+                      height="52px"
+                      padding="15px"
+                      bold
+                      fontSize="15.4px"
+                      borderRadius="0.285714rem"
+                      bold
+                    >
+                      이 프로젝트 후원하기
+                    </Button>
+                  ) : (
+                    <Button
+                      _onClick={cancelDonate}
+                      CancelHover
+                      height="52px"
+                      padding="15px"
+                      bold
+                      fontSize="15.4px"
+                      borderRadius="0.285714rem"
+                      bold
+                      color="rgba(0, 0, 0, 0.6)"
+                      bg="rgb(231, 231, 231)"
+                    >
+                      후원 취소하기
+                    </Button>
+                  )}
                   {/* 후원 취소하기 버튼 */}
                 </div>
               </DetailButtons>
