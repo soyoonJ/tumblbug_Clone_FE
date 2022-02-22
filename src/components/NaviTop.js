@@ -1,16 +1,16 @@
-import React from "react";
-import styled from "styled-components";
-import { Grid, Text } from "../elements";
+import React from 'react';
+import styled from 'styled-components';
+import { Grid, Text } from '../elements';
 
-import { history } from "../redux/configureStore";
-import { actionCreators as userActions } from "../redux/modules/user"; // as : 별명 주는거
-import { useDispatch, useSelector } from "react-redux";
+import { history } from '../redux/configureStore';
+import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
+import { useDispatch, useSelector } from 'react-redux';
 
 const NaviTop = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
 
-  const is_token = localStorage.getItem("login-token") ? true : false;
+  const is_token = localStorage.getItem('login-token') ? true : false;
 
   React.useEffect(() => {
     if (is_token) {
@@ -26,20 +26,41 @@ const NaviTop = (props) => {
             <LogoImg
               src="/img/logo.png"
               onClick={() => {
-                history.push("/");
+                history.push('/');
               }}
             />
             <Button
               onClick={() => {
-                // dispatch(userActions.logOut());
-                // window.location.replace('/');
-                history.push("/user");
+                const wrap = document.getElementById('wrap');
+
+                if (wrap.style.display === 'block') wrap.style.display = 'none';
+                else wrap.style.display = 'block';
               }}
             >
+              <Wrap id="wrap">
+                <High />
+                <Wrapper>
+                  <div
+                    onClick={() => {
+                      history.push('/user');
+                    }}
+                  >
+                    프로필
+                  </div>
+                  <div
+                    onClick={() => {
+                      dispatch(userActions.logOut());
+                      history.replace('/');
+                    }}
+                  >
+                    로그아웃
+                  </div>
+                </Wrapper>
+              </Wrap>
               <NameCircle>
-                {user.user.nickname ? user.user.nickname[0] : ""}
+                {user.user.nickname ? user.user.nickname[0] : ''}
               </NameCircle>
-              {user ? user.user.nickname : ""}
+              {user ? user.user.nickname : ''}
             </Button>
           </Grid>
         </NaviTopLayout>
@@ -53,12 +74,12 @@ const NaviTop = (props) => {
             <LogoImg
               src="/img/logo.png"
               onClick={() => {
-                history.push("/");
+                history.push('/');
               }}
             />
             <Button
               onClick={() => {
-                history.push("/login");
+                history.push('/login');
               }}
             >
               <Image>
@@ -146,6 +167,56 @@ const NameCircle = styled.div`
   line-height: 24px;
   color: #fff;
   margin-right: 10px;
+`;
+const Wrap = styled.div`
+  display: none;
+`;
+
+const High = styled.div`
+  position: absolute;
+  top: 47px;
+  right: 35px;
+  width: 8px;
+  height: 8px;
+  content: ' ';
+  transform: rotate(45deg);
+  border-top: 1px solid rgb(228, 228, 228);
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid rgb(228, 228, 228);
+  z-index: 1002;
+  background-color: #fff;
+`;
+
+const Wrapper = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 50px;
+  right: 0px;
+  width: 240px;
+  transition: all 0.3s ease-in-out 0s;
+  border: 1px solid rgb(228, 228, 228);
+  box-sizing: border-box;
+  border-radius: 4px;
+  z-index: 1200;
+
+  div {
+    padding: 4px 16px;
+    display: flex;
+    width: 100%;
+    height: 46px;
+    min-height: 46px;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    font-size: 14px;
+    line-height: 22px;
+    color: rgb(13, 13, 13);
+    cursor: pointer;
+    background-color: #fff;
+    font-weight: 400;
+  }
 `;
 
 export default NaviTop;

@@ -321,6 +321,7 @@ const Signup = () => {
             onChangePassword(e);
           }}
           value={password}
+          type="password"
           _id="passwordInput"
         />
         <Waring id="pleasePassword">비밀번호를 입력해주세요.</Waring>
@@ -336,6 +337,7 @@ const Signup = () => {
             onChangePasswordCheck(e);
           }}
           value={passwordCheck}
+          type="password"
           _id="passwordCheckInput"
         />
         <Waring id="pleasePasswordCheck">
