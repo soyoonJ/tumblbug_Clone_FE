@@ -1,13 +1,15 @@
-import React from "react";
-import styled from "styled-components";
-import { Grid } from "../elements";
-import Category from "./Category";
+import React from 'react';
+import styled from 'styled-components';
+import { Grid } from '../elements';
+import Category from './Category';
+
+import { history } from '../redux/configureStore';
 
 const NaviBottom = () => {
-  const [searchWord, setSearchWord] = React.useState("");
+  const [searchWord, setSearchWord] = React.useState('');
 
   function onKeyPress(e) {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       console.log(searchWord);
       window.location.replace(`discover?query=${searchWord}`);
     }
@@ -85,6 +87,11 @@ const Search = styled.div`
   position: absolute;
   top: 0px;
   right: 0px;
+  width: 260px;
+
+  @media (max-width: 640px) {
+    display: none;
+  }
 
   input {
     background-color: rgb(243 243 243);

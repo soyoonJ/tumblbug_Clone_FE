@@ -1,5 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+
+import { history } from '../redux/configureStore';
 
 const Category = (props) => {
   return (
@@ -24,7 +26,7 @@ const Category = (props) => {
         <CategoryList>
           <Full
             onClick={() => {
-              window.location.replace(`/discover?all=all`);
+              history.push(`/discover?all=all`);
             }}
           >
             <CateDiv>
@@ -62,7 +64,7 @@ const Category = (props) => {
           </Full>
           <Li
             onClick={() => {
-              window.location.replace(`/discover?category=디자인 문구`);
+              history.push(`/discover?category=디자인 문구`);
             }}
           >
             <CateDiv>
@@ -77,7 +79,7 @@ const Category = (props) => {
           </Li>
           <Li
             onClick={() => {
-              window.location.replace(`/discover?category=캐릭터 굿즈`);
+              history.push(`/discover?category=캐릭터 굿즈`);
             }}
           >
             <CateDiv>
@@ -92,7 +94,7 @@ const Category = (props) => {
           </Li>
           <Li
             onClick={() => {
-              window.location.replace(`/discover?category=푸드`);
+              history.push(`/discover?category=푸드`);
             }}
           >
             <CateDiv>
@@ -107,7 +109,7 @@ const Category = (props) => {
           </Li>
           <Li
             onClick={() => {
-              window.location.replace(`/discover?category=향수 · 뷰티`);
+              history.push(`/discover?category=향수 · 뷰티`);
             }}
           >
             <CateDiv>
@@ -122,7 +124,7 @@ const Category = (props) => {
           </Li>
           <Li
             onClick={() => {
-              window.location.replace(`/discover?category=음악`);
+              history.push(`/discover?category=음악`);
             }}
           >
             <CateDiv>
