@@ -25,6 +25,9 @@ const getPopularArticles = createAction(GET_POPULAR_ARTICLES, (articles) => ({
   articles,
 }));
 
+const setOne = createAction(SET_ONE, (one_list) => ({
+  one_list,
+}));
 const setOne = createAction(SET_ONE, (one_list) => ({ one_list }));
 
 const donate = createAction(DONATE, (articleId, is_donate) => ({ articleId }));
@@ -40,7 +43,8 @@ const search = createAction(SEARCH, (search_list) => ({ search_list }));
 // initialState
 // defaultProps 같은 역할
 const initialState = {
-  list: [],
+  Mlist: [],
+  Plist: [],
 };
 
 //주목할 만한 프로젝트
@@ -50,7 +54,6 @@ const getMainArticlesDB = () => {
       .mainAriticles()
       .then(function (res) {
         dispatch(getMainArticles(res.data.mainProjects));
-        console.log(res.data.mainProjects);
       })
       .catch((error) => {
         console.error(error);
@@ -65,7 +68,6 @@ const getPopularArticlesDB = () => {
       .popularAriticles()
       .then(function (res) {
         dispatch(getPopularArticles(res.data.popularProjects));
-        console.log(res.data.popularProjects);
       })
       .catch((error) => {
         console.error(error);
@@ -159,12 +161,12 @@ export default handleActions(
   {
     [GET_MAIN_ARTICLES]: (state, action) =>
       produce(state, (draft) => {
-        draft.list = action.payload.articles;
+        draft.Mlist = action.payload.articles;
       }),
 
     [GET_POPULAR_ARTICLES]: (state, action) =>
       produce(state, (draft) => {
-        draft.list = action.payload.articles;
+        draft.Plist = action.payload.articles;
       }),
 
     [SET_ONE]: (state, action) =>
