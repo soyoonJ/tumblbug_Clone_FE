@@ -154,6 +154,21 @@ const searchDB = (keyword) => {
   };
 };
 
+// 카테고리 검색하기
+const categoryDB = (keyword) => {
+  return function (dispatch, getState, { history }) {
+    axios
+      .get(`http://3.35.176.155:8080/api/articles/category?category=${keyword}`)
+      .then(function (res) {
+        console.log(res);
+        dispatch(search(res.data.categorizedProjects));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+};
+
 // 리듀서
 export default handleActions(
   {
@@ -213,6 +228,7 @@ const actionCreators = {
   // notDonateDB,
 
   searchDB,
+  categoryDB,
 };
 
 export { actionCreators };
