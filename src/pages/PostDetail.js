@@ -29,16 +29,19 @@ const PostDetail = (props) => {
   const detail = article.detailedProjects;
   // console.log('디테일', detail)
 
-  // const today = new Date();
-  // let year = today.getFullYear()
-  // let month = today.getMonth();
-  // let day = today.getDate();
-  // let todayDate = `${year}-${month}-${day}`
-  // // console.log(`${year}-${month}-${day}`);
-  // let targetDate = new Date(detail.deadline)
+  // 상세 info 남은시간 구하기
+  const today = new Date();
+  const endDate = new Date(detail.deadline);
+  const elapsedMSec = endDate.getTime() - today.getTime();
+  const elapsedDay = elapsedMSec / 1000 / 60 / 60 / 24;
+  const deadline = parseInt(elapsedDay);
 
-  // let deadline = (targetDate.getTime() - todayDate.getTime()) / (1000*60*60*24);
-  // console.log(deadline)
+  // 상세 정보 -> 펀딩 진행중 -> 결제일자 안내용
+  const year = detail.deadline.slice(0,4)
+  const month = detail.deadline.slice(5,7)
+  const date = detail.deadline.slice(8)
+  const payDate = `${year}년 ${month}월 ${date}일`
+  // console.log(payDate)
 
   let total = detail.totalAmount
     .toString()
@@ -46,7 +49,7 @@ const PostDetail = (props) => {
   let target = detail.targetAmount
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  let achieve = (detail.totalAmount / detail.targetAmount) * 100;
+  let achieve = parseInt((detail.totalAmount / detail.targetAmount) * 100);
   let donator = article.donatorNum
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -69,23 +72,6 @@ const PostDetail = (props) => {
         dispatch(articleActions.donateDB(articleId))
       }
     }
-
-  const cancelDonate = () => {
-    // dispatch(articleActions.notDonateDB(articleId))
-    // axios
-    //   .patch(`http://3.35.176.155:8080/api/article/${articleId}/donationCancel`,{}, {
-    //     headers: {
-    //     Authorization: `Bearer ${localStorage.getItem("login-token")}`,
-    //     },
-    // })
-    //   .then(function (res) {
-    //     console.log(res);
-    //     // dispatch(cancelDonate(articleId));
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
-  };
 
   return (
     <React.Fragment>
@@ -177,7 +163,7 @@ const PostDetail = (props) => {
                 <Grid fontSize="2.75rem" marginBottom="1.75rem">
                   <InfoTitle>남은시간</InfoTitle>
                   <InfoNum>
-                    <span>{detail.deadline}</span>
+                    <span>{deadline}</span>
                     <span>일</span>
                   </InfoNum>
                 </Grid>
@@ -197,7 +183,7 @@ const PostDetail = (props) => {
                   <span>
                     목표 금액인 {target}원이 모여야만 결제됩니다.
                     <br />
-                    결제는 {detail.deadline}에 다함께 진행됩니다.
+                    결제는 {payDate}에 다함께 진행됩니다.
                   </span>
                 </div>
               </SubInfo>
@@ -478,6 +464,7 @@ const InfoNum = styled.div`
   }
   letter-spacing: 0.5px;
   font-family: Segoe UI;
+  width: 100%;
 
   span {
     &:nth-child(2) {
