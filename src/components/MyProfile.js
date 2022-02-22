@@ -3,22 +3,35 @@ import styled from 'styled-components';
 import { BiSearch } from 'react-icons/bi';
 import { Text } from '../elements/index';
 
+import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
+import { useDispatch, useSelector } from 'react-redux';
+
 const MyProfile = () => {
   const [projectNum, setProjectNum] = React.useState(0);
   const [name, setNeme] = React.useState('박수민');
 
-  React.useEffect(() => {}, []);
+  const dispatch = useDispatch();
+  const user = useSelector((store) => store.user);
 
+  const is_token = localStorage.getItem('login-token') ? true : false;
+
+  React.useEffect(() => {
+    if (is_token) {
+      dispatch(userActions.loginCheckDB());
+    }
+  }, []);
   return (
     <Box>
       <div className="boxTop">
         <UserBox>
           <div className="userContainer">
             <div className="lastbox">
-              <div className="lastname">{name[0]}</div>
+              <div className="lastname">
+                {user.user.nickname ? user.user.nickname[0] : ''}
+              </div>
             </div>
             <div className="userInfo">
-              <div className="userName">{name}</div>
+              <div className="userName">{user ? user.user.nickname : ''}</div>
               <div className="signAt">15시간 전 가입</div>
             </div>
           </div>

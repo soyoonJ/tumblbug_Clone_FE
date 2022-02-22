@@ -9,6 +9,8 @@ import axios from 'axios';
 const GET_MAIN_ARTICLES = 'GET_MAIN_ARTICLES';
 const GET_POULAR_ARTICLES = 'GET_POULAR_ARTICLES';
 const DONATE = 'DONATE';
+const WANT_DONATE = 'WANT_DONATE';
+const CANCEL_DONATE = 'CANCEL_DONATE';
 const SET_ONE = 'SET_ONE';
 
 // action creators
@@ -22,6 +24,10 @@ const getPoularArticles = createAction(GET_POULAR_ARTICLES, (articles) => ({
 
 const setOne = createAction(SET_ONE, (one_list) => ({ one_list }));
 const donate = createAction(DONATE, (articleId, is_donate) => ({ articleId }));
+const wantDonate = createAction(WANT_DONATE, (articleId) => ({ articleId }));
+const cancelDonate = createAction(CANCEL_DONATE, (articleId) => ({
+  articleId,
+}));
 
 // initialState
 // defaultProps 같은 역할
@@ -74,10 +80,15 @@ const getPoularArticlesDB = () => {
 const donateDB = (articleId) => {
   return function (dispatch, getState, { history }) {
     axios
-      .get(`http://아이피주소/api/article/${articleId}/donation`)
+
+      .patch(`http://3.35.176.155:8080/api/article/${articleId}/donation`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('login-token')}`,
+        },
+      })
       .then(function (res) {
-        console.log(res);
-        // dispatch(donate(articleId));
+        console.log('도네이트', res);
+        // dispatch(getOneDB(articleId));
       })
       .catch(function (error) {
         console.log(error);
@@ -88,7 +99,15 @@ const donateDB = (articleId) => {
 const notDonateDB = (articleId) => {
   return function (dispatch, getState, { history }) {
     axios
-      .get(`http://아이피주소/api/article/${articleId}/donationCancel`)
+      .patch(
+        `http://3.35.176.155:8080/api/article/${articleId}/donationCancel`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('login-token')}`,
+          },
+        }
+      )
+
       .then(function (res) {
         console.log(res);
       })
@@ -133,6 +152,16 @@ export default handleActions(
       }),
 
     [SET_ONE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.one_list = action.payload.one_list;
+      }),
+
+    [WANT_DONATE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.one_list = action.payload.one_list;
+      }),
+
+    [CANCEL_DONATE]: (state, action) =>
       produce(state, (draft) => {
         draft.one_list = action.payload.one_list;
       }),
