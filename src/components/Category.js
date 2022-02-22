@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { Grid } from "../elements";
+import React from 'react';
+import styled from 'styled-components';
+import { Grid } from '../elements';
 
 const Category = (props) => {
-  const [choice, setChoice] = React.useState("카테고리");
+  const [choice, setChoice] = React.useState('');
 
   // const setFilter = (num) => {
   //   setChoice(num === 0 ? "카테고리" : num === 1 ? "" : "");
@@ -63,20 +63,26 @@ const Category = (props) => {
               전체
             </CateDiv>
           </Full>
-          <CateDiv>
-            <Li>
-              <CateDiv>
-                <img
-                  src="https://tumblbug-assets.imgix.net/categories/svg/stationary.svg"
-                  width="40px"
-                  height="40px"
-                  alt="디자인문구"
-                />
-                디자인문구
-              </CateDiv>
-            </Li>
-          </CateDiv>
-          <Li>
+          <Li
+            onClick={() => {
+              window.location.replace(`/discover?category=디자인 문구`);
+            }}
+          >
+            <CateDiv>
+              <img
+                src="https://tumblbug-assets.imgix.net/categories/svg/stationary.svg"
+                width="40px"
+                height="40px"
+                alt="디자인문구"
+              />
+              디자인문구
+            </CateDiv>
+          </Li>
+          <Li
+            onClick={() => {
+              window.location.replace(`/discover?category=캐릭터 굿즈`);
+            }}
+          >
             <CateDiv>
               <img
                 src="https://tumblbug-assets.imgix.net/categories/svg/charactor-goods.svg"
@@ -87,7 +93,11 @@ const Category = (props) => {
               캐릭터·굿즈
             </CateDiv>
           </Li>
-          <Li>
+          <Li
+            onClick={() => {
+              window.location.replace(`/discover?category=푸드`);
+            }}
+          >
             <CateDiv>
               <img
                 src="https://tumblbug-assets.imgix.net/categories/svg/food.svg"
@@ -98,7 +108,11 @@ const Category = (props) => {
               푸드
             </CateDiv>
           </Li>
-          <Li>
+          <Li
+            onClick={() => {
+              window.location.replace(`/discover?category=향수 · 뷰티`);
+            }}
+          >
             <CateDiv>
               <img
                 src="https://tumblbug-assets.imgix.net/categories/svg/perfumes-cosmetics.svg"
@@ -109,7 +123,11 @@ const Category = (props) => {
               향수·뷰티
             </CateDiv>
           </Li>
-          <Li>
+          <Li
+            onClick={() => {
+              window.location.replace(`/discover?category=음악`);
+            }}
+          >
             <CateDiv>
               <img
                 src="https://tumblbug-assets.imgix.net/categories/svg/music.svg"
