@@ -10,10 +10,11 @@ import { actionCreators as commentActions } from '../redux/modules/comments'
 const CommentList = ({detail, articleId}) => {
 
     // 댓글 작성창 활용 용도
-    const username = useSelector((state)=>state.user.user.nickname)
-    const comment_list = useSelector((state)=>state.comments.comment_list);
     const is_login = useSelector((state) => state.user.is_login);
-
+    const username = useSelector((state)=>state.user.user.nickname);
+    
+    const comment_list = useSelector((state)=>state.comments.comment_list);
+    const [writeComment, setComment] = useState('');
 
     const dispatch = useDispatch();
 
@@ -21,10 +22,14 @@ const CommentList = ({detail, articleId}) => {
       dispatch(commentActions.getCommentDB(articleId));
     },[])
 
+    const onChange = (e)=>{
+      setComment(e.target.value);
+    };
+
     const handlePress = ((e)=> {
       if(e.key==='Enter') {
-          console.log('댓글내용', e.target.value)
-          dispatch(commentActions.addCommentDB(articleId, e.target.value))
+          dispatch(commentActions.addCommentDB(articleId, e.target.value));
+          setComment('');
       }
   })
 
@@ -48,6 +53,8 @@ const CommentList = ({detail, articleId}) => {
               )}
               <input
                 placeholder="창작자에게 응원의 한마디!"
+                value={writeComment}
+                onChange={onChange}
                 style={{
                   width: "100%",
                   outline: "none",
@@ -321,6 +328,7 @@ const List = (props) => {
   const { commentId, articleId, comment, nickname } = props;
 
   const dispatch = useDispatch();
+  // const comment_list = useSelector((state)=>state.comments.comment_list)
 
   const [isActive, setIsActive] = useState(false);
 
