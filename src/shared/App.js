@@ -24,7 +24,7 @@ function App() {
         <Route path="/login" exact component={Login}></Route>
         <Route path="/signup" exact component={Signup}></Route>
         <Route path="/post/:id" exact component={PostDetail}></Route>
-        <Route path="/user/:userid" exact component={MyPage}></Route>
+        <Route path="/user" exact component={MyPage}></Route>
       </ConnectedRouter>
     </React.Fragment>
   );
