@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { history } from '../redux/configureStore';
+import { history } from "../redux/configureStore";
 
 const Category = (props) => {
   return (
@@ -26,7 +26,7 @@ const Category = (props) => {
         <CategoryList>
           <Full
             onClick={() => {
-              history.push(`/discover?all=all`);
+              history.push(`/discover?all=전체`);
             }}
           >
             <CateDiv>

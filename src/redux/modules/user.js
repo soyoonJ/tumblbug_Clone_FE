@@ -2,6 +2,9 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { apis } from '../../shared/api';
+import axios from 'axios';
+
+import { useDispatch } from 'react-redux';
 
 // actions
 const SET_USER = 'SET_USER';
@@ -41,12 +44,18 @@ const loginDB = (email, password) => {
 // 회원가입
 const signupDB = (nickname, email, password) => {
   return function (dispatch, getState, { history }) {
-    apis.signup(nickname, email, password).then((res) => {
-      if (!res.data.result) {
-        return;
-      }
-      history.replace('/');
-    });
+    apis
+      .signup(nickname, email, password)
+      .then((res) => {
+        if (!res.data.result) {
+          alert('이미 존재하는 이메일입니다.');
+          return;
+        }
+        history.replace('/');
+      })
+      .catch(function (error) {
+        alert('이미 존재하는 이메일입니다.');
+      });
   };
 };
 
@@ -65,16 +74,56 @@ const loginCheckDB = () => {
   };
 };
 
+// 카카오 API
+const getKakaoProfile = () => {
+  return function (dispatch, getState, { history }) {
+    window.Kakao.API.request({
+      url: '/v2/user/me',
+    })
+      .then(function (res) {
+        // console.log('코멘트전체확인',res.data.comments);
+        // 코멘트리스트 불러오기
+        const email = res.id;
+        const nickname = res.properties.nickname;
+
+        axios
+          .post(`http://3.35.176.155:8080/api/users/loginKakao`, {
+            email,
+            nickname,
+          })
+          .then((res) => {
+            // console.log('토큰내놔!!!!!!!!!!', res.data.token);
+            if (!res.data.result) {
+              alert('회원정보가 올바르지 않습니다.');
+              return;
+            }
+            localStorage.setItem('login-token', res.data.token);
+            dispatch(setUser({ email: email, nickname: nickname }));
+            window.location.replace('/');
+          });
+      })
+
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+};
+
 // 리듀서
 export default handleActions(
   {
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.user);
+        // console.log('hi!!!!!!!!', action.payload.user.email);
         draft.user.email = action.payload.user.email;
         draft.user.nickname = action.payload.user.nickname;
         draft.is_login = true;
-        console.log(draft.user.email, draft.user.nickname, draft.is_login);
+        console.log(
+          'hi!!!!!!!!',
+          draft.user.email,
+          draft.user.nickname,
+          draft.is_login
+        );
       }),
 
     [LOG_OUT]: (state, action) =>
@@ -93,6 +142,8 @@ const actionCreators = {
   signupDB,
   loginCheckDB,
   logOut,
+
+  getKakaoProfile,
 };
 
 export { actionCreators };

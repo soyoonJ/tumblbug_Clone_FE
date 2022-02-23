@@ -12,6 +12,8 @@ import PostDetail from '../pages/PostDetail';
 import MyPage from '../pages/MyPage';
 import Search from '../pages/Search';
 
+import Auth from '../pages/Auth';
+
 import './App.css';
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
         <Route path="/post/:id" exact component={PostDetail}></Route>
         <Route path="/user" exact component={MyPage}></Route>
         <Route path="/discover" exact component={Search}></Route>
+        {/* 카카오 로그인 */}
+        <Route path="/oauth/kakao/callback" exact component={Auth}></Route>
       </ConnectedRouter>
     </React.Fragment>
   );

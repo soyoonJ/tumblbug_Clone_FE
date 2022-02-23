@@ -27,7 +27,7 @@ const Search = (props) => {
     else dispatch(articlesActions.searchDB(search));
   }, [search]);
 
-  if (search === "all") {
+  if (search === "전체") {
     return (
       <React.Fragment>
         <Header />
