@@ -331,7 +331,10 @@ const List = (props) => {
 
   // console.log('댓글props',props)
   const { commentId, articleId, comment, nickname } = props;
+  // const comment_list = useSelector((state)=>state.comments.comment_list[articleId]);
+  // console.log('List',comment_list)
 
+  // console.log('코멘트', commentId)
   const dispatch = useDispatch();
   // const comment_list = useSelector((state)=>state.comments.comment_list)
 
@@ -349,8 +352,12 @@ const List = (props) => {
 
   const editComment = ((e)=> {
     if(e.key==='Enter') {
-      dispatch(commentActions.editCommentDB(articleId, commentId, comment));
-      setEdit(false)
+      // 댓글 생성하자마자 수정 시도하면 안됨... 이유가 뭘까?
+      console.log('엔터누르고', props.articleId, props.commentId);
+      dispatch(commentActions.editCommentDB(props.articleId, props.commentId, e.target.value));
+      // dispatch(commentActions.editCommentDB(articleId, comment_list?.commentId, e.target.value));
+      setEdit(false);
+
     }
 })
 

@@ -24,18 +24,19 @@ const initialState = {
 // 미들웨어
 const getCommentDB = (articleId) => {
   return function (dispatch, getState, { history }) {
+    console.log('수정아이디잘들어오나', articleId)
     axios
       .get(`http://3.35.176.155:8080/api/comments/${articleId}`)
       .then(function (res) {
         console.log('코멘트전체확인',res.data.comments);
 
-        let comments = [];
-        const commentDB = res.data.comments;
-        commentDB.forEach((doc)=>{
-          comments.push({nickname:doc.nickname,comment:doc.comment})
-        })
+        // let comments = [];
+        // const commentDB = res.data.comments;
+        // commentDB.forEach((doc)=>{
+        //   comments.push({nickname:doc.nickname,comment:doc.comment})
+        // })
 
-        dispatch(setComment(articleId, comments));
+        dispatch(setComment(articleId, res.data.comments));
       })
       .catch(function (error) {
         console.log(error);
@@ -78,7 +79,7 @@ const addCommentDB = (articleId, comment) => {
 
 const editCommentDB = (articleId, commentId, comment) => {
   return function (dispatch, getState, { history }) {
-
+    console.log('요청들어오나?',articleId, commentId, comment)
     axios
       .patch(
         `http://3.35.176.155:8080/api/comments/modify/${commentId}`,
@@ -90,8 +91,13 @@ const editCommentDB = (articleId, commentId, comment) => {
         }
       )
       .then(function (res) {
-        console.log("코멘트수정");
-        // dispatch(editComment());
+        // console.log(comment)
+        // let one_comment = {
+        //   comment:comment,
+        // }
+        
+        dispatch(getCommentDB(articleId));
+        window.alert('댓글 수정 완료!');
       })
       .catch(function (error) {
         console.log(error);
@@ -139,8 +145,7 @@ export default handleActions(
     }),
 
     [DELETE_COMMENT]: (state, action) => produce(state, (draft) => {
-      draft.comment_list[action.payload.articleId] = draft.comment_list[action.payload.articleId].filter(e =>
-        e.commentId !== action.payload.commentId);
+      draft.comment_list[action.payload.articleId]=draft.comment_list[action.payload.articleId].filter(e => e.commentId !== action.payload.commentId);
     }),
   },
   initialState
