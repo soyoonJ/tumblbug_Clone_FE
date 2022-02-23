@@ -15,19 +15,22 @@ const PostDetail = (props) => {
   // getPostFB가 완성되고 나서 살려야 함
   const is_login = useSelector((state) => state.user.is_login);
 
-  const article = useSelector((state)=> state.articles.one_list)
-  const donators = useSelector((state)=> state.articles.one_list.detailedProjects.donator)
+  const article = useSelector((state) => state.articles.one_list);
+  const donators = useSelector(
+    (state) => state.articles.one_list.detailedProjects.donator
+  );
   // console.log('도네이터 수', donators)
-  const userEmail = useSelector((state)=>state.user.user.email)
+  const userEmail = useSelector((state) => state.user.user.email);
 
   // 도네이트 여부
-  const isDonate = (donators?.findIndex(e=> e.email === userEmail) !== -1 )?true:false;
+  const isDonate =
+    donators?.findIndex((e) => e.email === userEmail) !== -1 ? true : false;
   // console.log('isDonate', isDonate);
 
   // articleId 파라미터 가져오기
   const articleId = props.match.params.id;
-  const comment_list = useSelector((state) => state.comments.comment_list)
-  const commentNum = comment_list[articleId]?.length
+  const comment_list = useSelector((state) => state.comments.comment_list);
+  const commentNum = comment_list[articleId]?.length;
   // console.log('개수', commentNum)
   // 모인금액, 후원자 숫자 콤마작업
   const detail = article.detailedProjects;
@@ -77,9 +80,9 @@ const PostDetail = (props) => {
     }
   };
 
-    const cancelDonate = () => {
-      dispatch(articleActions.notDonateDB(articleId))
-    }
+  const cancelDonate = () => {
+    dispatch(articleActions.notDonateDB(articleId));
+  };
 
   return (
     <React.Fragment>
@@ -253,20 +256,37 @@ const PostDetail = (props) => {
                   {/* 후원상태가 true라면 밑에 버튼, false면 회색버튼 추가 */}
                   {/* 후원하기 버튼 */}
 
-                  {isDonate?
-                  // 취소버튼
-                  <Button
-                  _onClick={cancelDonate}
-                  CancelHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold
-                    color="rgba(0, 0, 0, 0.6)" bg="rgb(231, 231, 231)"
-                  >후원 취소하기</Button>
-                  :
-                  // 후원버튼
-                  <Button
-                  _onClick={wantDonate}
-                  donateHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold>
-                    이 프로젝트 후원하기</Button>
-                  }
+                  {isDonate ? (
+                    // 취소버튼
+                    <Button
+                      _onClick={cancelDonate}
+                      CancelHover
+                      height="52px"
+                      padding="15px"
+                      bold
+                      fontSize="15.4px"
+                      borderRadius="0.285714rem"
+                      bold
+                      color="rgba(0, 0, 0, 0.6)"
+                      bg="rgb(231, 231, 231)"
+                    >
+                      후원 취소하기
+                    </Button>
+                  ) : (
+                    // 후원버튼
+                    <Button
+                      _onClick={wantDonate}
+                      donateHover
+                      height="52px"
+                      padding="15px"
+                      bold
+                      fontSize="15.4px"
+                      borderRadius="0.285714rem"
+                      bold
+                    >
+                      이 프로젝트 후원하기
+                    </Button>
+                  )}
 
                   {/* 후원 취소하기 버튼 */}
                 </div>
@@ -504,34 +524,28 @@ const SubInfo = styled.div`
   background-color: rgb(250, 250, 250);
   border: 1px solid rgb(239, 239, 239);
   display: block;
-   {
-    // 텍스트 묶음
-  }
+
   & > div {
     font-size: 1rem;
     color: rgba(0, 0, 0, 0.8);
     display: block;
   }
-   {
-    /* 펀딩 진행중 */
-  }
+
+  /* 펀딩 진행중 */
   & > div > div {
     font-weight: 700;
     line-height: 1.5;
     margin-bottom: 0.5rem;
   }
-   {
-    /* 목표금액~결제 안내 */
-  }
+
+  /* 목표금액~결제 안내 */
   & > div > span {
     line-height: 1.5;
     font-size: 1rem;
   }
 `;
 
-{
-  /* 하트/공유/후원하기 버튼 */
-}
+/* 하트/공유/후원하기 버튼 */
 const DetailButtons = styled.div`
   div {
     display: flex;
@@ -561,9 +575,7 @@ const IconAlign = styled.div`
   }
 `;
 
-{
-  /* 커뮤니티 네비게이션 */
-}
+/* 커뮤니티 네비게이션 */
 const Nav = styled.nav`
   @media (min-width: 1080px) {
     height: 56px;
@@ -590,9 +602,7 @@ const Nav = styled.nav`
     display: flex;
   }
 
-   {
-    /* 커뮤니티 */
-  }
+  /* 커뮤니티 */
   a {
     @media (min-width: 1080px) {
       margin-right: 17px;
@@ -614,9 +624,7 @@ const Nav = styled.nav`
   }
 `;
 
-{
-  /* 하단 댓글/창작자 */
-}
+/* 하단 댓글/창작자 */
 const DetailBottom = styled.div`
   @media only screen and (min-width: 1080px) {
     width: 1080px;
