@@ -5,7 +5,23 @@ import {Grid, Button, Image} from '../elements'
 
 const Creator = (props) => {
 
-    // console.log('창작자',props)
+  // const [IsCreatorOn, setIsCreatorOn] = React.useState(false)
+
+  // React.useEffect(() => {
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll); //clean up
+  //   };
+  // }, [IsCreatorOn]);
+
+  // const handleScroll = () => {
+  //   if (window.scrollY > 1000) {
+  //     setIsCreatorOn(true);
+  //     return;
+  //   }
+  //     setIsCreatorOn(false);
+  //     return;
+  // };
 
     return (
       <React.Fragment>

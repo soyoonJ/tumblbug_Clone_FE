@@ -111,6 +111,8 @@ const donateDB = (articleId) => {
       })
       .catch(function (error) {
         console.log(error);
+        // 이미 완료된 후원입니다.
+        window.alert(error.msg);
       });
   };
 };
@@ -129,6 +131,8 @@ axios
   })
   .catch(function (error) {
     console.log(error);
+    // 이미 취소된 후원입니다.
+    window.alert(error.msg);
   });
   };
 };
