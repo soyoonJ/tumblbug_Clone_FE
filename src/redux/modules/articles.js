@@ -10,7 +10,6 @@ import { apis } from "../../shared/api";
 // actions
 const GET_MAIN_ARTICLES = "GET_MAIN_ARTICLES";
 const GET_POPULAR_ARTICLES = "GET_POPULAR_ARTICLES";
-const DONATE = "DONATE";
 const WANT_DONATE = "WANT_DONATE";
 const CANCEL_DONATE = "CANCEL_DONATE";
 const SET_ONE = "SET_ONE";
@@ -32,7 +31,6 @@ const wantDonate = createAction(WANT_DONATE, (articleId, userEmail) => ({article
 const cancelDonate = createAction(CANCEL_DONATE, (articleId) => ({
   articleId,
 }));
-const donate = createAction(DONATE, (articleId, is_donate) => ({ articleId }));
 const getMy = createAction(GET_MY, (my_list) => ({ my_list }));
 const search = createAction(SEARCH, (search_list) => ({ search_list }));
 const allCate = createAction(ALL_CATE, (all_list) => ({ all_list }));
@@ -89,7 +87,7 @@ const getPopularArticlesDB = () => {
   };
 };
 
-// loginCheck 완료되면 가능
+
 const donateDB = (articleId) => {
   return function (dispatch, getState, { history }) {
     // const userEmail = getState().user.user.email;
@@ -106,7 +104,7 @@ const donateDB = (articleId) => {
         }
       )
       .then(function (res) {
-        console.log('donate', articleId)
+        // console.log('donate', articleId)
         dispatch(getOneDB(articleId))
       })
       .catch(function (error) {
@@ -126,7 +124,7 @@ axios
     },
 })
   .then(function (res) {
-    console.log('notdonate', articleId)
+    // console.log('notdonate', articleId)
     dispatch(getOneDB(articleId));
   })
   .catch(function (error) {
@@ -137,13 +135,12 @@ axios
   };
 };
 
-// articleId 샘플 - 21
 const getOneDB = (articleId) => {
   return function (dispatch, getState, { history }) {
     axios
       .get(`http://3.35.176.155:8080/api/article/${articleId}`)
       .then(function (res) {
-        console.log(res);
+        // console.log(res);
         dispatch(setOne(res.data));
       })
       .catch(function (error) {
@@ -227,19 +224,6 @@ export default handleActions(
       produce(state, (draft) => {
         draft.one_list = action.payload.one_list;
       }),
-
-    [WANT_DONATE]: (state, action) =>
-      produce(state, (draft) => {
-        // is_donate = {1:soyoon}
-        // is_donate = {1:[soyoon, ,,, ,,, ]}
-        // console.log(action.payload.articleId, action.payload.userEmail)
-        draft.is_donate[action.payload.articleId].push(action.payload.userEmail);
-        // console.log("도네이트 정보", draft.is_donate[action.payload.articleId]);
-      }),
-    // [CANCEL_DONATE]: (state, action) =>
-    // produce(state, (draft) => {
-    //   draft.is_donate[action.payload.articleId] = false;
-    // }),
 
     [GET_MY]: (state, action) =>
       produce(state, (draft) => {

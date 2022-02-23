@@ -2,11 +2,12 @@ import styled from "styled-components";
 import React from "react";
 
 const Image = (props) => {
-  const { shape, src, size, margin,marginTop ,marginRight, } = props;
+  const { shape, src, size, margin,marginTop ,marginRight, position} = props;
 
   const styles = {
     src: src,
     size: size,
+    position: position,
     margin:margin,
     marginTop:marginTop,
     marginRight:marginRight,
@@ -37,6 +38,7 @@ Image.defaultProps = {
   shape: "circle",
   src: "https://photo.jtbc.joins.com/news/2021/03/26/202103261532034842.jpg",
   size: 36,
+  position: "center",
 };
 
 const ImageDefault = styled.div`
@@ -75,7 +77,7 @@ const ImageCircle = styled.div`
 
   background-image: url("${(props) => props.src}");
   background-size: cover;
-  background-position: center;
+  background-position: ${(props) => props.position};
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   ${(props) => (props.marginTop ? `margin-top: ${props.marginTop};` : "")}
   ${(props) => (props.marginRight ? `margin-right: ${props.marginRight};` : "")}
