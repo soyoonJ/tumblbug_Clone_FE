@@ -25,6 +25,9 @@ const PostDetail = (props) => {
 
   // articleId 파라미터 가져오기
   const articleId = props.match.params.id;
+  const comment_list = useSelector((state) => state.comments.comment_list)
+  const commentNum = comment_list[articleId].length
+  // console.log('개수', commentNum)
   // 모인금액, 후원자 숫자 콤마작업
   const detail = article.detailedProjects;
   // console.log('디테일', detail)
@@ -272,7 +275,7 @@ const PostDetail = (props) => {
         <div>
           <div>
             <a>
-              커뮤니티<span>0</span>
+              커뮤니티<span>{commentNum}</span>
             </a>
           </div>
         </div>
