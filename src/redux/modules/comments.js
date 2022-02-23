@@ -24,17 +24,10 @@ const initialState = {
 // 미들웨어
 const getCommentDB = (articleId) => {
   return function (dispatch, getState, { history }) {
-    console.log('수정아이디잘들어오나', articleId)
+    // console.log('수정아이디잘들어오나', articleId)
     axios
       .get(`http://3.35.176.155:8080/api/comments/${articleId}`)
       .then(function (res) {
-        // console.log('코멘트전체확인',res.data.comments);
-
-        // let comments = [];
-        // const commentDB = res.data.comments;
-        // commentDB.forEach((doc)=>{
-        //   comments.push({nickname:doc.nickname,comment:doc.comment})
-        // })
 
         dispatch(setComment(articleId, res.data.comments));
       })
@@ -91,10 +84,6 @@ const editCommentDB = (articleId, commentId, comment) => {
         }
       )
       .then(function (res) {
-        // console.log(comment)
-        // let one_comment = {
-        //   comment:comment,
-        // }
         
         dispatch(getCommentDB(articleId));
         window.alert('댓글 수정 완료!');

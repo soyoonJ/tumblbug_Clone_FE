@@ -143,7 +143,7 @@ const getOneDB = (articleId) => {
     axios
       .get(`http://3.35.176.155:8080/api/article/${articleId}`)
       .then(function (res) {
-        console.log(res);
+        // console.log(res);
         dispatch(setOne(res.data));
       })
       .catch(function (error) {

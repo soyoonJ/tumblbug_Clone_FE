@@ -172,7 +172,7 @@ const PostDetail = (props) => {
                 <Grid fontSize="2.75rem" marginBottom="1.75rem">
                   <InfoTitle>남은시간</InfoTitle>
                   <InfoNum>
-                    <span>{deadline}</span>
+                    <span>{deadline>0?deadline:0}</span>
                     <span>일</span>
                   </InfoNum>
                 </Grid>

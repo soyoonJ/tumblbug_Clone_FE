@@ -18,8 +18,8 @@ const CommentList = ({ detail, articleId }) => {
 
   const comment_list = useSelector((state)=>state.comments.comment_list);
 
-  const donators = useSelector((state)=> state.articles.one_list.detailedProjects.donator)
-  const isDonate = (donators?.findIndex(e=> e === userEmail) !== -1 )?true:false;
+  // const donators = useSelector((state)=> state.articles.one_list.detailedProjects.donator)
+  // const isDonate = (donators?.findIndex(e=> e === userEmail) !== -1 )?true:false;
   // console.log('코멘트리스트', comment_list)
   const [writeComment, setComment] = useState('');
   const dispatch = useDispatch();
@@ -218,6 +218,7 @@ const Profileimg = styled.div`
   height: 40px;
   border-radius: 50%;
   background: rgb(208, 208, 208);
+  background-size: cover;
   color: rgb(255, 255, 255);
   margin: 5px 1rem 0px 0px;
 
@@ -385,6 +386,8 @@ const List = (props) => {
               size="40"
               src="https://tumblbug-upi.imgix.net/defaults/avatar_3.png?ixlib=rb-1.1.0&w=100&h=125&auto=format%2Ccompress&fit=facearea&facepad=2.0&ch=Save-Data&mask=ellipse&s=23cd7d64a8ff0c22c20d54f96489e7e9"
               marginTop="5px"
+              position="50% 38%"
+              display="inline-block"
             />
             {/* 사용자 텍스트 정보 */}
             <UserInfo>
