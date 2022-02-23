@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 
 import { Grid, Button, Image } from "../elements";
-import { CommentList, Creator, Header } from "../components";
+import { CommentList, Creator, Footer, Header } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as articleActions } from "../redux/modules/articles";
 import { history } from "../redux/configureStore";
@@ -21,7 +21,6 @@ const PostDetail = (props) => {
   // getPostFB가 완성되고 나서 살려야 함
   const is_login = useSelector((state) => state.user.is_login);
   const userEmail = useSelector((state)=>state.user.user.email)
-
   const article = useSelector((state)=> state.articles.one_list)
   
   // 도네이트 여부
@@ -32,6 +31,7 @@ const PostDetail = (props) => {
   // articleId 파라미터 가져오기
   const articleId = props.match.params.id;
   const comment_list = useSelector((state) => state.comments.comment_list)
+
   const commentNum = comment_list[articleId]?.length;
   // console.log('개수', commentNum)
   // 모인금액, 후원자 숫자 콤마작업
@@ -46,10 +46,10 @@ const PostDetail = (props) => {
   const deadline = parseInt(elapsedDay);
 
   // 상세 정보 -> 펀딩 진행중 -> 결제일자 안내용
-  const year = detail.deadline.slice(0,4)
-  const month = detail.deadline.slice(5,7)
-  const date = detail.deadline.slice(8)
-  const payDate = `${year}년 ${month}월 ${date}일`
+  const year = detail.deadline.slice(0, 4);
+  const month = detail.deadline.slice(5, 7);
+  const date = detail.deadline.slice(8);
+  const payDate = `${year}년 ${month}월 ${date}일`;
   // console.log(payDate)
 
   let total = detail.totalAmount
@@ -66,21 +66,21 @@ const PostDetail = (props) => {
   React.useEffect(() => {
     // 아티클 정보 불러오기
     dispatch(articleActions.getOneDB(articleId));
-    
+
   }, []);
 
-    const wantDonate = () => {
-      if(!is_login) {
-        window.alert('로그인 후 후원 가능합니다!')
-        history.push('/login')
-      } else {
-        dispatch(articleActions.donateDB(articleId))
-      }
+  const wantDonate = () => {
+    if (!is_login) {
+      window.alert("로그인 후 후원 가능합니다!");
+      history.push("/login");
+    } else {
+      dispatch(articleActions.donateDB(articleId));
     }
+  };
 
-    const cancelDonate = () => {
-      dispatch(articleActions.notDonateDB(articleId))
-    }
+  const cancelDonate = () => {
+    dispatch(articleActions.notDonateDB(articleId));
+  };
 
   return (
     <React.Fragment>
@@ -254,20 +254,37 @@ const PostDetail = (props) => {
                   {/* 후원상태가 true라면 밑에 버튼, false면 회색버튼 추가 */}
                   {/* 후원하기 버튼 */}
 
-                  {isDonate?
-                  // 취소버튼
-                  <Button
-                  _onClick={cancelDonate}
-                  CancelHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold
-                    color="rgba(0, 0, 0, 0.6)" bg="rgb(231, 231, 231)"
-                  >후원 취소하기</Button>
-                  :
-                  // 후원버튼
-                  <Button
-                  _onClick={wantDonate}
-                  donateHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold>
-                    이 프로젝트 후원하기</Button>
-                  }
+                  {isDonate ? (
+                    // 취소버튼
+                    <Button
+                      _onClick={cancelDonate}
+                      CancelHover
+                      height="52px"
+                      padding="15px"
+                      bold
+                      fontSize="15.4px"
+                      borderRadius="0.285714rem"
+                      bold
+                      color="rgba(0, 0, 0, 0.6)"
+                      bg="rgb(231, 231, 231)"
+                    >
+                      후원 취소하기
+                    </Button>
+                  ) : (
+                    // 후원버튼
+                    <Button
+                      _onClick={wantDonate}
+                      donateHover
+                      height="52px"
+                      padding="15px"
+                      bold
+                      fontSize="15.4px"
+                      borderRadius="0.285714rem"
+                      bold
+                    >
+                      이 프로젝트 후원하기
+                    </Button>
+                  )}
 
                   {/* 후원 취소하기 버튼 */}
                 </div>
@@ -295,6 +312,7 @@ const PostDetail = (props) => {
           {detail && <Creator {...detail}></Creator>}
         </div>
       </DetailBottom>
+      <Footer />
     </React.Fragment>
   );
 };
@@ -508,34 +526,28 @@ const SubInfo = styled.div`
   background-color: rgb(250, 250, 250);
   border: 1px solid rgb(239, 239, 239);
   display: block;
-   {
-    // 텍스트 묶음
-  }
+
   & > div {
     color: rgba(0, 0, 0, 0.8);
     display: block;
   }
-   {
-    /* 펀딩 진행중 */
-  }
+
+  /* 펀딩 진행중 */
   & > div > div {
     font-size: 0.9rem;
     font-weight: 700;
     line-height: 1.5;
     margin-bottom: 0.5rem;
   }
-   {
-    /* 목표금액~결제 안내 */
-  }
+
+  /* 목표금액~결제 안내 */
   & > div > span {
     line-height: 1.5;
     font-size: 0.9rem;
   }
 `;
 
-{
-  /* 하트/공유/후원하기 버튼 */
-}
+/* 하트/공유/후원하기 버튼 */
 const DetailButtons = styled.div`
   div {
     display: flex;
@@ -565,9 +577,7 @@ const IconAlign = styled.div`
   }
 `;
 
-{
-  /* 커뮤니티 네비게이션 */
-}
+/* 커뮤니티 네비게이션 */
 const Nav = styled.nav`
   @media (min-width: 1080px) {
     height: 56px;
@@ -594,9 +604,7 @@ const Nav = styled.nav`
     display: flex;
   }
 
-   {
-    /* 커뮤니티 */
-  }
+  /* 커뮤니티 */
   a {
     @media (min-width: 1080px) {
       margin-right: 17px;
@@ -618,9 +626,7 @@ const Nav = styled.nav`
   }
 `;
 
-{
-  /* 하단 댓글/창작자 */
-}
+/* 하단 댓글/창작자 */
 const DetailBottom = styled.div`
   @media only screen and (min-width: 1080px) {
     width: 1080px;

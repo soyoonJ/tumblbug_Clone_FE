@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Header, Banner, MainPost, SidePost } from "../components";
+import { Header, Banner, MainPost, SidePost, Footer } from "../components";
 import { Grid } from "../elements";
 
 const Main = (props) => {
@@ -16,6 +16,7 @@ const Main = (props) => {
           <SidePost />
         </Grid>
       </Container>
+      <Footer />
     </React.Fragment>
   );
 };

@@ -76,7 +76,6 @@ const A = styled.a`
   font-size: 11.5px;
   color: rgb(109 109 109);
   letter-spacing: -0.005em;
-  /* line-height: 16px; */
   text-decoration: none;
 
   :hover {
