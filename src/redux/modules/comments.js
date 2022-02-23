@@ -40,8 +40,9 @@ const getCommentDB = (articleId) => {
 const addCommentDB = (articleId, comment) => {
   return function (dispatch, getState, { history }) {
 
-    const nickname = getState().user.user.nickname; 
-    console.log('addComment', articleId, comment);
+    const nickname = getState().user.user.nickname;
+    const email = getState().user.user.email;
+    // console.log('addComment', articleId, comment);
     axios
     .post(`http://3.35.176.155:8080/api/comments/${articleId}`,
       {
@@ -54,10 +55,11 @@ const addCommentDB = (articleId, comment) => {
       },
     )
     .then(function (res) {
-      console.log(res);
+      // console.log(res);
       let one_comment = {
         nickname:nickname,
         comment:comment,
+        email:email,
       }
 
       dispatch(addComment(articleId, one_comment));
@@ -72,7 +74,7 @@ const addCommentDB = (articleId, comment) => {
 
 const editCommentDB = (articleId, commentId, comment) => {
   return function (dispatch, getState, { history }) {
-    console.log('요청들어오나?',articleId, commentId, comment)
+    // console.log('요청들어오나?',articleId, commentId, comment)
     axios
       .patch(
         `http://3.35.176.155:8080/api/comments/modify/${commentId}`,

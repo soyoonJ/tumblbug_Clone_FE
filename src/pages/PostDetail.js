@@ -27,6 +27,7 @@ const PostDetail = (props) => {
   // console.log('도네이터 수', donators)
   const donators = useSelector((state)=> state.articles.one_list.detailedProjects.donator)
   const isDonate = (donators?.findIndex(e=> e === userEmail) !== -1 )?true:false;
+  // const isDonate = (donators?.findIndex(e=> e.email === userEmail) !== -1 )?true:false;
 
   // articleId 파라미터 가져오기
   const articleId = props.match.params.id;

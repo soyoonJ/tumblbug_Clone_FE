@@ -359,9 +359,8 @@ const List = (props) => {
   const editComment = ((e)=> {
     if(e.key==='Enter') {
       // 댓글 생성하자마자 수정 시도하면 안됨... 이유가 뭘까?
-      console.log('엔터누르고', props.articleId, props.commentId);
-      dispatch(commentActions.editCommentDB(props.articleId, props.commentId, e.target.value));
-      // dispatch(commentActions.editCommentDB(articleId, comment_list?.commentId, e.target.value));
+      console.log('엔터누르고', articleId, commentId);
+      dispatch(commentActions.editCommentDB(articleId, commentId, e.target.value));
       setEdit(false);
     }
 })
