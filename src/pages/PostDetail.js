@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 
 import { Grid, Button, Image } from "../elements";
-import { CommentList, Creator, Header } from "../components";
+import { CommentList, Creator, Footer, Header } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as articleActions } from "../redux/modules/articles";
 import { history } from "../redux/configureStore";
@@ -15,11 +15,11 @@ const PostDetail = (props) => {
   // getPostFB가 완성되고 나서 살려야 함
   const is_login = useSelector((state) => state.user.is_login);
 
-  const article = useSelector((state)=> state.articles.one_list)
-  const donators = useSelector((state) => state.articles.is_donate)
-  console.log('뷰 도네이터', donators)
+  const article = useSelector((state) => state.articles.one_list);
+  const donators = useSelector((state) => state.articles.is_donate);
+  console.log("뷰 도네이터", donators);
   // const donateCheck = (donators?.filter(e=>e === userEmail).length !== 0)?true:false;
-  
+
   // const isDonate = useSelector((state) => state.articles.is_donate)
   // const userEmail = useSelector((state)=>state.user.user.email)
 
@@ -37,10 +37,10 @@ const PostDetail = (props) => {
   const deadline = parseInt(elapsedDay);
 
   // 상세 정보 -> 펀딩 진행중 -> 결제일자 안내용
-  const year = detail.deadline.slice(0,4)
-  const month = detail.deadline.slice(5,7)
-  const date = detail.deadline.slice(8)
-  const payDate = `${year}년 ${month}월 ${date}일`
+  const year = detail.deadline.slice(0, 4);
+  const month = detail.deadline.slice(5, 7);
+  const date = detail.deadline.slice(8);
+  const payDate = `${year}년 ${month}월 ${date}일`;
   // console.log(payDate)
 
   let total = detail.totalAmount
@@ -57,21 +57,21 @@ const PostDetail = (props) => {
   React.useEffect(() => {
     // 아티클 정보 불러오기
     dispatch(articleActions.getOneDB(articleId));
-    
+
     // 코멘트 정보 불러오기
     // dispatch(commentActions.getCommentDB(articleId))
     // 후원자 정보 바뀔 때마다 변경해주기
     // },[article])
   }, []);
 
-    const wantDonate = () => {
-      if(!is_login) {
-        window.alert('로그인 후 후원 가능합니다!')
-        history.push('/login')
-      } else {
-        dispatch(articleActions.donateDB(articleId))
-      }
+  const wantDonate = () => {
+    if (!is_login) {
+      window.alert("로그인 후 후원 가능합니다!");
+      history.push("/login");
+    } else {
+      dispatch(articleActions.donateDB(articleId));
     }
+  };
 
   return (
     <React.Fragment>
@@ -247,18 +247,24 @@ const PostDetail = (props) => {
 
                   {/* {!donateCheck ? */}
                   <Button
-                  _onClick={wantDonate}
-                  donateHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold>
-                    이 프로젝트 후원하기</Button>
-                    {/* :
+                    _onClick={wantDonate}
+                    donateHover
+                    height="52px"
+                    padding="15px"
+                    bold
+                    fontSize="15.4px"
+                    borderRadius="0.285714rem"
+                    bold
+                  >
+                    이 프로젝트 후원하기
+                  </Button>
+                  {/* :
                   <Button
                   _onClick={cancelDonate}
                   CancelHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold
                     color="rgba(0, 0, 0, 0.6)" bg="rgb(231, 231, 231)"
                   >후원 취소하기</Button>
                 } */}
-                  
-
 
                   {/* 후원 취소하기 버튼 */}
                 </div>
@@ -286,6 +292,7 @@ const PostDetail = (props) => {
           {detail && <Creator {...detail}></Creator>}
         </div>
       </DetailBottom>
+      <Footer />
     </React.Fragment>
   );
 };
