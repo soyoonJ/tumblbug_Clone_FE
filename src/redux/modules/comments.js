@@ -67,6 +67,9 @@ const addCommentDB = (articleId, comment) => {
     })
     .catch(function (error) {
       console.log(error);
+    })
+    .then(() => {
+      dispatch(getCommentDB(articleId))
     });
 
   };
@@ -123,11 +126,11 @@ const deleteCommentDB = (commentId, articleId) => {
 export default handleActions(
   {
     [SET_COMMENT]: (state, action) => produce(state, (draft) => {
-      draft.comment_list[action.payload.articleId] = action.payload.comments;
+      draft.comment_list[action.payload.articleId] = action.payload.comments.reverse();
+      console.log('전체', draft.comment_list[action.payload.articleId])
     }),
 
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
-      // console.log(action.payload)
       draft.comment_list[action.payload.articleId].unshift(action.payload.comment);
     }),
 

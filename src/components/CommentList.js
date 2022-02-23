@@ -342,6 +342,7 @@ const List = (props) => {
   const comment_list = useSelector((state)=>state.comments.comment_list[articleId]);
   // console.log('List', comment_list);
 
+
   const dispatch = useDispatch();
 
   const [isActive, setIsActive] = useState(false);
@@ -355,6 +356,8 @@ const List = (props) => {
     setEdit(true);
     setIsActive(false);
   }
+
+  // console.log('아이디', articleId, commentId)
 
   const editComment = ((e)=> {
     if(e.key==='Enter') {
