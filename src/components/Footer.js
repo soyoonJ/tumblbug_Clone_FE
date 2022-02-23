@@ -90,11 +90,24 @@ const Footer = (props) => {
             </CompanyItem>
             <CompanyItem>
               <strong>프론트엔드</strong>
-              <span>박수민, 정소윤, 구미리</span>
+              <span>
+                <a href="https://github.com/clappingmin">박수민</a>
+              </span>
+              <span>
+                <a href="https://github.com/soyoonJ">정소윤</a>
+              </span>
+              <span>
+                <a href="https://github.com/mirigu">구미리</a>
+              </span>
             </CompanyItem>
             <CompanyItem>
               <strong>백엔드</strong>
-              <span>나기탁, 장창훈</span>
+              <span>
+                <a href="https://github.com/nagitak">나기탁</a>
+              </span>
+              <span>
+                <a href="https://github.com/Hoon333">장창훈</a>
+              </span>
             </CompanyItem>
           </Company>
         </FooterCompany>
@@ -246,6 +259,12 @@ const CompanyItem = styled.div`
   span {
     margin: 0px 8px 0px 0px;
     color: rgb(109, 109, 109);
+  }
+
+  a {
+    cursor: pointer;
+    color: rgb(109, 109, 109);
+    text-decoration: none;
   }
 `;
 

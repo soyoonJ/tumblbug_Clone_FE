@@ -19,12 +19,14 @@ const RankPost = (props) => {
   return (
     <React.Fragment>
       <SidePostCard>
-        <PostImg
-          onClick={() => {
-            history.replace(`/post/${articleId}`);
-          }}
-          src={image}
-        />
+        <ImgDiv>
+          <PostImg
+            onClick={() => {
+              history.replace(`/post/${articleId}`);
+            }}
+            src={image}
+          />
+        </ImgDiv>
         <Rank></Rank>
         <PostContent>
           <Grid>
@@ -36,7 +38,7 @@ const RankPost = (props) => {
               {category}
             </A>
             <Span>ㅣ</Span>
-            <A href="#">
+            <A>
               {nickname.length > 10
                 ? nickname.substring(0, 10) + "..."
                 : nickname}
@@ -64,6 +66,14 @@ const SidePostCard = styled.div`
   width: 100%;
   height: 100%;
   margin-bottom: 12px;
+`;
+
+const ImgDiv = styled.div`
+  width: 108px;
+  position: relative;
+  overflow: hidden;
+  flex: 0 0 auto;
+  cursor: pointer;
 `;
 
 const PostImg = styled.img`
