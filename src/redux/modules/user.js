@@ -114,7 +114,7 @@ export default handleActions(
   {
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
-        console.log('hi!!!!!!!!', action.payload.user);
+        // console.log('hi!!!!!!!!', action.payload.user.email);
         draft.user.email = action.payload.user.email;
         draft.user.nickname = action.payload.user.nickname;
         draft.is_login = true;

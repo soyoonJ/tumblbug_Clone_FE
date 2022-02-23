@@ -50,7 +50,7 @@ const NaviTop = (props) => {
                   <div
                     onClick={() => {
                       dispatch(userActions.logOut());
-                      history.replace('/');
+                      window.location.replace('/');
                     }}
                   >
                     로그아웃
