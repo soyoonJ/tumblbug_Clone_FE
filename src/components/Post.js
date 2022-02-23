@@ -20,12 +20,15 @@ const Post = (props) => {
   return (
     <React.Fragment>
       <PostCard>
-        <PostImg
-          src={image}
-          onClick={() => {
-            history.push(`/post/${articleId}`);
-          }}
-        />
+        <ImgDiv>
+          <PostImg
+            src={image}
+            onClick={() => {
+              history.push(`/post/${articleId}`);
+            }}
+          />
+        </ImgDiv>
+
         <PostContent>
           <Grid padding="0px 0px 2px">
             <A
@@ -57,6 +60,11 @@ const PostCard = styled.div`
   width: 25%;
   padding: 0px 7px;
   margin-bottom: 40px;
+`;
+
+const ImgDiv = styled.div`
+  position: relative;
+  overflow: hidden;
 `;
 
 const PostImg = styled.img`
