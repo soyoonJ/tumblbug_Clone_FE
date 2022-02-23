@@ -15,16 +15,20 @@ const PostDetail = (props) => {
   // getPostFB가 완성되고 나서 살려야 함
   const is_login = useSelector((state) => state.user.is_login);
 
-  const article = useSelector((state) => state.articles.one_list);
-  const donators = useSelector((state) => state.articles.is_donate);
-  console.log("뷰 도네이터", donators);
-  // const donateCheck = (donators?.filter(e=>e === userEmail).length !== 0)?true:false;
+  const article = useSelector((state)=> state.articles.one_list)
+  const donators = useSelector((state)=> state.articles.one_list.detailedProjects.donator)
+  // console.log('도네이터 수', donators)
+  const userEmail = useSelector((state)=>state.user.user.email)
 
-  // const isDonate = useSelector((state) => state.articles.is_donate)
-  // const userEmail = useSelector((state)=>state.user.user.email)
+  // 도네이트 여부
+  const isDonate = (donators?.findIndex(e=> e.email === userEmail) !== -1 )?true:false;
+  // console.log('isDonate', isDonate);
 
   // articleId 파라미터 가져오기
   const articleId = props.match.params.id;
+  const comment_list = useSelector((state) => state.comments.comment_list)
+  const commentNum = comment_list[articleId]?.length
+  // console.log('개수', commentNum)
   // 모인금액, 후원자 숫자 콤마작업
   const detail = article.detailedProjects;
   // console.log('디테일', detail)
@@ -72,6 +76,10 @@ const PostDetail = (props) => {
       dispatch(articleActions.donateDB(articleId));
     }
   };
+
+    const cancelDonate = () => {
+      dispatch(articleActions.notDonateDB(articleId))
+    }
 
   return (
     <React.Fragment>
@@ -245,26 +253,20 @@ const PostDetail = (props) => {
                   {/* 후원상태가 true라면 밑에 버튼, false면 회색버튼 추가 */}
                   {/* 후원하기 버튼 */}
 
-                  {/* {!donateCheck ? */}
-                  <Button
-                    _onClick={wantDonate}
-                    donateHover
-                    height="52px"
-                    padding="15px"
-                    bold
-                    fontSize="15.4px"
-                    borderRadius="0.285714rem"
-                    bold
-                  >
-                    이 프로젝트 후원하기
-                  </Button>
-                  {/* :
+                  {isDonate?
+                  // 취소버튼
                   <Button
                   _onClick={cancelDonate}
                   CancelHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold
                     color="rgba(0, 0, 0, 0.6)" bg="rgb(231, 231, 231)"
                   >후원 취소하기</Button>
-                } */}
+                  :
+                  // 후원버튼
+                  <Button
+                  _onClick={wantDonate}
+                  donateHover height="52px" padding="15px" bold fontSize="15.4px" borderRadius="0.285714rem" bold>
+                    이 프로젝트 후원하기</Button>
+                  }
 
                   {/* 후원 취소하기 버튼 */}
                 </div>
@@ -278,7 +280,7 @@ const PostDetail = (props) => {
         <div>
           <div>
             <a>
-              커뮤니티<span>0</span>
+              커뮤니티<span>{commentNum}</span>
             </a>
           </div>
         </div>

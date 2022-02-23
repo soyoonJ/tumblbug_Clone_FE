@@ -18,6 +18,8 @@ const CommentList = ({ detail, articleId }) => {
   const [writeComment, setComment] = useState('');
   const dispatch = useDispatch();
 
+  const _user = useSelector((state)=>state.user.user.email);
+
 
   React.useEffect(() => {
     dispatch(commentActions.getCommentDB(articleId));
@@ -162,7 +164,7 @@ const CommentList = ({ detail, articleId }) => {
           {/* 코멘트 박스 -> map 돌려야 함*/}
 
             {comment_list[articleId]?.map((e, i) => {
-              return <List key={i} {...e}></List>;
+              return <List key={i} isUser={e.email===_user} {...e}></List>;
             })}
             {/* <List></List> */}
           </div>
@@ -331,9 +333,10 @@ const List = (props) => {
 
   // console.log('댓글props',props)
   const { commentId, articleId, comment, nickname } = props;
+  const comment_list = useSelector((state)=>state.comments.comment_list[articleId]);
+  // console.log('List', comment_list);
 
   const dispatch = useDispatch();
-  // const comment_list = useSelector((state)=>state.comments.comment_list)
 
   const [isActive, setIsActive] = useState(false);
   const [isEdit, setEdit] = useState(false);
@@ -349,8 +352,11 @@ const List = (props) => {
 
   const editComment = ((e)=> {
     if(e.key==='Enter') {
-      dispatch(commentActions.editCommentDB(articleId, commentId, comment));
-      setEdit(false)
+      // 댓글 생성하자마자 수정 시도하면 안됨... 이유가 뭘까?
+      console.log('엔터누르고', props.articleId, props.commentId);
+      dispatch(commentActions.editCommentDB(props.articleId, props.commentId, e.target.value));
+      // dispatch(commentActions.editCommentDB(articleId, comment_list?.commentId, e.target.value));
+      setEdit(false);
     }
 })
 
@@ -398,7 +404,9 @@ const List = (props) => {
               </span>
             </UserInfo>
           </div>
-          {/* 수정삭제버튼 */}
+          
+          {props.isUser?
+          // 수정삭제버튼
           <div style={{ position: "relative" }}>
             {/* 아이콘 */}
             <IconBtn onClick={modalClick}>
@@ -428,6 +436,10 @@ const List = (props) => {
             ) : null}
 
           </div>
+          :
+          null
+          }
+
         </div>
         {/* 코멘트 내용 */}
         {!isEdit ? (
@@ -517,7 +529,6 @@ li > a {
   font-size: 14px;
 }
 `
-
 const UserInfo = styled.div`
   margin-left: 1rem;
 `;
