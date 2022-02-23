@@ -524,34 +524,28 @@ const SubInfo = styled.div`
   background-color: rgb(250, 250, 250);
   border: 1px solid rgb(239, 239, 239);
   display: block;
-   {
-    // 텍스트 묶음
-  }
+
   & > div {
     font-size: 1rem;
     color: rgba(0, 0, 0, 0.8);
     display: block;
   }
-   {
-    /* 펀딩 진행중 */
-  }
+
+  /* 펀딩 진행중 */
   & > div > div {
     font-weight: 700;
     line-height: 1.5;
     margin-bottom: 0.5rem;
   }
-   {
-    /* 목표금액~결제 안내 */
-  }
+
+  /* 목표금액~결제 안내 */
   & > div > span {
     line-height: 1.5;
     font-size: 1rem;
   }
 `;
 
-{
-  /* 하트/공유/후원하기 버튼 */
-}
+/* 하트/공유/후원하기 버튼 */
 const DetailButtons = styled.div`
   div {
     display: flex;
@@ -581,9 +575,7 @@ const IconAlign = styled.div`
   }
 `;
 
-{
-  /* 커뮤니티 네비게이션 */
-}
+/* 커뮤니티 네비게이션 */
 const Nav = styled.nav`
   @media (min-width: 1080px) {
     height: 56px;
@@ -610,9 +602,7 @@ const Nav = styled.nav`
     display: flex;
   }
 
-   {
-    /* 커뮤니티 */
-  }
+  /* 커뮤니티 */
   a {
     @media (min-width: 1080px) {
       margin-right: 17px;
@@ -634,9 +624,7 @@ const Nav = styled.nav`
   }
 `;
 
-{
-  /* 하단 댓글/창작자 */
-}
+/* 하단 댓글/창작자 */
 const DetailBottom = styled.div`
   @media only screen and (min-width: 1080px) {
     width: 1080px;
