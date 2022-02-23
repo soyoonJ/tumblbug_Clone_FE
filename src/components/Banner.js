@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, Grid, Text } from "../elements";
+import { Grid, Text } from "../elements";
+import { useSelector } from "react-redux";
 
 const Banner = (props) => {
   return (
@@ -19,10 +20,10 @@ const Banner = (props) => {
               {props.banner_title}
             </Text>
             <Text
-              weight="600"
+              weight="300"
               size="14px"
               color="white"
-              margin=" 0px 0px 50px 0px"
+              margin=" 0px 0px 80px 0px"
             >
               {props.banner_comment}
             </Text>
@@ -59,9 +60,9 @@ const Banner = (props) => {
 };
 
 Banner.defaultProps = {
-  src: "https://d1ohqa58xvigdz.cloudfront.net/heroes/eutbag2nd-1.png?q=80&width=920&height=560&fit=crop",
-  banner_title: "잊혀진 한국 신화와 영웅이 깃든 타로",
-  banner_comment: "탄탄한 스토리와 수려한 일러스트, 만신 타로카드2",
+  src: "https://d1ohqa58xvigdz.cloudfront.net/heroes/dreamroad.jpg?q=80&width=920&height=560&fit=crop",
+  banner_title: "어젯밤 꿈은 무슨 뜻일까",
+  banner_comment: "키워드에 감정,행동 조합해 입체적인 꿈 해몽서",
   cnt: 4,
   curcnt: 1,
 };
@@ -77,7 +78,7 @@ const BannerImage = styled.img`
 
 const BannerComment = styled.div`
   width: 306px;
-  background-color: #863d5e;
+  background-color: #8c3145;
   padding: 40px;
 `;
 

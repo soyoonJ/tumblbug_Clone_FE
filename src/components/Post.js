@@ -68,15 +68,19 @@ const ImgDiv = styled.div`
 `;
 
 const PostImg = styled.img`
-  position: relative;
   width: 100%;
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+    transition: all 0.4s ease 0s;
+  }
 `;
 
 const A = styled.a`
   font-size: 11.5px;
   color: rgb(109 109 109);
-  letter-spacing: -0.005em;
+  letter-spacing: -0.019em;
   /* line-height: 16px; */
   text-decoration: none;
   cursor: pointer;
