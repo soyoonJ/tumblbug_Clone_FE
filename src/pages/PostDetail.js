@@ -10,24 +10,29 @@ import { history } from "../redux/configureStore";
 
 const PostDetail = (props) => {
   const dispatch = useDispatch();
-  // console.log(isDonate)
+  
+  React.useEffect(() => {
+    // 아티클 정보 불러오기
+    dispatch(articleActions.getOneDB(articleId));
+    
+  }, []);
+
 
   // getPostFB가 완성되고 나서 살려야 함
   const is_login = useSelector((state) => state.user.is_login);
-
-  const article = useSelector((state)=> state.articles.one_list)
-  const donators = useSelector((state)=> state.articles.one_list.detailedProjects.donator)
-  // console.log('도네이터 수', donators)
   const userEmail = useSelector((state)=>state.user.user.email)
 
+  const article = useSelector((state)=> state.articles.one_list)
+  
   // 도네이트 여부
-  const isDonate = (donators?.findIndex(e=> e.email === userEmail) !== -1 )?true:false;
-  // console.log('isDonate', isDonate);
+  // console.log('도네이터 수', donators)
+  const donators = useSelector((state)=> state.articles.one_list.detailedProjects.donator)
+  const isDonate = (donators?.findIndex(e=> e === userEmail) !== -1 )?true:false;
 
   // articleId 파라미터 가져오기
   const articleId = props.match.params.id;
   const comment_list = useSelector((state) => state.comments.comment_list)
-  const commentNum = comment_list[articleId]?.length
+  const commentNum = comment_list[articleId]?.length;
   // console.log('개수', commentNum)
   // 모인금액, 후원자 숫자 콤마작업
   const detail = article.detailedProjects;
@@ -62,10 +67,6 @@ const PostDetail = (props) => {
     // 아티클 정보 불러오기
     dispatch(articleActions.getOneDB(articleId));
     
-    // 코멘트 정보 불러오기
-    // dispatch(commentActions.getCommentDB(articleId))
-    // 후원자 정보 바뀔 때마다 변경해주기
-    // },[article])
   }, []);
 
     const wantDonate = () => {
@@ -97,7 +98,7 @@ const PostDetail = (props) => {
                         fontWeight: "600",
                         color: "#757575",
                         padding: "0.6rem",
-                        fontSize: "0.9rem",
+                        fontSize: "0.8rem",
                         background: "rgb(250, 250, 250)",
                         border: "1px solid rgb(239, 239, 239)",
                         borderRadius: "2px",
@@ -114,7 +115,7 @@ const PostDetail = (props) => {
                       marginTop="5px"
                       src={detail.creatorImg}
                     />
-                    <span style={{ fontWeight: "600", fontSize: "1rem" }}>
+                    <span style={{ fontWeight: "600", fontSize: "0.9rem" }}>
                       {detail.nickname}
                     </span>
                   </div>
@@ -382,7 +383,7 @@ const Title = styled.div`
 
   h1 {
     @media (min-width: 1080px) {
-      font-size: 2.8rem;
+      font-size: 2.5rem;
       margin: 1.5rem 0px 1rem;
     }
     min-height: 1rem;
@@ -461,7 +462,7 @@ const Info = styled.aside`
 `;
 const InfoTitle = styled.div`
   @media (min-width: 1080px) {
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin-bottom: 1rem;
   }
   color: rgba(0, 0, 0, 0.87);
@@ -470,25 +471,29 @@ const InfoNum = styled.div`
   @media (min-width: 1080px) {
     font-size: 2.75rem;
   }
-  letter-spacing: 0.5px;
-  font-family: Segoe UI;
+  letter-spacing: 0.3px;
   width: 100%;
 
   span {
+    &:nth-child(1) {
+      font-size: 2.5rem;
+      font-family: Segoe UI;
+    }
     &:nth-child(2) {
       @media (min-width: 1080px) {
-        font-size: 1rem;
+        font-size: 0.9rem;
       }
       color: rgba(0, 0, 0, 0.87);
       margin-left: 0.25rem;
+
     }
     &:nth-child(3) {
       @media (min-width: 1080px) {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         margin-left: 10px;
       }
       display: inline;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
       font-family: Segoe UI;
       font-weight: 700;
     }
@@ -507,7 +512,6 @@ const SubInfo = styled.div`
     // 텍스트 묶음
   }
   & > div {
-    font-size: 1rem;
     color: rgba(0, 0, 0, 0.8);
     display: block;
   }
@@ -515,6 +519,7 @@ const SubInfo = styled.div`
     /* 펀딩 진행중 */
   }
   & > div > div {
+    font-size: 0.9rem;
     font-weight: 700;
     line-height: 1.5;
     margin-bottom: 0.5rem;
@@ -524,7 +529,7 @@ const SubInfo = styled.div`
   }
   & > div > span {
     line-height: 1.5;
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 `;
 

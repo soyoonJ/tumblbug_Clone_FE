@@ -14,7 +14,13 @@ const CommentList = ({ detail, articleId }) => {
     // 댓글 작성창 활용 용도
   const is_login = useSelector((state) => state.user.is_login);
   const username = useSelector((state)=>state.user.user.nickname);
+  const userEmail = useSelector((state)=>state.user.user.email)
+
   const comment_list = useSelector((state)=>state.comments.comment_list);
+
+  const donators = useSelector((state)=> state.articles.one_list.detailedProjects.donator)
+  const isDonate = (donators?.findIndex(e=> e === userEmail) !== -1 )?true:false;
+  // console.log('코멘트리스트', comment_list)
   const [writeComment, setComment] = useState('');
   const dispatch = useDispatch();
 
@@ -50,7 +56,7 @@ const CommentList = ({ detail, articleId }) => {
             {/* 댓글 작성창 */}
             <div>
               {/* 로그인+후원까지 했을 때 댓글 창 */}
-              {is_login ?
+              {is_login?
               <CommentWrite onKeyPress={handlePress}>
               {username && (
                 <Profileimg>
@@ -85,7 +91,6 @@ const CommentList = ({ detail, articleId }) => {
                   />
                 <span>로그인 해주세요.</span>
               </CommentLogin>
-
             }
               {/* 후원 안했을 때 댓글 창 */}
               {/* <CommentDonate>
@@ -162,7 +167,7 @@ const CommentList = ({ detail, articleId }) => {
             </div>
           </Contents>
           {/* 코멘트 박스 -> map 돌려야 함*/}
-
+            
             {comment_list[articleId]?.map((e, i) => {
               return <List key={i} isUser={e.email===_user} {...e}></List>;
             })}
@@ -544,7 +549,7 @@ const UserName = styled.div`
     max-width: 320px;
   }
   color: rgb(61, 61, 61);
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   overflow: hidden;
 `;
@@ -555,7 +560,6 @@ const Comment = styled.div`
 
   & > div {
     @media (min-width: 1080px) {
-      padding: 1.5rem 0;
       font-size: 16px;
       line-height: 28px;
     }
@@ -565,7 +569,6 @@ const Comment = styled.div`
     max-width: 620px;
     margin: 0px auto;
     display: block;
-    padding-top: 16px;
     line-height: 28px;
     color: rgb(61, 61, 61);
   }
@@ -576,7 +579,7 @@ const Comment = styled.div`
   max-width: 620px;
   margin: 0px auto;
   display: block;
-  padding-top: 16px;
+  padding: 1.5rem 0;
   line-height: 28px;
   color: rgb(61, 61, 61);
 }
@@ -592,7 +595,6 @@ const Comment = styled.div`
   max-width: 620px;
   width: 95%;
   margin: 0px auto;
-  padding-top: 16px;
   line-height: 28px;
   color: rgb(61, 61, 61);
   border-radius: 4px;
