@@ -334,7 +334,7 @@ const List = (props) => {
   // console.log('댓글props',props)
   const { commentId, articleId, comment, nickname } = props;
   const comment_list = useSelector((state)=>state.comments.comment_list[articleId]);
-  console.log('List', comment_list);
+  // console.log('List', comment_list);
 
   const dispatch = useDispatch();
 

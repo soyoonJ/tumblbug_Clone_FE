@@ -92,7 +92,7 @@ const getPopularArticlesDB = () => {
 // loginCheck 완료되면 가능
 const donateDB = (articleId) => {
   return function (dispatch, getState, { history }) {
-    const userEmail = getState().user.user.email;
+    // const userEmail = getState().user.user.email;
     // console.log('후원유저', userEmail)
     // user에서 로그인 여부 받아와서 나눠주기
     axios
@@ -106,8 +106,8 @@ const donateDB = (articleId) => {
         }
       )
       .then(function (res) {
-        // console.log("도네이트", articleId, userEmail);
-        dispatch(wantDonate(articleId, userEmail));
+        console.log('donate', articleId)
+        dispatch(getOneDB(articleId))
       })
       .catch(function (error) {
         console.log(error);
@@ -115,23 +115,23 @@ const donateDB = (articleId) => {
   };
 };
 
-// const notDonateDB = (articleId) => {
-//   return function (dispatch, getState, { history }) {
-// axios
-//   .patch(`http://3.35.176.155:8080/api/article/${articleId}/donationCancel`,{
-//     headers: {
-//     Authorization: `Bearer ${localStorage.getItem("login-token")}`,
-//     },
-// })
-//   .then(function (res) {
-//     console.log(res);
-//     // dispatch(cancelDonate(articleId));
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   });
-//   };
-// };
+const notDonateDB = (articleId) => {
+  return function (dispatch, getState, { history }) {
+axios
+  .patch(`http://3.35.176.155:8080/api/article/${articleId}/donationCancel`,{},{
+    headers: {
+    Authorization: `Bearer ${localStorage.getItem("login-token")}`,
+    },
+})
+  .then(function (res) {
+    console.log('notdonate', articleId)
+    dispatch(getOneDB(articleId));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+  };
+};
 
 // articleId 샘플 - 21
 const getOneDB = (articleId) => {
@@ -228,9 +228,9 @@ export default handleActions(
       produce(state, (draft) => {
         // is_donate = {1:soyoon}
         // is_donate = {1:[soyoon, ,,, ,,, ]}
-        console.log(action.payload.articleId, action.payload.userEmail)
+        // console.log(action.payload.articleId, action.payload.userEmail)
         draft.is_donate[action.payload.articleId].push(action.payload.userEmail);
-        console.log("도네이트 정보", draft.is_donate[action.payload.articleId]);
+        // console.log("도네이트 정보", draft.is_donate[action.payload.articleId]);
       }),
     // [CANCEL_DONATE]: (state, action) =>
     // produce(state, (draft) => {
@@ -269,8 +269,8 @@ const actionCreators = {
   getOneDB,
   wantDonate,
   donateDB,
-  // cancelDonate,
-  // notDonateDB,
+  cancelDonate,
+  notDonateDB,
 
   searchDB,
   categoryDB,

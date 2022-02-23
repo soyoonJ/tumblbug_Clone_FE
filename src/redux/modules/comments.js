@@ -28,7 +28,7 @@ const getCommentDB = (articleId) => {
     axios
       .get(`http://3.35.176.155:8080/api/comments/${articleId}`)
       .then(function (res) {
-        console.log('코멘트전체확인',res.data.comments);
+        // console.log('코멘트전체확인',res.data.comments);
 
         // let comments = [];
         // const commentDB = res.data.comments;
