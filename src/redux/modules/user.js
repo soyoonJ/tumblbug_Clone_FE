@@ -74,27 +74,6 @@ const loginCheckDB = () => {
   };
 };
 
-// 카카오 토큰 받기
-const loginKaKaoDB = (email, nickname) => {
-  return function (dispatch, getState, { history }) {
-    apis
-      .loginKakao(email, nickname)
-      .then((res) => {
-        console.log('토큰내놔!!!!!!!!!!', res);
-        if (!res.data.result) {
-          alert('회원정보가 올바르지 않습니다.');
-          return;
-        }
-        localStorage.setItem('login-token', res.data.token);
-        dispatch(setUser({ email }));
-        // window.location.replace('/');
-      })
-      .catch(function (error) {
-        alert('아이디 또는 비밀번호를 확인해주세요.');
-      });
-  };
-};
-
 // 카카오 API
 const getKakaoProfile = () => {
   return function (dispatch, getState, { history }) {
