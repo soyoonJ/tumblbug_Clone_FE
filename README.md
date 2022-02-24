@@ -22,7 +22,7 @@
 
 ## 사용 기술 스택
 
-<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black"/> <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"/> <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white"/>  <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"/> <img src="https://img.shields.io/badge/Amazon S3-569A31?style=for-the-badge&logo=Amazon S3&logoColor=white"/>
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black"/> <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"/> <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white"/> <img src="https://img.shields.io/badge/Amazon S3-569A31?style=for-the-badge&logo=Amazon S3&logoColor=white"/>
 
 ## 와이어프레임  
 👉[와이어프레임](https://www.figma.com/file/BLHgGHVpTFsCBL9b1ftKjh/%ED%95%AD%ED%95%B499-%ED%85%80%EB%B8%94%EB%B2%85-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9_%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84?node-id=0%3A1)
@@ -51,7 +51,11 @@
  - [x] 댓글 조회/작성/수정/삭제
 
 
-## 결과 및 [🎥 시연 영상](https://www.youtube.com/watch?v=s4IIfrH5daI)
+## 결과 및 [🎥 시연 영상](https://www.youtube.com/watch?v=iQ80Nb2BXTo)
 
-[텀블벅 클론 웹사이트](http://tumblbugclone.s3-website.ap-northeast-2.amazonaws.com/)
-
+[텀블벅 클론코딩](http://tumblbugclone.s3-website.ap-northeast-2.amazonaws.com/)
+회원가입~로그인
+https://user-images.githubusercontent.com/96245651/155518838-c65fbf56-bc5e-4997-bdf0-8dd0278447cb.mp4
+로그인 이후 기능구현
+https://user-images.githubusercontent.com/96245651/155518917-fdc49f7e-8d6d-43fc-89c4-ee7c14005738.mp4
+|:---:|:---:|:---:|
