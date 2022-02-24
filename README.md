@@ -13,12 +13,12 @@
 2022.02.18 - 2022.02.24
 
 ### Back-end
-<a href="https://github.com/nagitak"><img width="180"  src="https://img.shields.io/static/v1?label=Node.js&message=나기탁&color=08CE5D&style=for-the-badge&>"/></a> <a href="https://github.com/Hoon333"><img width="180"  src="https://img.shields.io/static/v1?label=Node.js&message=장창훈&color=08CE5D&style=for-the-badge&>"/></a> 
+<a href="https://github.com/nagitak"><img width="180"  src="https://img.shields.io/static/v1?label=Node.js&message=GITAK NA&color=08CE5D&style=for-the-badge&>"/></a> <a href="https://github.com/Hoon333"><img width="180"  src="https://img.shields.io/static/v1?label=Node.js&message=CHANGHOON JANG&color=08CE5D&style=for-the-badge&>"/></a> 
 
 ### Front-end
-<a href="https://github.com/mirigu"><img width="180"  src="https://img.shields.io/static/v1?label=React&message=구미리&color=61dafb&style=for-the-badge&>"/></a> 
-<a href="https://github.com/clappingmin"><img width="180"  src="https://img.shields.io/static/v1?label=React&message=박수민&color=61dafb&style=for-the-badge&>"/></a> 
-<a href="https://github.com/soyoonJ"><img width="180"  src="https://img.shields.io/static/v1?label=React&message=정소윤&color=61dafb&style=for-the-badge&>"/></a>
+<a href="https://github.com/mirigu"><img width="180"  src="https://img.shields.io/static/v1?label=React&message=MIRI GU&color=61dafb&style=for-the-badge&>"/></a> 
+<a href="https://github.com/clappingmin"><img width="180"  src="https://img.shields.io/static/v1?label=React&message=SUMIN PARK&color=61dafb&style=for-the-badge&>"/></a> 
+<a href="https://github.com/soyoonJ"><img width="180"  src="https://img.shields.io/static/v1?label=React&message=SOYOON JEONG&color=61dafb&style=for-the-badge&>"/></a>
 
 
 ## 사용 기술 스택
