@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import { Grid } from "../elements";
-import { history } from "../redux/configureStore";
+import React from 'react';
+import styled from 'styled-components';
+import { Grid } from '../elements';
+import { history } from '../redux/configureStore';
 
 const SearchPost = (props) => {
   const {
@@ -49,7 +49,7 @@ const SearchPost = (props) => {
           </Grid>
           <Content>
             {contents.length > 40
-              ? contents.substring(0, 40) + "..."
+              ? contents.substring(0, 40) + '...'
               : contents}
           </Content>
         </PostContent>
