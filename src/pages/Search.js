@@ -32,6 +32,10 @@ const Search = (props) => {
       <React.Fragment>
         <Header />
         <Container>
+          <CateroryTitle>{search}</CateroryTitle>
+          <ProjectCounter>
+            <span>{allList ? allList.length : 0}</span>개의 프로젝트가 있습니다.
+          </ProjectCounter>
           <PostBox>
             {allList
               ? allList.map((a, i) => {
@@ -48,6 +52,11 @@ const Search = (props) => {
     <React.Fragment>
       <Header />
       <Container>
+        <CateroryTitle>{search}</CateroryTitle>
+        <ProjectCounter>
+          <span>{searchList ? searchList.length : 0}</span>개의 프로젝트가
+          있습니다.
+        </ProjectCounter>
         <PostBox>
           {searchList
             ? searchList.map((a, i) => {
@@ -63,17 +72,39 @@ const Search = (props) => {
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   position: relative;
   justify-content: flex-start;
   width: 100%;
   max-width: 1160px;
   margin: 0px auto;
-  padding: 56px 0px;
+  padding: 50px 0px;
 `;
 
 const PostBox = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 0px -6px;
+`;
+
+const CateroryTitle = styled.div`
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 28px;
+  margin-bottom: 10px;
+`;
+
+const ProjectCounter = styled.div`
+  margin: 14px 0px 24px;
+  font-size: 16px;
+  line-height: 27px;
+  span {
+    color: rgb(255, 87, 87);
+  }
+  @media (max-width: 1080px) {
+    font-size: 14px;
+    line-height: 24px;
+    margin: 14px 16px 24px;
+  }
 `;
 export default Search;
