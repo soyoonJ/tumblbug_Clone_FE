@@ -3,7 +3,6 @@
 ## 🤷 프로젝트 소개
 ### 텀블벅 클론 코딩  
 
-
 ## 깃허브 및 팀노션
  - [BE](https://github.com/Hoon333/tumblbug_Clone_BE)
  - [FE](https://github.com/soyoonJ/tumblbug_Clone_FE)
@@ -24,6 +23,10 @@
 ## 사용 기술 스택
 
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black"/> <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"/> <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white"/> <img src="https://img.shields.io/badge/Amazon S3-569A31?style=for-the-badge&logo=Amazon S3&logoColor=white"/>
+
+## 와이어프레임  
+[와이어프레임](https://www.figma.com/file/BLHgGHVpTFsCBL9b1ftKjh/%ED%95%AD%ED%95%B499-%ED%85%80%EB%B8%94%EB%B2%85-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9_%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84?node-id=0%3A1)
+[메인와이어프레임](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbvQsFa%2FbtruiTKNamj%2FYpO6LIF7MW3Bg7A30f1u1K%2Fimg.png)
 
 ## 기능
 
