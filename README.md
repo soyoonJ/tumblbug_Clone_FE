@@ -53,7 +53,7 @@
 
 ## 결과 및 [🎥 시연 영상](https://www.youtube.com/watch?v=s4IIfrH5daI)
 
-[텀블벅 클론코딩](http://tumblbugclone.s3-website.ap-northeast-2.amazonaws.com/)    
+[텀블벅 클론 ](http://tumblbugclone.s3-website.ap-northeast-2.amazonaws.com/)    
 - 회원가입~로그인
 
 https://user-images.githubusercontent.com/96245651/155518838-c65fbf56-bc5e-4997-bdf0-8dd0278447cb.mp4
