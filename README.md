@@ -29,18 +29,26 @@
 ![메인와이어프레임](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbvQsFa%2FbtruiTKNamj%2FYpO6LIF7MW3Bg7A30f1u1K%2Fimg.png)
 
 ## 기능
+💸 회원가입
+- [x] 이메일 로그인
+- [x] 소셜 로그인
 
-- [x] 로그인
-- [x] 회원가입
-- [x] 메인 페이지
-- [x] 판매 상품 등록/수정
-- [x] 상품 상세페이지 수정/삭제
-- [x] 댓글 삭제/수정
+💸 로그인
+- [x] 이메일 로그인
+- [x] 소셜 로그인
 
-🥕 추가 기능
- - [x] 판매중 / 거래완료 필터링
- - [x] 전체게시글에 댓글 갯수 표시
- - [x] 검색기능 - 글제목 title 기준 검색
+💸 마이페이지
+- [x] 내가 후원한 프로젝트 조회
+
+💸 메인페이지
+ - [x] 주목할만한 프로젝트
+ - [x] 인기프로젝트 조회
+ - [x] 검색기능
+ - [x] 카테고리별 프로젝트 조회
+
+💸 메인페이지
+ - [x] 후원하기/취소
+ - [x] 댓글 조회/작성/수정/삭제
 
 
 ## 결과 및 [🎥 시연 영상](https://www.youtube.com/watch?v=iQ80Nb2BXTo)
