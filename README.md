@@ -54,11 +54,11 @@
 ## 결과 및 [🎥 시연 영상](https://www.youtube.com/watch?v=iQ80Nb2BXTo)
 
 [텀블벅 클론코딩](http://tumblbugclone.s3-website.ap-northeast-2.amazonaws.com/)    
-회원가입~로그인
+- 회원가입~로그인
 
 https://user-images.githubusercontent.com/96245651/155518838-c65fbf56-bc5e-4997-bdf0-8dd0278447cb.mp4
 
-로그인 이후 기능구현  
+- 로그인 이후 기능구현  
 
 https://user-images.githubusercontent.com/96245651/155518917-fdc49f7e-8d6d-43fc-89c4-ee7c14005738.mp4
 
