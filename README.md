@@ -29,24 +29,24 @@
 ![메인와이어프레임](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbvQsFa%2FbtruiTKNamj%2FYpO6LIF7MW3Bg7A30f1u1K%2Fimg.png)
 
 ## 기능
-💸 회원가입
+💸 **회원가입**
 - [x] 이메일 로그인
 - [x] 소셜 로그인
 
-💸 로그인
+💸 **로그인**
 - [x] 이메일 로그인
 - [x] 소셜 로그인
 
-💸 마이페이지
+💸 **마이페이지**
 - [x] 내가 후원한 프로젝트 조회
 
-💸 메인페이지
+💸 **메인페이지**
  - [x] 주목할만한 프로젝트
  - [x] 인기프로젝트 조회
  - [x] 검색기능
  - [x] 카테고리별 프로젝트 조회
 
-💸 메인페이지
+💸 **페이지**
  - [x] 후원하기/취소
  - [x] 댓글 조회/작성/수정/삭제
 
