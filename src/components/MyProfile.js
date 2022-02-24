@@ -1,21 +1,21 @@
-import React from 'react';
-import styled from 'styled-components';
-import { BiSearch } from 'react-icons/bi';
-import { Text } from '../elements/index';
+import React from "react";
+import styled from "styled-components";
+import { BiSearch } from "react-icons/bi";
+import { Text } from "../elements/index";
 
-import SearchPost from './SearchPost';
+import SearchPost from "./SearchPost";
 
-import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
-import { actionCreators as articlesActions } from '../redux/modules/articles'; // as : 별명 주는거
+import { actionCreators as userActions } from "../redux/modules/user"; // as : 별명 주는거
+import { actionCreators as articlesActions } from "../redux/modules/articles"; // as : 별명 주는거
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
 const MyProfile = () => {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const myList = useSelector((store) => store.articles.my_list);
 
-  const is_token = localStorage.getItem('login-token') ? true : false;
+  const is_token = localStorage.getItem("login-token") ? true : false;
 
   React.useEffect(() => {
     if (is_token) {
@@ -31,11 +31,11 @@ const MyProfile = () => {
           <div className="userContainer">
             <div className="lastbox">
               <div className="lastname">
-                {user.user.nickname ? user.user.nickname[0] : ''}
+                {user.user.nickname ? user.user.nickname[0] : ""}
               </div>
             </div>
             <div className="userInfo">
-              <div className="userName">{user ? user.user.nickname : ''}</div>
+              <div className="userName">{user ? user.user.nickname : ""}</div>
               <div className="signAt">15시간 전 가입</div>
             </div>
           </div>
@@ -65,7 +65,7 @@ const MyProfile = () => {
                 ? myList.map((a, i) => {
                     return <SearchPost key={i} {...a} />;
                   })
-                : ''}
+                : ""}
             </PostBox>
           )}
         </ProjectList>

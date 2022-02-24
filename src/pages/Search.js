@@ -32,8 +32,9 @@ const Search = (props) => {
       <React.Fragment>
         <Header />
         <Container>
+          <CateroryTitle>{search}</CateroryTitle>
           <ProjectCounter>
-            <span>{allList ? allList.length : 0}</span>개의 프로젝트가 있습니다
+            <span>{allList ? allList.length : 0}</span>개의 프로젝트가 있습니다.
           </ProjectCounter>
           <PostBox>
             {allList
@@ -51,9 +52,10 @@ const Search = (props) => {
     <React.Fragment>
       <Header />
       <Container>
+        <CateroryTitle>{search}</CateroryTitle>
         <ProjectCounter>
           <span>{searchList ? searchList.length : 0}</span>개의 프로젝트가
-          있습니다
+          있습니다.
         </ProjectCounter>
         <PostBox>
           {searchList
@@ -76,7 +78,7 @@ const Container = styled.div`
   width: 100%;
   max-width: 1160px;
   margin: 0px auto;
-  padding: 56px 0px;
+  padding: 50px 0px;
 `;
 
 const PostBox = styled.div`
@@ -85,8 +87,15 @@ const PostBox = styled.div`
   margin: 0px -6px;
 `;
 
+const CateroryTitle = styled.div`
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 28px;
+  margin-bottom: 10px;
+`;
+
 const ProjectCounter = styled.div`
-  margin: 14px 24px 24px;
+  margin: 14px 0px 24px;
   font-size: 16px;
   line-height: 27px;
   span {
