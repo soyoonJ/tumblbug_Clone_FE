@@ -11,7 +11,7 @@ const Auth = () => {
   const dispatch = useDispatch();
 
   const REST_API_KEY = '7b3f8ab784a724634fbb9c5250dd699e';
-  const REDIRECT_URI = 'http://localhost:3000/oauth/kakao/callback';
+  const REDIRECT_URI = 'http://tumblbugclone.s3-website.ap-northeast-2.amazonaws.com/oauth/kakao/callback';
   const CLIENT_SECRET = 'rf1aaPug1Mcg9hjRpjZinu6CharA7byO';
   // calllback으로 받은 인가코드
   const code = new URL(window.location.href).searchParams.get('code');

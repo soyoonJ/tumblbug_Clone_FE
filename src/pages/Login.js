@@ -17,7 +17,7 @@ const Login = () => {
 
   // 카카오 로그인
   const REST_API_KEY = '7b3f8ab784a724634fbb9c5250dd699e';
-  const REDIRECT_URI = 'http://localhost:3000/oauth/kakao/callback';
+  const REDIRECT_URI = 'http://tumblbugclone.s3-website.ap-northeast-2.amazonaws.com/oauth/kakao/callback';
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   // 경고창 없애는 함수
