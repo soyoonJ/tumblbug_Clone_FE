@@ -23,6 +23,7 @@ const MyProfile = () => {
       dispatch(articlesActions.getMyDB());
     }
   }, []);
+
   return (
     <Box>
       <div className="boxTop">
@@ -194,14 +195,9 @@ const ProjectCounter = styled.div`
 `;
 
 const ProjectList = styled.div`
-  height: 425px;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  @media (max-width: 1080px) {
-    height: 272px;
-  }
 
   .emptyBox {
     display: flex;
