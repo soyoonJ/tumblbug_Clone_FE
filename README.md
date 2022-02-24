@@ -51,7 +51,7 @@
  - [x] 댓글 조회/작성/수정/삭제
 
 
-## 결과 및 [🎥 시연 영상](https://www.youtube.com/watch?v=iQ80Nb2BXTo)
+## 결과 및 [🎥 시연 영상](https://www.youtube.com/watch?v=s4IIfrH5daI)
 
 [텀블벅 클론코딩](http://tumblbugclone.s3-website.ap-northeast-2.amazonaws.com/)    
 - 회원가입~로그인
