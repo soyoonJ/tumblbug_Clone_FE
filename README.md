@@ -26,7 +26,7 @@
 
 ## 와이어프레임  
 [와이어프레임](https://www.figma.com/file/BLHgGHVpTFsCBL9b1ftKjh/%ED%95%AD%ED%95%B499-%ED%85%80%EB%B8%94%EB%B2%85-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9_%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84?node-id=0%3A1)
-[메인와이어프레임](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbvQsFa%2FbtruiTKNamj%2FYpO6LIF7MW3Bg7A30f1u1K%2Fimg.png)
+![메인와이어프레임](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbvQsFa%2FbtruiTKNamj%2FYpO6LIF7MW3Bg7A30f1u1K%2Fimg.png)
 
 ## 기능
 
