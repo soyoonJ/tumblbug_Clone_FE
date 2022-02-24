@@ -1,14 +1,14 @@
 // 액션 만들어주는 것들
-import { createAction, handleActions } from 'redux-actions';
-import { produce } from 'immer';
-import { apis } from '../../shared/api';
-import axios from 'axios';
+import { createAction, handleActions } from "redux-actions";
+import { produce } from "immer";
+import { apis } from "../../shared/api";
+import axios from "axios";
 
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 
 // actions
-const SET_USER = 'SET_USER';
-const LOG_OUT = 'LOG_OUT';
+const SET_USER = "SET_USER";
+const LOG_OUT = "LOG_OUT";
 
 // action creators
 const setUser = createAction(SET_USER, (user) => ({ user }));
@@ -28,15 +28,15 @@ const loginDB = (email, password) => {
       .login(email, password)
       .then((res) => {
         if (!res.data.result) {
-          alert('회원정보가 올바르지 않습니다.');
+          alert("회원정보가 올바르지 않습니다.");
           return;
         }
-        localStorage.setItem('login-token', res.data.token);
+        localStorage.setItem("login-token", res.data.token);
         dispatch(setUser({ email }));
-        window.location.replace('/');
+        window.location.replace("/");
       })
       .catch(function (error) {
-        alert('아이디 또는 비밀번호를 확인해주세요.');
+        alert("아이디 또는 비밀번호를 확인해주세요.");
       });
   };
 };
@@ -48,13 +48,13 @@ const signupDB = (nickname, email, password) => {
       .signup(nickname, email, password)
       .then((res) => {
         if (!res.data.result) {
-          alert('이미 존재하는 이메일입니다.');
+          alert("이미 존재하는 이메일입니다.");
           return;
         }
-        history.replace('/');
+        history.replace("/");
       })
       .catch(function (error) {
-        alert('이미 존재하는 이메일입니다.');
+        alert("이미 존재하는 이메일입니다.");
       });
   };
 };
@@ -65,8 +65,8 @@ const loginCheckDB = () => {
     apis.loginCheck().then((res) => {
       console.log(res);
       if (!res.data.result) {
-        alert('회원정보가 올바르지 않습니다.');
-        history.replace('/');
+        alert("회원정보가 올바르지 않습니다.");
+        history.replace("/");
         return;
       }
       dispatch(setUser({ email: res.data.email, nickname: res.data.nickname }));
@@ -78,7 +78,7 @@ const loginCheckDB = () => {
 const getKakaoProfile = () => {
   return function (dispatch, getState, { history }) {
     window.Kakao.API.request({
-      url: '/v2/user/me',
+      url: "/v2/user/me",
     })
       .then(function (res) {
         // console.log('코멘트전체확인',res.data.comments);
@@ -94,12 +94,12 @@ const getKakaoProfile = () => {
           .then((res) => {
             // console.log('토큰내놔!!!!!!!!!!', res.data.token);
             if (!res.data.result) {
-              alert('회원정보가 올바르지 않습니다.');
+              alert("회원정보가 올바르지 않습니다.");
               return;
             }
-            localStorage.setItem('login-token', res.data.token);
+            localStorage.setItem("login-token", res.data.token);
             dispatch(setUser({ email: email, nickname: nickname }));
-            window.location.replace('/');
+            window.location.replace("/");
           });
       })
 
@@ -119,7 +119,7 @@ export default handleActions(
         draft.user.nickname = action.payload.user.nickname;
         draft.is_login = true;
         console.log(
-          'hi!!!!!!!!',
+          "hi!!!!!!!!",
           draft.user.email,
           draft.user.nickname,
           draft.is_login
@@ -128,7 +128,7 @@ export default handleActions(
 
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
-        localStorage.removeItem('login-token');
+        localStorage.removeItem("login-token");
         draft.user = null;
         draft.is_login = false;
       }),
